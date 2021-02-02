@@ -20,7 +20,7 @@ export class TokenInterceptor implements HttpInterceptor{
                 let tokenizeReq = req.clone({
                     setHeaders: {
                         Authorization: `Bearer ${authService.getToken()}`,
-                        'Content-Type': `application/json`
+                        'Content-Type': 'application/json;charset=UTF-8'
                     }
                 })
                 return next.handle(tokenizeReq);
@@ -36,12 +36,14 @@ export class TokenInterceptor implements HttpInterceptor{
         return next.handle(req);
     }
 
+    
+    posIndicator:string = 'tutionspringbootbackend.herokuapp.com/';
+
     private isValidReqUrl(reqUrl: string): boolean{
-        let posIndicator:string = 'tutionspringbootbackend.herokuapp.com/';
-        let position = reqUrl.indexOf(posIndicator);
+        let position = reqUrl.indexOf(this.posIndicator);
 
         if (position > 0) {
-            let destination:string = reqUrl.substr(position + posIndicator.length);
+            let destination:string = reqUrl.substr(position + this.posIndicator.length);
 
             for (let url of this.avoidReqUrls){
                 let rg = new RegExp(url);
@@ -54,19 +56,18 @@ export class TokenInterceptor implements HttpInterceptor{
     }
 
     private isMultiHeaderReqUrl(reqUrl: string): boolean{
-        let posIndicator:string = 'tutionspringbootbackend.herokuapp.com/';
-        let position = reqUrl.indexOf(posIndicator);
+        let position = reqUrl.indexOf(this.posIndicator);
 
         if (position > 0) {
-            let destination:string = reqUrl.substr(position + posIndicator.length);
+            let destination:string = reqUrl.substr(position + this.posIndicator.length);
 
             for (let url of this.multiHeaderReqUrls){
                 let rg = new RegExp(url);
                 if (rg.test(destination)){
-                    return false;
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 }
