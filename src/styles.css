@@ -1,0 +1,290 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+/* ============== Custom Fonts ================ */
+@font-face {
+    font-family: cp_l;
+    src: url(./assets/fonts/Cera-Pro-Light.otf);
+}
+@font-face {
+    font-family: cp_r;
+    src: url(./assets/fonts/Cera-Pro-Regular.otf);
+}
+@font-face {
+    font-family: cp_m;
+    src: url(./assets/fonts/Cera-Pro-Medium.otf);
+}
+@font-face {
+    font-family: nexa;
+    src: url(./assets/fonts/Nexa-Bold.ttf);
+}
+
+/* =============== Color Variables ================= */
+
+:root{
+    --theme-white: #f7f7f7;
+    --theme-orange: #f68e1e;
+    --theme-black: #3a3a3c;
+    --theme-gray: #eeeeee;
+    --theme-gray-light: #f4f4f4;
+    --theme-gray-dark: #e7e7e7;
+    --white: #fff;
+    --theme-btn-hover: #e08018;
+    --gray: #6e6e6e;
+    --gray-light: #cccccc;
+    --disabled: #ebb57b;
+}
+
+/* ========== Form Validation Styles =========== */
+
+.ng-valid[required], .ng-valid.required {
+    border: 1px solid #2dd836;
+}
+  
+.ng-invalid:focus, .ng-touched:not(form) {
+    border: 1px solid #f15856;
+}
+
+/* ============== Common styles ================ */
+.material-icons.md-10 { font-size: 10px !important; }
+.material-icons.md-15 { font-size: 15px !important; }
+.material-icons.md-18 { font-size: 18px !important; }
+.material-icons.md-19 { font-size: 19px !important; }
+.material-icons.md-21 { font-size: 21px !important; }
+.material-icons.md-24 { font-size: 24px !important; }
+.material-icons.md-27 { font-size: 27px !important; }
+.material-icons.md-30 { font-size: 30px !important; }
+.material-icons.md-36 { font-size: 36px !important; }
+.material-icons.md-42 { font-size: 42px !important; }
+.material-icons.md-48 { font-size: 48px !important; }
+.material-icons.md-55 { font-size: 55px !important; }
+*{
+    margin: 0;
+    padding: 0;
+}
+.navbar-brand{
+    font-family: nexa;
+}
+nav ul > li{
+    margin-right: 20px;
+}
+nav ul > li:last-child{
+    margin-right: 0;
+}
+nav ul > li > a{
+    font-family: cp_r;
+    color: #222;
+    text-transform: capitalize;
+    transition: 0.3s;
+}
+.bg-gray{
+    background: var(--theme-gray);
+}
+.section-height{
+    height: calc(100vh - 122px);
+    overflow-y: auto;
+}
+.section{
+    padding: 50px 0;
+}
+.custom-section-margin{
+    margin: 50px auto;
+}
+.theme-btn{
+    background: var(--theme-orange);
+    color: var(--white);
+    border-radius: 7px;
+    padding: 8px 15px;
+    border: none;
+    outline: none;
+    font-family: cp_r;
+    text-transform: capitalize;
+    transition: 0.3s all;
+}
+.theme-btn:hover{
+    background: var(--theme-btn-hover);
+}
+.theme-btn[disabled]{
+    background: var(--disabled);
+}
+.theme-btn[disabled]:hover{
+    cursor: not-allowed;
+    background: var(--disabled);
+}
+.horizontal-divider{
+    width: 20%;
+    margin: 15px auto 25px;
+    border-top: 4px solid var(--theme-orange);
+}
+.fullwidth-horizontal-divider{
+    width: 100%;
+    margin: 15px auto 25px;
+    border-top: 4px solid var(--theme-orange);
+}
+input, textarea, select{
+    border-radius: 7px !important;
+}
+.custom-shadow-div{
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px 0px;
+}
+.badge{
+    letter-spacing: 1px;
+}
+.modal-header{
+    background: var(--theme-orange);
+}
+.modal-header h5, .modal-header button{
+    color: #fff;
+    font-family: cp_m;
+}
+.validator-spinner{
+    position: absolute;
+    top: 5px;
+    right: 25px;
+}
+.alert{
+    font-family: cp_r;
+}
+
+/* ================== Control Panel Styles ==================== */
+
+.control-panel-content-section{
+    margin-bottom: 40px;
+}
+.content-title > h3{
+    font-family: nexa;
+    text-transform: uppercase;
+}
+.content-title > span{
+    font-family: cp_r;
+    color: var(--gray);
+}
+.content-title button{
+    background: var(--theme-black);
+    color: #fff;
+    border-radius: 10px;
+    border: none;
+    font-family: cp_r;
+    padding: 7px 15px;
+    font-size: 14px;
+}
+
+/* Tabs styles */
+
+.nav-tabs{
+    background: var(--theme-gray);
+    border-radius: 10px 10px 0 0;
+}
+.nav-tabs > .nav-item > .nav-link{
+    color: var(--theme-black);
+    font-family: cp_r;
+}
+.nav-tabs > .nav-item > .nav-link:hover{
+    border-radius: 10px 10px 0 0;
+}
+.nav-tabs > .nav-item > .nav-link.active{
+    color: var(--theme-orange);
+    border-radius: 10px 10px 0 0;
+}
+.tab-content{
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0 0 10px 10px;
+    padding: 15px;
+}
+.tab-content form label{
+    font-family: cp_r;
+    color: var(--gray);
+}
+.tab-content form input, .tab-content form textarea{
+    font-size: 15px;
+}
+.study-file a .download-file-div{
+    border: 1px solid transparent;
+}
+.study-file a:hover{
+    color: var(--theme-orange);
+    text-decoration: none;
+}
+.study-file a:hover .download-file-div{
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+.study-file .download-file-div > span{
+    color: var(--gray);
+    font-size: 13px;
+}
+
+/* Drag and Drop Styles */
+
+.dropzone{
+    border-radius: 10px;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+}
+.dropzone > input{
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.dropzone > label{
+    color: var(--white) !important;
+    font-size: 15px;
+    border-radius: 10px;
+    background-color: #127cc2;
+    padding: 5px 15px;
+}
+.dropzone > i{
+    color: var(--gray);
+}
+.dropzone > h4{
+    font-size: 20px;
+    font-family: cp_r;
+    color: var(--gray-light);
+}
+
+/* ==================== Classes Styles ========================= */
+.class-col > a:hover{
+    text-decoration: none;
+}
+.class-col > a:hover > .card, .class-col:hover > .card{
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 6px 25px 0px;
+    margin-top: -10px;
+}
+.class-col .card{
+    transition: 0.25s all;
+}
+.card img{
+    background-size: cover;
+    border-radius: 10px 10px 0 0;
+}
+.card-title, .card-body small, .card-text{
+    color: var(--theme-black);
+}
+.card-title{
+    font-family: cp_m;
+    text-transform: capitalize;
+    margin-bottom: 0;
+}
+.card-body small{
+    color: var(--gray);
+    font-family: "Arial";
+}
+.card-text{
+    margin-top: 10px;
+    font-size: 14px;
+    font-family: "Arial";
+}
+.class-price{
+    margin-bottom: 0;
+    font-family: cp_m;
+    color: var(--theme-orange);
+    font-size: 20px;
+    text-align: right;
+}

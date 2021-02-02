@@ -1,0 +1,61 @@
+.class-summery h4, .class-teacher-info h6{
+    font-family: cp_m;
+    margin-bottom: 0;
+}
+.class-summery > span, .class-teacher-info span{
+    font-family: cp_l;
+    color: var(--gray);
+    font-size: 14px;
+}
+.class-teacher-info small{
+    color: var(--gray);
+}
+.class-teacher-info .more-details-link{
+    color: var(--theme-orange);
+}
+.class-teacher-info .more-details-link:hover{
+    cursor: pointer;
+}
+.class-status{
+    background: var(--theme-gray);
+    border-radius: 10px;
+    padding: 15px;
+}
+.class-status > span{
+    background: var(--gray-light);
+    color: var(--theme-black);
+    font-family: cp_r;
+    border-radius: 10px;
+}
+.class-status .class-price{
+    font-size: 1.3rem;
+    font-family: cp_m;
+    color: var(--theme-orange);
+    margin-bottom: 10px;
+}
+.class-status .monthly-paid-status{
+    font-family: cp_r;
+}
+.class-status .monthly-paid-status > span{
+    color: rgb(0, 204, 0);
+    /* color: red; */
+}
+.next-class-join{
+    background: var(--theme-orange);
+    border-radius: 10px;
+    color: var(--white);
+    font-family: cp_m;
+    font-size: 17px;
+}
+.next-class-join > a{
+    background: var(--theme-black);
+    border-radius: 10px;
+    color: var(--theme-white);
+    font-family: cp_r;
+    padding: 10px 15px;
+    transition: 0.2s;
+}
+.next-class-join > a:hover{
+    text-decoration: none;
+    background: var(--gray);
+}

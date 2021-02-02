@@ -1,0 +1,112 @@
+.stats-teacher-info-sec, .class-purchase-sec{
+    background: var(--white);
+}
+.class-stats > h5, .teacher-info > h5, .purchase-summery > h5{
+    font-family: cp_m;
+    margin-bottom: 0;
+}
+.class-stats > p{
+    color: var(--gray);
+    font-family: cp_r;
+}
+.class-stats > p > span{
+    color: var(--theme-orange);
+}
+.stats .stat-col{
+    background: var(--theme-white);
+    padding: 10px 20px;
+    border-radius: 7px;
+    color: var(--theme-orange);
+    font-family: cp_m;
+    font-size: 20px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 4px 0px;
+}
+.stats .stat-col:first-child{
+    margin-right: 30px;
+}
+.stats .stat-col > span{
+    color: var(--gray);
+    font-family: cp_l;
+    font-size: 16px;
+}
+.teacher-img > img{
+    width: 100%;
+    border: 2px solid var(--theme-orange);
+}
+.teacher-name-email-tel > h5{
+    font-family: cp_m;
+}
+.teacher-name-email-tel > span{
+    font-family: cp_l;
+    font-size: 14.5px;
+    color: var(--gray);
+}
+.other-info > small{
+    color: var(--gray);
+}
+.other-info > p{
+    font-family: cp_r;
+    font-size: 15px;
+    color: var(--theme-black);
+}
+.other-info > p > span{
+    color: var(--theme-orange);
+}
+.teacher-achievement{
+    background: var(--theme-gray);
+    border-radius: 7px;
+}
+.teacher-achievement > h6, .payment-form > h6{
+    font-family: cp_m;
+    margin-bottom: 0;
+}
+.teacher-achievement > ul{
+    list-style: none;
+    margin-bottom: 0 !important;
+}
+.teacher-achievement > ul > li{
+    font-family: cp_l;
+    font-size: 15px;
+}
+.teacher-achievement > ul > li > span{
+    font-family: cp_m;
+    font-size: 16px;
+    color: var(--theme-orange);
+}
+.price-tag{
+    color: var(--gray);
+    margin-bottom: 25px;
+}
+.price-tag h5{
+    font-family: cp_r;
+    color: var(--gray);
+    margin-bottom: 0;
+}
+.price-tag span{
+    font-family: cp_m;
+    font-size: 1.5rem;
+    color: var(--theme-orange);
+}
+.payment-form{
+    background: var(--theme-gray-light);
+    border-radius: 7px;
+}
+.payment-form > form > h6{
+    font-family: cp_r;
+    color: var(--theme-orange);
+}
+.payment-form label{
+    font-family: cp_r;
+    margin-bottom: 1px;
+    font-size: 14px;
+}
+.payment-form input{
+    font-family: cp_l;
+    font-size: 14px;
+}
+.checkout-form-group input{
+    margin-bottom: 10px;
+}
+.checkout-form-group input:last-child{
+    margin-bottom: 0;
+}

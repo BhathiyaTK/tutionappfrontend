@@ -1,0 +1,12 @@
+.sidebar-content, .panel-content{
+    height: calc(100vh - 72px);
+}
+.sidebar-content{
+    width: 15%;
+}
+.panel-content{
+    width: 85%;
+    overflow-y: auto;
+    background: var(--theme-gray);
+    padding: 30px 40px;
+}

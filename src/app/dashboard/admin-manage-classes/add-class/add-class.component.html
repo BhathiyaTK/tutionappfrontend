@@ -1,0 +1,39 @@
+<div class="alert alert-success alert-dismissible fade show" *ngIf="successMsg">
+    Class added successfully.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="alert alert-danger alert-dismissible fade show" *ngIf="errorMsg">
+    Process failed! something went wrong.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form (ngSubmit)="addNewClass()" [formGroup]="addClassForm" #classAddForm="ngForm">
+    <div class="form-group">
+        <label for="name">Class name</label>
+        <input type="text" 
+        formControlName="name" 
+        class="form-control"
+        required>
+    </div>
+    <div class="form-group">
+        <label for="teacher">Select the teacher</label>
+        <select formControlName="teacherId"
+        class="form-control" required>
+            <option value="">Choose...</option>
+            <option *ngFor="let tchr of Teachers" value="{{tchr.teacherId}}">
+                {{tchr.fName}} {{tchr.lName}}
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="note">Class note</label>
+        <textarea formControlName="notes" 
+        class="form-control"
+        rows="10"
+        required></textarea>
+    </div>
+    <button class="theme-btn" type="submit">Add Class</button>
+</form>

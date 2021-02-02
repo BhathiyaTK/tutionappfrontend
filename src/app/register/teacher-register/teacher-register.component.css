@@ -1,0 +1,12 @@
+.alert{
+    font-family: cp_r;
+}
+.alert.alert-danger i {
+    margin: 13px 15px 0 0;
+}
+.alert.alert-danger > small{
+    font-family: "Arial";
+}
+.alert.alert-danger > button{
+    padding-top: 23px;
+}

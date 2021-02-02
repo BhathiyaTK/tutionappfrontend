@@ -1,0 +1,66 @@
+.topbar{
+    height: 72px;
+    align-items: center;
+    padding: 20px 25px;
+    float: none;
+    width: 100%;
+    background: #fff;
+    z-index: 9999;
+}
+.topbar .left-span{
+    align-items: center;
+    padding: 3px 0;
+}
+.topbar .left-span > .topbar-title{
+    font-size: 20px;
+    font-family: nexa;
+    text-transform: uppercase;
+}
+.topbar .right-span{
+    align-items: center;
+}
+.topbar .right-span #profileBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.1s;
+}
+.topbar .right-span #profileBox:hover{
+    cursor: pointer;
+    color: var(--theme-orange);
+}
+.dropdown-menu{
+    width: 17%;
+}
+.user-info{
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.user-info-img{
+    width: 23%;
+}
+.user-info-name{
+    width: 77%;
+}
+.user-info-name h6{
+    margin-bottom: 0;
+}
+.user-info-img img{
+    width: 100%;
+}
+.dropdown-box-links > ul{
+    list-style: none;
+    margin-bottom: 6px;
+}
+.dropdown-box-links > ul > li > a, .dropdown-box-links > ul > li > button{
+    font-family: cp_r;
+    font-size: 15px;
+}
+.dropdown-box-links > ul > li > a{
+    color: var(--theme-orange);
+}
+.dropdown-box-links > ul > li > a:hover{
+    text-decoration: none;
+}

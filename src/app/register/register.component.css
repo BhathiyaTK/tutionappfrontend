@@ -1,0 +1,33 @@
+.register-form-div{
+    background: var(--white);
+    padding: 40px 50px;
+    border-radius: 10px;
+    text-align: center;
+}
+.register-form-div h3{
+    font-family: nexa;
+    color: var(--theme-black);
+}
+.form-navigator > li{
+    list-style: none;
+    background: var(--theme-gray-dark);
+    border-radius: 7px;
+    padding: 10px 0;
+    margin-bottom: 15px;
+}
+.form-navigator > li.active{
+    background: var(--theme-black);
+    border-color: var(--theme-black);
+}
+.form-navigator > li.active a{
+    color: #fff;
+    width: 100%;
+}
+.form-navigator > li > a{
+    color: var(--theme-orange);
+    font-family: cp_r;
+    padding: 12px 65px;
+}
+.form-navigator > li > a:hover{
+    text-decoration: none;
+}

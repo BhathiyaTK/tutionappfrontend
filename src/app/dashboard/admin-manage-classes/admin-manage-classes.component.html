@@ -1,0 +1,32 @@
+<section class="control-panel-content-section">
+    <div class="content-title">
+        <h3 class="mb-0">Classes</h3>
+        <span>Manage all the classes in MASTERY.LK</span>
+    </div>
+    <div class="alert alert-warning mt-4">
+        This section is in under development. Will add more features and have more UI changes in future...
+    </div>
+    <div class="control-panel-content mt-4">
+        <div class="bg-white custom-shadow-div">
+            <div class="class-img-banner"></div>
+            <div class="p-4">
+                <ul class="nav nav-tabs" id="teacherClassTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="all-class-tab" data-toggle="tab" href="#all-class" role="tab" aria-controls="all-class" aria-selected="true">All Classes</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="add-class-tab" data-toggle="tab" href="#add-class" role="tab" aria-controls="add-class" aria-selected="false">Add Class</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="teacherClassTabContent">
+                    <div class="tab-pane fade show active" id="all-class" role="tabpanel" aria-labelledby="all-class-tab">
+                        <app-admin-all-classes></app-admin-all-classes>
+                    </div>
+                    <div class="tab-pane fade" id="add-class" role="tabpanel" aria-labelledby="add-class-tab">
+                        <app-add-class></app-add-class>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,39 @@
+.class-summery h4, .class-stats-info h5{
+    font-family: cp_m;
+    margin-bottom: 0;
+}
+.class-summery > span{
+    font-family: cp_l;
+    color: var(--gray);
+    font-size: 14px;
+}
+.class-stats-info > ul{
+    list-style: none;
+}
+.class-stats-info > ul > li{
+    font-family: cp_r;
+}
+.class-stats-info > ul > li > span{
+    color: var(--theme-orange);
+    font-family: cp_m;
+}
+.class-fee-status{
+    background: var(--theme-gray);
+    border-radius: 10px;
+    padding: 15px;
+    font-family: cp_r;
+    margin-top: 20px;
+}
+.class-fee-status .class-price{
+    font-size: 1.3rem;
+    font-family: cp_m;
+    color: var(--theme-orange);
+}
+.revenue{
+    background: var(--theme-gray);
+    border-radius: 10px;
+}
+.revenue > h4{
+    color: var(--theme-orange);
+    font-family: cp_m;
+}

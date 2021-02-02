@@ -1,0 +1,55 @@
+.personalized-data h5{
+    font-family: cp_m;
+    margin-bottom: 20px;
+    color: var(--gray);
+}
+.personalized-data .personal-data-div{
+    align-items: center;
+    border-radius: 10px;
+    background: var(--theme-gray);
+    margin-bottom: 20px;
+}
+.personalized-data .personal-data-div:last-child{
+    margin-bottom: 0;
+}
+.personalized-data .personal-data-div .data-left{
+    padding-left: 40px;
+}
+.personalized-data .personal-data-div .data-left span{
+    font-family: cp_m;
+    font-size: 20px;
+}
+.personalized-data .personal-data-div .data-right{
+    background: var(--theme-orange);
+    border-radius: 50px 10px 10px 50px;
+}
+.personalized-data .personal-data-div .data-right span{
+    font-family: cp_l;
+    font-size: 3.5rem;
+    color: #fff;
+}
+
+.fees-status{
+    background: var(--theme-gray);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.fees-status:last-child{
+    margin-bottom: 0;
+}
+.fees-status .title-month-status h6{
+    font-family: cp_m;
+    font-size: 1.2rem;
+    margin-bottom: 0;
+}
+.fees-status .title-month-status small{
+    color: #7a7a7a;
+}
+.fees-status .title-month-status p{
+    font-family: cp_l;
+}
+.fees-status .class-fees span{
+    font-family: cp_m;
+    font-size: 1.8rem;
+}

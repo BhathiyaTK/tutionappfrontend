@@ -1,0 +1,28 @@
+<section class="control-panel-content-section">
+    <div class="content-title">
+        <h3 class="mb-0">Joined Classes</h3>
+        <span>All the classes you have joined</span>
+    </div>
+    <div class="control-panel-content mt-4">
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-3 class-col" *ngFor="let class of classes" style="margin-bottom: 30px;">
+                <a [routerLink]="['/mPanel/joined-classes', class.id, class.name]">
+                    <div class="card custom-shadow-div">
+                        <img src="../../../assets/images/bg2.jpg" class="card-img-top" alt="Class Banner Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{class.name}}</h5>
+                            <small>By {{class.teacher}}</small>
+                            <p class="card-text">
+                                Next class on {{class.date}}<br>at {{class.time}}
+                            </p>
+                            <hr>
+                            <p class="class-price">
+                                Rs.{{class.fee}}
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

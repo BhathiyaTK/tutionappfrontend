@@ -1,0 +1,14 @@
+[
+  {
+      "userId": 1,
+      "username": "teacher1@gmail.com",
+      "password": "1234",
+      "role": "teacher"
+  },
+  {
+      "userId": 2,
+      "username": "student@gmail.com",
+      "password": "1234",
+      "role": "taecher"
+  }
+]

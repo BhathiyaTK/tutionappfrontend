@@ -1,0 +1,13 @@
+.tab-title{
+    font-family: cp_r;
+}
+.tab-title > small{
+    color: var(--gray);
+}
+.last-class-note > h6{
+    font-family: cp_r;
+}
+.last-class-note > p{
+    font-family: cp_l;
+    font-size: 14px;
+}

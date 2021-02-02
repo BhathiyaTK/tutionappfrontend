@@ -1,0 +1,18 @@
+#register-link{
+    background: var(--theme-black);
+    color: var(--theme-white);
+    border-radius: 7px;
+    padding-left: 15px;
+    padding-right: 15px;
+    transition: 0.3s all;
+}
+#register-link:hover{
+    color: var(--theme-white);
+    background: var(--theme-orange);
+}
+nav ul > li > a{
+    color: var(--thme-black);
+}
+nav ul > li > a:hover{
+    color: var(--theme-orange);
+}

@@ -1,0 +1,41 @@
+<section class="control-panel-content-section">
+    <div class="content-title">
+        <h3 class="mb-0">Classes to be paid</h3>
+        <span>All the classes you have to pay class fees for current month</span>
+    </div>
+    <div class="control-panel-content mt-4">
+        <div class="alert alert-warning shadow-sm mb-5">
+            <i class="material-icons float-left mr-2">warning</i> මෙම මාසය සදහා අදාල පන්ති ගාස්තු නොගෙවීම හේතුවෙන් පහත දැක්වෙන පන්ති තාවකලිකව අවලංගූ වී ඇත. මෙම පන්ති සදහා මේ මසට අදාල මුදල් ගෙවීමෙන් පසුව නැවත මෙම පන්ති  "Joined Classes" යටතේ ඔබට බලාගත හැකි අතර එහිදි නැවත අදාල පන්තිය හා සම්බන්ධ විය හැක.
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-3 class-col unavailable-class" style="margin-bottom: 30px;">
+                <div class="card custom-shadow-div">
+                    <img src="../../../assets/images/bg2.jpg" class="card-img-top" alt="Class Banner Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Engineering Technology</h5>
+                        <small>By Mr. Nishantha Warnakulasooriya</small>
+                        <hr>
+                        <div class="d-flex align-items-center justify-content-between pay-button-div">
+                            <span class="class-price">Rs.2300.00</span>
+                            <a class="theme-btn float-right" [routerLink]="['/mPanel/classes/6/EngineeringTechnology', 'purchase']">Pay Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-3 class-col unavailable-class" style="margin-bottom: 30px;">
+                <div class="card custom-shadow-div">
+                    <img src="../../../assets/images/bg2.jpg" class="card-img-top" alt="Class Banner Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Mechatronics</h5>
+                        <small>By Mr. Athula Senadira</small>
+                        <hr>
+                        <div class="d-flex align-items-center justify-content-between pay-button-div">
+                            <span class="class-price">Rs.2500.00</span>
+                            <a class="theme-btn float-right" [routerLink]="['/mPanel/classes/7/Mechatronics', 'purchase']">Pay Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

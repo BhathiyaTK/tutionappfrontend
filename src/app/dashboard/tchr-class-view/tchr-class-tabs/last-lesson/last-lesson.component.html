@@ -1,0 +1,84 @@
+<div class="alert alert-success alert-dismissible text-left" *ngIf="successAlert">
+    <i class="material-icons float-left mr-2">check_circle</i> Lesson Uploaded Successfully.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="alert alert-danger alert-dismissible text-left" *ngIf="errorAlert">
+    <i class="material-icons float-left">cancel</i>
+    {{errorText}}<br><small>Please try again shortly.</small>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="mt-2" *ngIf="isUploading && percentageVal | async as pct">
+    <div class="progress" style="height: 10px;">
+        <div class="progress-bar bg-success progress-bar-striped" role="progressbar" [ngStyle]="{width:pct+'%'}" aria-valuenow="{{pct | number}}" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <i><small class="text-success">Uploading - {{pct | number:'1.0-0'}}%</small></i>
+    <hr>
+</div>
+<form [formGroup]="videoUploadForm" (ngSubmit)="lessonAdd()" #lessonAddForm="ngForm">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-7">
+            <div class="form-group">
+                <label for="lesson">Lesson</label>
+                <input type="text" 
+                formControlName="lesson" 
+                class="form-control" 
+                placeholder="Lesson topic here..." 
+                required
+                [ngClass]="{'is-invalid':lessonUpload.lesson.errors && lessonUpload.lesson.touched}">
+                <div *ngIf="lessonUpload.lesson.invalid && (lessonUpload.lesson.dirty || lessonUpload.lesson.touched)" class="text-danger text-left error-msg-div">
+                    <div *ngIf="lessonUpload.lesson.errors.required"><small>Lesson topic is required</small></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="text" 
+                formControlName="date" 
+                class="form-control" 
+                placeholder="DD/MM/YYYY" 
+                required
+                [ngClass]="{'is-invalid':lessonUpload.date.errors && lessonUpload.date.touched}">
+                <div *ngIf="lessonUpload.date.invalid && (lessonUpload.date.dirty || lessonUpload.date.touched)" class="text-danger text-left error-msg-div">
+                    <div *ngIf="lessonUpload.date.errors.required"><small>Date is required</small></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="video">Upload Lesson Video</label>
+                <input type="file" 
+                formControlName="videoFile" 
+                class="form-control" 
+                required
+                accept="*.mp4"
+                (change)="onChange($event)"
+                [ngClass]="{'is-invalid':lessonUpload.videoFile.errors && lessonUpload.videoFile.touched}">
+                <div *ngIf="lessonUpload.videoFile.invalid && (lessonUpload.videoFile.dirty || lessonUpload.videoFile.touched)" class="text-danger text-left error-msg-div">
+                    <div *ngIf="lessonUpload.videoFile.errors.required"><small>Lesson video is required</small></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-5">
+            <div class="form-group mb-0">
+                <label for="note">Note</label>
+                <textarea 
+                formControlName="note" 
+                rows="8" 
+                maxlength="400"
+                class="form-control" 
+                placeholder="Brief introduction about the lesson..." 
+                required
+                [ngClass]="{'is-invalid':lessonUpload.note.errors && lessonUpload.note.touched}"></textarea>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div *ngIf="lessonUpload.note.invalid && (lessonUpload.note.dirty || lessonUpload.note.touched)" class="text-danger text-left error-msg-div">
+                        <div *ngIf="lessonUpload.note.errors.required"><small>Note is required</small></div>
+                        <div *ngIf="lessonUpload.note.errors.maxlength"><small>Maximun 400 characters only</small></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <button type="submit" name="lesson_update" class="theme-btn">Submit Lesson</button>
+</form>

@@ -1,0 +1,44 @@
+.teacher-info-content{
+    padding: 0 10px;
+}
+.teacher-profile-pic{
+    width: 50%;
+    margin: 10px auto 0;
+}
+.teacher-profile-pic > img{
+    width: 100%;
+}
+.teacher-short-desc{
+    margin: 20px 10px;
+}
+.teacher-short-desc > h4{
+    font-family: cp_r;
+}
+.teacher-short-desc > span{
+    font-family: cp_r;
+    font-size: 14px;
+    color: rgb(155, 155, 155);
+}
+.teacher-desc p{
+    font-family: cp_l;
+    font-size: 14px;
+}
+.teacher-desc p > span{
+    color: var(--theme-orange);
+}
+.contact-info > h6, .teacher-stats > h6{
+    font-family: cp_m;
+    color: var(--theme-black);
+}
+.contact-info > ul, .teacher-stats > ul{
+    list-style: none;
+}
+.contact-info > ul > li, .teacher-stats > ul > li{
+    font-family: cp_r;
+    color: var(--theme-orange);
+}
+.teacher-stats > ul > li > span{
+    font-family: cp_l;
+    color: var(--gray);
+    font-size: 14px;
+}

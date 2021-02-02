@@ -1,0 +1,8 @@
+.class-img-banner{
+    height: 180px;;
+    background-image: url("../../../assets/images/bg2.jpg");;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 10px 10px 0 0;
+}

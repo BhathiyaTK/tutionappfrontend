@@ -1,0 +1,7 @@
+{
+    "/register/*": {
+        "target": "https://tutionspringbootbackend.herokuapp.com",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

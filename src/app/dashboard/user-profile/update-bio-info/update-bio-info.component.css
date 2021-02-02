@@ -1,0 +1,15 @@
+.update-form-div{
+    font-family: cp_r;
+}
+.update-form-div img{
+    border-radius: 10px;
+}
+.update-form-div .div-content{
+    background: var(--theme-gray);
+    border-radius: 10px;
+    padding: 15px;
+}
+.update-form-div .alert{
+    font-size: 13px;
+    font-family: "Arial";
+}

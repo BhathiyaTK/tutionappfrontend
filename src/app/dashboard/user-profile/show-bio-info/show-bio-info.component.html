@@ -1,0 +1,69 @@
+<div class="custom-shadow-div bg-white mb-5">
+    <div class="profile-banner">
+        <div class="profile-banner-img"></div>
+        <div class="profile-img-div">
+            <div class="row align-items-center">
+                <div class="col-sm-12 col-md-12 col-lg-3">
+                    <img src="../../../assets/images/users/students/student.jpg" alt="">
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-9">
+                    <p>Sandakalum Gunawardhana</p>
+                    <span>sandakalum@gmail.com</span>
+                </div>
+            </div>
+        </div>
+        <div class="profile-banner-bottom"></div>
+    </div>
+    <div class="p-4">
+        <div>
+            <div class="personal-detail">
+                <small>Address</small>
+                <h6>123/A, De Silva Mawatha, North Kalutara, Kalutara.</h6>
+            </div>
+            <div class="personal-detail">
+                <small>Mobile No.</small>
+                <h6>0771234567</h6>
+            </div>
+            <div class="personal-detail">
+                <small>Gardian Contact No.</small>
+                <h6>0382212345</h6>
+            </div>
+            <div class="personal-detail">
+                <small>Stream</small>
+                <h6>Mathematics</h6>
+            </div>
+            <div class="personal-detail">
+                <small>Qualification</small>
+                <h6>BSc. Physical Sciences (UOC), HND in Education, Diploma in Education</h6>
+            </div>
+            <div class="personal-detail">
+                <small>Description</small>
+                <p class="mb-0">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla consequatur magnam, temporibus voluptate necessitatibus blanditiis consectetur ipsa? Recusandae, sapiente? In sed, autem quos assumenda consequuntur quae laborum deleniti reprehenderit dolorum?
+                </p>
+            </div>
+        </div>
+        <hr>
+        <button type="button" class="theme-btn" data-toggle="modal" data-target="#userBioUpdateModal">
+            <i class="material-icons md-21 float-left mr-2">edit</i>
+            Edit Info
+        </button>
+    </div>
+</div>
+
+
+<div class="modal fade" id="userBioUpdateModal" tabindex="-1" aria-labelledby="userBioUpdateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userBioUpdateModalLabel">Update Personal Info</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="material-icons float-right">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-update-bio-info></app-update-bio-info>
+            </div>
+        </div>
+    </div>
+</div>

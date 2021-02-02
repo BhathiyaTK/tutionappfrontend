@@ -1,0 +1,22 @@
+.header-image-col{
+    text-align: center;
+}
+.header-image-col img{
+    width: 50%;
+}
+#signin-bottom-section h4{
+    font-family: cp_m;
+    margin-bottom: 20px;
+}
+#signin-bottom-section p{
+    font-family: cp_l;
+    color: var(--gray);
+}
+.signin-bottom-col{
+    border-right: 1px solid #e0e0e0;
+    padding: 15px 30px;
+    text-align: center;
+}
+.signin-bottom-col:last-child{
+    border-right: none;
+}

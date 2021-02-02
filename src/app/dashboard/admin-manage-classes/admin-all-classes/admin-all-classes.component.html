@@ -1,0 +1,22 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Note</th>
+          <th scope="col">Responsible Teacher</th>
+          <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let class of Classes">
+          <td>{{class.tutionClassId}}</td>
+          <td>{{class.name}}</td>
+          <td>{{class.notes}}</td>
+          <td>{{class.teacherEntity.fName}} {{class.teacherEntity.lName}}</td>
+          <td>
+            <button class="theme-btn" value="{{class.tutionClassId}}">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+</table>

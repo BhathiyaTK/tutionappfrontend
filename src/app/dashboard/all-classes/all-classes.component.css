@@ -1,0 +1,24 @@
+.class-price{
+    margin-bottom: 0;
+    font-family: cp_m;
+    color: var(--theme-black);
+    font-size: 20px;
+    text-align: left;
+}
+.class-price > button{
+    font-size: 15px;
+}
+.options-box > span{
+    font-family: cp_r;
+    color: #777;
+    margin-right: 10px;
+}
+.options-box > select{
+    width: 120px;
+}
+.options-box > select option{
+    font-size: 13px;
+}
+.options-box > input[type=search]{
+    font-family: cp_l;
+}

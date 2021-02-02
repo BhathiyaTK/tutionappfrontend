@@ -1,0 +1,30 @@
+<div class="signin-form-div shadow">
+    <h3>Welcome to <span>mastery.lk</span></h3>
+    <div class="horizontal-divider"></div>
+    <div class="alert alert-danger alert-dismissible fade show text-left" *ngIf="invalidLogin">
+        Invalid email and/or password
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form method="post" class="mb-4" [formGroup]="signinForm" (ngSubmit)="submit()">
+        <div class="form-group">
+            <input type="text" formControlName="signin_email" id="signin-email" placeholder="Email" class="form-control" required>
+            <div *ngIf="signin_form.signin_email.invalid && (signin_form.signin_email.dirty || signin_form.signin_email.touched)" class="text-danger text-left error-msg-div">
+                <div *ngIf="signin_form.signin_email.errors.required"><small>Email is required</small></div>
+                <div *ngIf="signin_form.signin_email.errors.email"><small>Please enter a valid email</small></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="password" formControlName="signin_password" id="signin-password" placeholder="Password" class="form-control" required>
+            <div *ngIf="signin_form.signin_password.invalid && (signin_form.signin_password.dirty || signin_form.signin_password.touched)" class="text-danger text-left error-msg-div">
+                <div *ngIf="signin_form.signin_password.errors.required"><small>Password is required</small></div>
+            </div>
+        </div>
+        <button type="submit" class="theme-btn w-100 mt-3">Sign in</button>
+    </form>
+    <div class="reset-links-div mt-3">
+        <small>Forgot sign-in credentials? <a routerLink="/reset">Reset</a></small><br>
+        <small>New around here? <a routerLink="/register">Register</a></small>
+    </div>
+</div>

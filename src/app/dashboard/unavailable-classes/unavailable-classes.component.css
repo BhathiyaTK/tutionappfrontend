@@ -1,0 +1,19 @@
+.unavailable-class > a{
+    pointer-events: none;
+    cursor: default;
+}
+.disabled-class-div{
+    display: none;
+    position: absolute;
+    height: 100%;
+    width: 92.5%;
+    top: 0;
+    background: rgba(61, 61, 61, 0.781);
+    border-radius: 10px;
+    transition: 0.25s all;
+}
+.pay-button-div > a:hover{
+    cursor: pointer;
+    color: var(--white);
+    text-decoration: none;
+}

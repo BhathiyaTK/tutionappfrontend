@@ -1,0 +1,23 @@
+.copyright-div{
+    height: 50px;
+    background: var(--theme-black);
+    color: var(--theme-white);
+    align-items: center;
+    width: 100%;
+}
+.copyright-div a{
+    color: var(--theme-orange);
+    padding-top: 1px;
+    padding-bottom: 2px;
+}
+.copyright-div a:hover{
+    text-decoration: none;
+    border-top: 1px solid var(--theme-orange);
+    border-bottom: 1px solid var(--theme-orange);
+}
+.copyright-div .text-one{
+    float: left;
+}
+.copyright-div .text-two{
+    float: right;
+}
