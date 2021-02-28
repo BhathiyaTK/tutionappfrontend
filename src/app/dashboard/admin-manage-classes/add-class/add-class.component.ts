@@ -19,15 +19,25 @@ export class AddClassComponent implements OnInit {
   Teachers:any = [];
   successMsg: boolean = false;
   errorMsg: boolean = false;
+  note:any = '';
 
   name:string;
-  teacherId:string;
+  teacher:number;
+  fee:string;
+  date:string;
+  time:string;
   notes:string;
 
   addClassForm = this.fb.group({
     name: ['', [Validators.required]],
-    teacherId: ['', [Validators.required]],
-    notes: ['', [Validators.required]]
+    teacher: ['', [Validators.required]],
+    fee: ['', [Validators.required]],
+    date: ['', [Validators.required]],
+    time: ['', [Validators.required]],
+    notes: ['', [
+      Validators.required,
+      Validators.maxLength(255)
+    ]]
   });
 
   ngOnInit(): void {
@@ -49,16 +59,21 @@ export class AddClassComponent implements OnInit {
       var val = {
         name: this.addClassForm.get('name').value,
         notes: this.addClassForm.get('notes').value,
+        hDate: this.addClassForm.get('date').value,
+        htime: this.addClassForm.get('time').value,
+        classFee: this.addClassForm.get('fee').value,
         teacherModel:{
-          teacherId: this.addClassForm.get('teacherId').value
+          teacherId: this.addClassForm.get('teacher').value
         }
       }
       this.cs.addClass(val).subscribe((res) => {
         this.successMsg = true;
-      }, (error) => {
+        this.addClassForm.reset();
+        this.note = '';
+      },(err) => {
         this.errorMsg = true;
-        console.log("Error occured ====> ", error);
-      })
+        console.log(err);
+      });
     } else {
       console.log("Validation Failed!");
     }

@@ -9,7 +9,7 @@ export class TokenInterceptor implements HttpInterceptor{
     multiHeaderReqUrls: Array<string>;
 
     constructor(private injector: Injector){
-        this.avoidReqUrls = ['login','newstudent/register','newteacher/register'];
+        this.avoidReqUrls = ['login','newstudent/register','newteacher/register','getAllUsers'];
         this.multiHeaderReqUrls = ['admin/newclass'];
     }
 
@@ -20,7 +20,8 @@ export class TokenInterceptor implements HttpInterceptor{
                 let tokenizeReq = req.clone({
                     setHeaders: {
                         Authorization: `Bearer ${authService.getToken()}`,
-                        'Content-Type': 'application/json;charset=UTF-8'
+                        'Content-Type': 'application/json',
+                        'charset': 'utf-8'
                     }
                 })
                 return next.handle(tokenizeReq);

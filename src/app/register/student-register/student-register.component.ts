@@ -40,7 +40,7 @@ export class StudentRegisterComponent implements OnInit {
       Validators.required,
       Validators.email
     ],
-    this.customValidator.validateEmailNotExist.bind(this.customValidator)
+    // this.customValidator.validateEmailNotExist.bind(this.customValidator)
     ],
     telephone: ['', [
       Validators.required,

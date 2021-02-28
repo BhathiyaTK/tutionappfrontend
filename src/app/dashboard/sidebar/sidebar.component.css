@@ -1,5 +1,6 @@
 .sidebar{
     width: 100%;
+    height: calc(100vh - 72px);
 }
 .sidebar-logo{
     width: 100%;
@@ -25,8 +26,8 @@
 }
 .sidebar-navs > a:hover{
     text-decoration: none;
-    color: var(--white);
-    background: var(--theme-orange);
+    color: var(--theme-black);
+    background: var(--theme-gray-dark);
 }
 .sidebar-navs > a.active{
     color: var(--white);
@@ -47,11 +48,37 @@
     border-bottom: 1px solid var(--theme-orange);
 }
 
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+    .sidebar{
+        height: auto;
+    }
+    .sidebar-logo img{
+        width: 60%;
+    }
+    .sidebar-navs > a{
+        display: block;
+        padding: 10px 20px 10px 20px;
+        border-bottom: 1px solid var(--theme-gray-dark);
+        font-size: 15px;
+    }
+    .developer-sec{
+        position: absolute;
+        left: 50%;
+        bottom: 30px;
+        transform: translate(-50%, -50%);
+    }
+}
 @media screen 
   and (min-device-width: 1200px) 
   and (max-device-width: 1600px) 
   and (-webkit-min-device-pixel-ratio: 2)
   and (min-resolution: 192dpi) {
+    .sidebar{
+        height: auto;
+    }
     .sidebar-logo img{
         width: 100%;
     }

@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-7">
                 <div class="stats-teacher-info-sec p-4 custom-shadow-div">
-                    <div class="class-stats mb-5">
+                    <!-- <div class="class-stats mb-5">
                         <h5><i class="material-icons float-left mr-2 md-24">trending_up</i>Class stats</h5>
                         <hr class="mb-4">
                         <div class="stats d-flex d-md-flex d-lg-flex mb-4">
@@ -18,35 +18,35 @@
                             <div class="stat-col">02 <span>Days per week</span></div>
                         </div>
                         <p>Class started on <span>2021-01-01</span></p>
-                    </div>
+                    </div> -->
                     <div class="teacher-info">
                         <h5><i class="material-icons float-left mr-2 md-24">person</i>Teacher Info</h5>
                         <hr class="mb-4">
                         <div class="d-flex d-md-flex d-lg-flex align-items-center">
                             <div class="teacher-img w-25">
-                                <img src="../../../assets/images/users/teachers/teacher.jpg" alt="Teacher Photo" class="rounded-circle">
+                                <img src="../../../assets/images/users/avatar.png" alt="Teacher Photo" class="rounded-circle">
                             </div>
                             <div class="teacher-name-email-tel w-75 px-4">
-                                <h5>Nihal Perera</h5>
-                                <span>nihalperera@gmail.com</span><br>
-                                <span>0771234567</span>
+                                <h5>{{teacher_name}}</h5>
+                                <!-- <span>nihalperera@gmail.com</span><br> -->
+                                <span>{{teacher_tel}}</span>
                             </div>
                         </div>
                         <div class="other-info mt-4">
                             <small>Education Qualifications</small>
-                            <p>BSc. (Hons) in Mathematics, Diploma in Education</p>
+                            <p>{{teacher_edu}}</p>
                             <small>Description</small>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae quisquam quam ex rem, eaque accusantium sint optio, quia doloribus earum dignissimos distinctio molestiae placeat ipsam enim quaerat? Iste, ullam ipsam. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi aut sed minima, ipsum magnam nihil molestias ad, earum aspernatur ab sequi ipsa iure? Ut, libero atque ducimus sit vitae fugit.</p>
-                            <p>Joined on <span>2020-12-01</span></p>
+                            <p>{{teacher_intro}}</p>
+                            <!-- <p>Joined on <span>2020-12-01</span></p> -->
                         </div>
-                        <div class="teacher-achievement p-3">
+                        <!-- <div class="teacher-achievement p-3">
                             <h6><i class="material-icons float-left mr-1 md-18">grade</i> Achievements</h6>
                             <hr>
                             <ul>
                                 <li>&#8594;&nbsp; Total <span>1682</span> Students</li>
                                 <li>&#8594;&nbsp; <span>03</span> Classes</li>
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -57,11 +57,11 @@
                         <hr class="mb-4">
                         <div class="price-tag d-flex d-md-flex d-lg-flex align-items-center justify-content-between">
                             <div><h5>Class Fee</h5></div>
-                            <div><span>Rs. 2,500.00</span>/month</div>
+                            <div><span>Rs. {{class_fee}}</span>/month</div>
                         </div>
                         <div class="mb-3 text-center alert alert-warning shadow-sm rounded">
                             --- NOTE ---<br>
-                            මෙම පන්ති ගාස්තුව වලංගු වන්නේ ජනවාරි මාසය සදහා පමණි. මෙම පංතියට මේ මාසයෙන් පසුව සම්බන්ධ වීමට ඔබ ඉදිරි මාස සදහා මෙම පන්ති ගාස්තුව අදාල මාසයේදි ගෙවිය යුතුය.
+                            මෙම පන්ති ගාස්තුව වලංගු වන්නේ වර්තමාන මාසය සදහා පමණි. මෙම පංතියට මේ මාසයෙන් පසුව සම්බන්ධ වීමට ඔබ ඉදිරි මාස සදහා මෙම පන්ති ගාස්තුව අදාල මාසයේදි ගෙවිය යුතුය.
                         </div>
                         <div class="payment-form p-3">
                             <h6><i class="material-icons float-left mr-2 md-21">list</i> Checkout details</h6>
@@ -75,13 +75,13 @@
                                 <div class="checkout-form-group">
                                     <fieldset disabled>
                                         <label for="order_id">Class ID</label>
-                                        <input type="text" name="order_id" value="12345" class="form-group form-control form-control-sm">
+                                        <input type="text" name="order_id" value="{{subClassId}}" class="form-group form-control form-control-sm">
                                         <label for="items">Class Name</label>
-                                        <input type="text" name="items" value="Combined Mathematics" class="form-control form-control-sm">
+                                        <input type="text" name="items" value="{{class_name}}" class="form-control form-control-sm">
                                         <div class="row">
                                             <div class="col-sm-12 col-md-6 col-lg-6">
                                                 <label for="amount">Fee</label>
-                                                <input type="text" name="amount" value="2500" class="form-control form-control-sm">
+                                                <input type="text" name="amount" value="{{class_fee}}" class="form-control form-control-sm">
                                             </div>
                                             <div class="col-sm-12 col-md-6 col-lg-6">
                                                 <label for="currency">Currency</label>
@@ -100,7 +100,16 @@
                                     <input type="hidden" name="country" value="Sri Lanka">
                                 </div>
                                 <br>
-                                <button type="submit" class="theme-btn w-100">Proceed to Checkout</button>
+                                <div class="alert alert-info mb-0">
+                                    Please send below details to MASTERY.LK administration. Then they will add you to relevant class. Then you can find this class in "Joined Classes" section.
+                                    <ul class="ml-4 mt-3 mb-0">
+                                        <li>Money Deposited Bank Slip</li>
+                                        <li>Class ID</li>
+                                        <li>Class Name</li>
+                                        <li>Student ID (You can find this in your "Profile" section.)</li>
+                                    </ul>
+                                </div>
+                                <!-- <button type="submit" class="theme-btn w-100">Proceed to Checkout</button> -->
                             </form>
                         </div>
                     </div>

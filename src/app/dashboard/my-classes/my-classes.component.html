@@ -4,19 +4,29 @@
         <span>All the classes conducted by you</span>
     </div>
     <div class="control-panel-content mt-4">
+        <div class="text-center my-5" *ngIf="spinner">
+            <img class="spinner" src="../../../../assets/images/loaders/spin_lg_white_edge.gif">
+            <h6 class="text-monospace">Loading data...</h6>
+        </div>
+        <div class="mt-4" *ngIf="emptyMsg">
+            <div class="alert alert-danger mb-0">
+                <i class="material-icons float-left mr-2">error</i>
+                No classes found.
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-12 col-md-4 col-lg-3 class-col" *ngFor="let class of myclasses" style="margin-bottom: 30px;">
-                <a [routerLink]="['/mPanel/my-classes', class.id, class.name]">
+                <a [routerLink]="['/mPanel/my-classes', class.tutionClassId, removeUrlSpaces(class.name)]">
                     <div class="card custom-shadow-div">
                         <img src="../../../assets/images/bg2.jpg" class="card-img-top" alt="Class Banner Image">
                         <div class="card-body">
                             <h5 class="card-title">{{class.name}}</h5>
                             <p class="card-text">
-                                Every {{class.date}}<br>at {{class.time}}
+                                Every {{class.hDate}}<br>at {{timeConverter(class.htime)}}
                             </p>
                             <hr>
                             <p class="class-price">
-                                Rs.{{class.fee}}
+                                Rs.{{class.classFee}}
                             </p>
                         </div>
                     </div>

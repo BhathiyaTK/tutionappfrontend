@@ -1,5 +1,12 @@
+<div class="tab-title mb-2">
+    <p class="mb-0">Add the last class below.
+        <small class="text-primary"><i>&#8212; You can fill below form in Sinhala/English</i></small>
+    </p>
+</div>
+<hr>
 <div class="alert alert-success alert-dismissible text-left" *ngIf="successAlert">
-    <i class="material-icons float-left mr-2">check_circle</i> Lesson Uploaded Successfully.
+    <i class="material-icons float-left mr-2">check_circle</i>
+    {{successText}}
     <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -18,9 +25,9 @@
     <i><small class="text-success">Uploading - {{pct | number:'1.0-0'}}%</small></i>
     <hr>
 </div>
-<form [formGroup]="videoUploadForm" (ngSubmit)="lessonAdd()" #lessonAddForm="ngForm">
-    <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-7">
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-7">
+        <form [formGroup]="videoUploadForm" (ngSubmit)="lessonAdd()" #lessonAddForm="ngForm">
             <div class="form-group">
                 <label for="lesson">Lesson</label>
                 <input type="text" 
@@ -28,6 +35,7 @@
                 class="form-control" 
                 placeholder="Lesson topic here..." 
                 required
+                [readonly]="inputDisabled" 
                 [ngClass]="{'is-invalid':lessonUpload.lesson.errors && lessonUpload.lesson.touched}">
                 <div *ngIf="lessonUpload.lesson.invalid && (lessonUpload.lesson.dirty || lessonUpload.lesson.touched)" class="text-danger text-left error-msg-div">
                     <div *ngIf="lessonUpload.lesson.errors.required"><small>Lesson topic is required</small></div>
@@ -35,11 +43,11 @@
             </div>
             <div class="form-group">
                 <label for="date">Date</label>
-                <input type="text" 
+                <input type="date" 
                 formControlName="date" 
                 class="form-control" 
-                placeholder="DD/MM/YYYY" 
                 required
+                [readonly]="inputDisabled" 
                 [ngClass]="{'is-invalid':lessonUpload.date.errors && lessonUpload.date.touched}">
                 <div *ngIf="lessonUpload.date.invalid && (lessonUpload.date.dirty || lessonUpload.date.touched)" class="text-danger text-left error-msg-div">
                     <div *ngIf="lessonUpload.date.errors.required"><small>Date is required</small></div>
@@ -51,6 +59,7 @@
                 formControlName="videoFile" 
                 class="form-control" 
                 required
+                [readonly]="inputDisabled" 
                 accept="*.mp4"
                 (change)="onChange($event)"
                 [ngClass]="{'is-invalid':lessonUpload.videoFile.errors && lessonUpload.videoFile.touched}">
@@ -58,17 +67,16 @@
                     <div *ngIf="lessonUpload.videoFile.errors.required"><small>Lesson video is required</small></div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-12 col-md-12 col-lg-5">
             <div class="form-group mb-0">
                 <label for="note">Note</label>
                 <textarea 
                 formControlName="note" 
-                rows="8" 
+                rows="5" 
                 maxlength="400"
                 class="form-control" 
                 placeholder="Brief introduction about the lesson..." 
                 required
+                [readonly]="inputDisabled" 
                 [ngClass]="{'is-invalid':lessonUpload.note.errors && lessonUpload.note.touched}"></textarea>
                 <div class="d-flex justify-content-between align-items-center">
                     <div *ngIf="lessonUpload.note.invalid && (lessonUpload.note.dirty || lessonUpload.note.touched)" class="text-danger text-left error-msg-div">
@@ -77,8 +85,44 @@
                     </div>
                 </div>
             </div>
+            <div class="alert alert-info my-3" style="font-family: 'Arial';">
+                <i class="material-icons float-left mr-2">info</i><small>Once you preseed the submit button, Previously uploaded class will be automatically replaced by newly uploaded class and process couldn't revert.</small>
+            </div>
+            <button type="submit" name="lesson_update" class="theme-btn" [disabled]="videoUploadForm.invalid">Submit Lesson</button>
+            <button type="reset" class="theme-btn-secondary ml-2">Reset</button>
+        </form>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-5">
+        <div class="p-3 lesson-preview-sec">
+            <h6>Last class preview</h6>
+            <hr>
+            <div *ngIf="hasClass">
+                <video src="{{lastClass.videoFile}}" 
+                controls
+                width="100%"></video>
+                <div class="class-preview-content mt-2">
+                    <div>
+                        <h6>Lesson<span>:</span></h6>
+                        <p>{{lastClass.lesson}}</p>
+                    </div>
+                    <hr>
+                    <div>
+                        <h6>Date<span>:</span></h6>
+                        <p>{{lastClass.date}}</p>
+                    </div>
+                    <hr>
+                    <div>
+                        <h6>Note<span>:</span></h6>
+                        <p class="mb-0">{{lastClass.note}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="no-data-msg" *ngIf="emptyMsg">
+                <small class="text-danger">
+                    <i class="material-icons float-left md-21 mr-2" style="margin-top: 3.2px;">error_outline</i>
+                    No class held until now.
+                </small>
+            </div>
         </div>
     </div>
-    <hr>
-    <button type="submit" name="lesson_update" class="theme-btn">Submit Lesson</button>
-</form>
+</div>

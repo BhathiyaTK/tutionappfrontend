@@ -48,12 +48,12 @@ export class TeacherRegisterComponent implements OnInit {
       Validators.required,
       Validators.email
     ],
-    this.customValidator.validateEmailNotExist.bind(this.customValidator)
+    // this.customValidator.validateEmailNotExist.bind(this.customValidator)
     ],
     eduQual: ['', [Validators.required]],
     teacherIntro: ['', [
       Validators.required,
-      Validators.maxLength(400)
+      Validators.maxLength(255)
     ]],
     password: ['', [
       Validators.required,
@@ -94,6 +94,7 @@ export class TeacherRegisterComponent implements OnInit {
       this.userService.registerTeacher(val).subscribe(res => {
         this.pendingAlert = false;
         this.successAlert = true;
+        this.intro = '';
         this.tchrRegForm.reset();
       }, (error) => {
         this.pendingAlert = false;

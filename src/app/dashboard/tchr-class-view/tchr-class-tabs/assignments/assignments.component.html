@@ -1,33 +1,105 @@
 <div class="tab-title mb-2">
-    <p class="mb-0">Upload assignments before their due dates</p>
+    <p class="mb-0">
+        Upload assignments for this class
+        <small class="text-primary"><i>&#8212; Only PDF file format allowed.</i></small>
+    </p>
 </div>
 <hr>
-<div class="study-file row">
-    <div class="col-sm-6 col-md-3 col-lg-2">
-        <a href="../../../assets/images/logo.png" download class="text-center">
+<div class="alert alert-success alert-dismissible text-left" *ngIf="successAlert">
+    <i class="material-icons float-left mr-2">check_circle</i>
+    {{successText}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="alert alert-danger alert-dismissible text-left" *ngIf="errorAlert">
+    <i class="material-icons float-left">cancel</i>
+    {{errorText}}<br><small>Please try again shortly.</small>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="mt-2" *ngIf="isUploading && percentageVal | async as pct">
+    <div class="progress" style="height: 10px;">
+        <div class="progress-bar bg-success progress-bar-striped" role="progressbar" [ngStyle]="{width:pct+'%'}" aria-valuenow="{{pct | number}}" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <i><small class="text-success">Uploading - {{pct | number:'1.0-0'}}%</small></i>
+    <hr>
+</div>
+<div class="assignments-upload-form-sec">
+    <form [formGroup]="assigtUploadForm" (ngSubmit)="assigtAdd()" #assigtAddForm="ngForm">
+        <div class="form-group row">
+            <label for="inputName" class="col-sm-12 col-md-2 col-lg-2 col-form-label">Title</label>
+            <div class="col-sm-12 col-md-10 col-lg-10">
+                <input type="text" 
+                class="form-control" 
+                formControlName="assigtName" 
+                required
+                [readonly]="inputDisabled"
+                placeholder="Assignment title here..."
+                [ngClass]="{'is-invalid':assigtUpload.assigtName.errors && assigtUpload.assigtName.touched}">
+                <div *ngIf="assigtUpload.assigtName.invalid && (assigtUpload.assigtName.dirty || assigtUpload.assigtName.touched)" class="text-danger text-left error-msg-div">
+                    <div *ngIf="assigtUpload.assigtName.errors.required"><small>Assignment title is required</small></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputDate" class="col-sm-12 col-md-2 col-lg-2 col-form-label">Deadline</label>
+            <div class="col-sm-12 col-md-10 col-lg-10">
+                <input type="date" 
+                class="form-control" 
+                required
+                [readonly]="inputDisabled"
+                formControlName="assigtDeadline"
+                [ngClass]="{'is-invalid':assigtUpload.assigtDeadline.errors && assigtUpload.assigtDeadline.touched}">
+                <div *ngIf="assigtUpload.assigtDeadline.invalid && (assigtUpload.assigtDeadline.dirty || assigtUpload.assigtDeadline.touched)" class="text-danger text-left error-msg-div">
+                    <div *ngIf="assigtUpload.assigtDeadline.errors.required"><small>Deadline is required</small></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputFile" class="col-sm-12 col-md-2 col-lg-2 col-form-label">File</label>
+            <div class="col-sm-12 col-md-10 col-lg-10">
+                <input type="file" 
+                class="form-control" 
+                required
+                accept="*.pdf"
+                (change)="onChange($event)"
+                [readonly]="inputDisabled"
+                formControlName="assigtFile"
+                [ngClass]="{'is-invalid':assigtUpload.assigtFile.errors && assigtUpload.assigtFile.touched}">
+                <div *ngIf="assigtUpload.assigtFile.invalid && (assigtUpload.assigtFile.dirty || assigtUpload.assigtFile.touched)" class="text-danger text-left error-msg-div">
+                    <div *ngIf="assigtUpload.assigtFile.errors.required"><small>This input is required</small></div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group row">
+          <div class="col-sm-10">
+            <button type="submit" class="theme-btn" [disabled]="assigtUploadForm.invalid">Upload</button>
+            <button type="reset" class="theme-btn-secondary ml-2">Reset</button>
+          </div>
+        </div>
+    </form>
+</div>
+<div class="tab-title mt-5">
+    <p class="mb-0">Uploaded assignments</p>
+</div>
+<hr>
+<div class="study-file row m-0">
+    <div class="col-sm-6 col-md-3 col-lg-2" *ngFor="let assigt of assigtList; let key = index">
+        <a href="{{assigt.assigtFile}}" title="{{assigt.title}}" target="_blank" class="text-center">
             <div class="download-file-div py-3">
                 <i class="material-icons md-42">assignment</i><br>
-                <small>Assignment 01</small><br>
-                <span>Deadline: 31-01-2021</span>
+                <small>{{shorterFileName(assigt.title, 10)}}</small><br>
+                <span>Deadline: {{assigt.date}}</span>
             </div>
         </a>
     </div>
-    <div class="col-sm-6 col-md-3 col-lg-2">
-        <a href="../../../assets/images/logo.png" download class="text-center">
-            <div class="download-file-div py-3">
-                <i class="material-icons md-42">assignment</i><br>
-                <small>Assignment 02</small><br>
-                <span>Deadline: 31-01-2021</span>
-            </div>
-        </a>
-    </div>
-    <div class="col-sm-6 col-md-3 col-lg-2">
-        <a href="../../../assets/images/logo.png" download class="text-center">
-            <div class="download-file-div py-3">
-                <i class="material-icons md-42">assignment</i><br>
-                <small>Assignment 03</small><br>
-                <span>Deadline: 31-01-2021</span>
-            </div>
-        </a>
-    </div>
+</div>
+<div class="no-data-msg" *ngIf="emptyMsg">
+    <small class="text-danger">
+        <i class="material-icons float-left md-21 mr-2" style="margin-top: 3.2px;">error_outline</i>
+        No assignment found.
+    </small>
 </div>

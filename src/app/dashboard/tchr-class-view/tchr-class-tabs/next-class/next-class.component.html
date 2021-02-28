@@ -1,0 +1,54 @@
+<div class="tab-title mb-2">
+    <p class="mb-0">
+        Upload next class ZOOM link
+    </p>
+</div>
+<hr>
+<div class="alert alert-success alert-dismissible text-left" *ngIf="successAlert">
+    <i class="material-icons float-left mr-2">check_circle</i>
+    {{successText}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="alert alert-danger alert-dismissible text-left" *ngIf="errorAlert">
+    <i class="material-icons float-left">cancel</i>
+    {{errorText}}<br><small>Please try again shortly.</small>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="">
+    <form [formGroup]="nextClassForm" (ngSubmit)="nextClassAdd()" #nextClassAddForm="ngForm">
+        <div class="form-group">
+            <label for="inputName" class="col-form-label">Next class join link</label>
+            <input type="url" 
+            class="form-control" 
+            formControlName="zoomLink" 
+            required
+            [readonly]="inputDisabled"
+            placeholder="Paste ZOOM link here..."
+            [ngClass]="{'is-invalid':nextClass.zoomLink.errors && nextClass.zoomLink.touched}">
+            <div *ngIf="nextClass.zoomLink.invalid && (nextClass.zoomLink.dirty || nextClass.zoomLink.touched)" class="text-danger text-left error-msg-div">
+                <div *ngIf="nextClass.zoomLink.errors.required"><small>This field is required</small></div>
+            </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-10">
+            <button type="submit" class="theme-btn" [disabled]="nextClassForm.invalid">Submit</button>
+            <button type="reset" class="theme-btn-secondary ml-2">Reset</button>
+          </div>
+        </div>
+    </form>
+</div>
+<div class="tab-title mt-5">
+    <p class="mb-0">Next class ZOOM link</p>
+</div>
+<hr>
+<a href="{{nextClassLink}}" target="_blank" class="text-center">{{nextClassLink}}</a>
+<div class="no-data-msg" *ngIf="emptyMsg">
+    <small class="text-danger">
+        <i class="material-icons float-left md-21 mr-2" style="margin-top: 3.2px;">error_outline</i>
+        No link found.
+    </small>
+</div>

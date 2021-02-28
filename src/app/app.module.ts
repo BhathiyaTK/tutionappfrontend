@@ -1,13 +1,28 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
-
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AppRoutingModule } from './app-routing.module';
+import { environment } from './../environments/environment.prod';
+import { ErrorIntercept } from './services/http-interceptor';
+import { TokenInterceptor } from './services/token-interceptor';
+import { AuthGuard } from './services/auth/auth.guard';
+import { AuthService } from './services/auth/auth.service';
+import { StudentGuard } from './services/auth/student.guard';
+import { TeacherGuard } from './services/auth/teacher.guard';
+import { AdminGuard } from './services/auth/admin.guard';
+import { UserServicesService } from './services/users/user-services.service';
+import { ClassesService } from './services/classes/classes.service';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ChartsModule } from 'ng2-charts';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { DecimalPipe } from '@angular/common';
+import { SidebarModule } from 'ng-sidebar';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CommonNavbarComponent } from './common-navbar/common-navbar.component';
@@ -30,8 +45,6 @@ import { StdClassTabsComponent } from './dashboard/std-class-view/std-class-tabs
 import { AllClassesComponent } from './dashboard/all-classes/all-classes.component';
 import { PurchaseClassComponent } from './dashboard/purchase-class/purchase-class.component';
 import { MyClassesComponent } from './dashboard/my-classes/my-classes.component';
-import { ErrorIntercept } from './services/http-interceptor';
-import { TokenInterceptor } from './services/token-interceptor';
 import { TeacherInfoModalComponent } from './dashboard/std-class-view/std-class-summery/teacher-info-modal/teacher-info-modal.component';
 import { UnavailableClassesComponent } from './dashboard/unavailable-classes/unavailable-classes.component';
 import { TchrClassViewComponent } from './dashboard/tchr-class-view/tchr-class-view.component';
@@ -41,23 +54,21 @@ import { LastLessonComponent } from './dashboard/tchr-class-view/tchr-class-tabs
 import { DndDirective } from './directives/dnd.directive';
 import { StudyMaterialsComponent } from './dashboard/tchr-class-view/tchr-class-tabs/study-materials/study-materials.component';
 import { AssignmentsComponent } from './dashboard/tchr-class-view/tchr-class-tabs/assignments/assignments.component';
-import { AuthGuard } from './services/auth/auth.guard';
-import { AuthService } from './services/auth/auth.service';
-import { UserServicesService } from './services/users/user-services.service';
 import { NoAccessComponent } from './error/no-access/no-access.component';
 import { NotFoundComponent } from './error/not-found/not-found/not-found.component';
 import { AdminDashboardComponent } from './dashboard/admin-dashboard/admin-dashboard.component';
 import { AdminManageClassesComponent } from './dashboard/admin-manage-classes/admin-manage-classes.component';
 import { AdminManageTeachersComponent } from './dashboard/admin-manage-teachers/admin-manage-teachers.component';
 import { AdminManageStudentsComponent } from './dashboard/admin-manage-students/admin-manage-students.component';
-import { StudentGuard } from './services/auth/student.guard';
-import { TeacherGuard } from './services/auth/teacher.guard';
-import { AdminGuard } from './services/auth/admin.guard';
 import { AddClassComponent } from './dashboard/admin-manage-classes/add-class/add-class.component';
 import { AdminAllClassesComponent } from './dashboard/admin-manage-classes/admin-all-classes/admin-all-classes.component';
-import { ClassesService } from './services/classes/classes.service';
 import { AllTeachersComponent } from './dashboard/admin-manage-teachers/all-teachers/all-teachers.component';
 import { AllStudentsComponent } from './dashboard/admin-manage-students/all-students/all-students.component';
+import { NextClassComponent } from './dashboard/tchr-class-view/tchr-class-tabs/next-class/next-class.component';
+import { DashboardNumsComponent } from './dashboard/admin-dashboard/dashboard-nums/dashboard-nums.component';
+import { BarChartComponent } from './dashboard/admin-dashboard/bar-chart/bar-chart.component';
+import { PieChartComponent } from './dashboard/admin-dashboard/pie-chart/pie-chart.component';
+import { StdAddToClassComponent } from './dashboard/admin-manage-students/std-add-to-class/std-add-to-class.component';
 
 @NgModule({
   declarations: [
@@ -101,7 +112,12 @@ import { AllStudentsComponent } from './dashboard/admin-manage-students/all-stud
     AddClassComponent,
     AdminAllClassesComponent,
     AllTeachersComponent,
-    AllStudentsComponent
+    AllStudentsComponent,
+    NextClassComponent,
+    DashboardNumsComponent,
+    BarChartComponent,
+    PieChartComponent,
+    StdAddToClassComponent
   ],
   imports: [
     BrowserModule,
@@ -109,50 +125,14 @@ import { AllStudentsComponent } from './dashboard/admin-manage-students/all-stud
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent},
-      { 
-        path: 'register', 
-        component: RegisterComponent,
-        children: [
-          { path: '', redirectTo: 'student', pathMatch: 'full' },
-          { path: 'student', component: StudentRegisterComponent },
-          { path: 'teacher', component: TeacherRegisterComponent }
-        ]
-      },
-      { 
-        path: 'mPanel', 
-        component: DashboardComponent,
-        canActivate: [AuthGuard],
-        children: [
-          { path: 'profile', component: UserProfileComponent},
-          { path: 'joined-classes/:id/:name', component: StdClassViewComponent, canActivate: [StudentGuard] },
-          { path: 'joined-classes', component: JoinedClassesComponent, canActivate: [StudentGuard] },
-          { path: 'unavailable-classes', component: UnavailableClassesComponent, canActivate: [StudentGuard] },
-          { path: 'classes/:id/:name/purchase', component: PurchaseClassComponent, canActivate: [StudentGuard] },
-          { path: 'classes', component: AllClassesComponent, canActivate: [StudentGuard] },
-          { path: 'my-classes/:id/:name', component: TchrClassViewComponent, canActivate: [TeacherGuard] },
-          { path: 'my-classes', component: MyClassesComponent, canActivate: [TeacherGuard] },
-          { path: 'dashboard', component: AdminDashboardComponent, canActivate: [AdminGuard] },
-          { path: 'manage-classes', component: AdminManageClassesComponent, canActivate: [AdminGuard] },
-          { path: 'manage-teachers', component: AdminManageTeachersComponent, canActivate: [AdminGuard] },
-          { path: 'manage-students', component: AdminManageStudentsComponent, canActivate: [AdminGuard] },
-          { path: 'no-access', component: NoAccessComponent },
-          { path: 'not-found', component: NotFoundComponent }
-        ]
-      }
-    ]),
     NgxDropzoneModule,
-    AngularFireModule.initializeApp({
-      apiKey: "AIzaSyBKAeFn4RMGSZq3f7OOhE1wOI3_jMJ82zY",
-      authDomain: "schoolapp-e7d45.firebaseapp.com",
-      projectId: "schoolapp-e7d45",
-      storageBucket: "schoolapp-e7d45.appspot.com",
-      messagingSenderId: "53365894430",
-      appId: "1:53365894430:web:9cdca2ce35272ea6b0ed0f",
-      measurementId: "G-KF92S6WN7L"
-    }),
-    AngularFireStorageModule
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
+    NgxPaginationModule,
+    ChartsModule,
+    NgxSpinnerModule,
+    SidebarModule.forRoot()
   ],
   providers: [
     {
@@ -171,7 +151,8 @@ import { AllStudentsComponent } from './dashboard/admin-manage-students/all-stud
     TeacherGuard,
     AdminGuard,
     UserServicesService,
-    ClassesService
+    ClassesService,
+    DecimalPipe
   ],
   bootstrap: [AppComponent]
 })

@@ -29,9 +29,12 @@
     --theme-gray-dark: #e7e7e7;
     --white: #fff;
     --theme-btn-hover: #e08018;
+    --theme-s-btn-hover: #d6d6d6;
     --gray: #6e6e6e;
     --gray-light: #cccccc;
     --disabled: #ebb57b;
+    --red: rgb(204, 24, 24);
+    --red-hover: rgb(167, 20, 20);
 }
 
 /* ========== Form Validation Styles =========== */
@@ -42,6 +45,122 @@
   
 .ng-invalid:focus, .ng-touched:not(form) {
     border: 1px solid #f15856;
+}
+
+/* ================ Button Styles ================= */
+.theme-btn{
+    background: var(--theme-orange);
+    color: var(--white);
+    border-radius: 7px;
+    padding: 8px 15px;
+    border: none;
+    outline: none;
+    font-family: cp_r;
+    text-transform: capitalize;
+    transition: 0.3s all;
+}
+.theme-btn:hover{
+    background: var(--theme-btn-hover);
+}
+.theme-btn[disabled]{
+    background: var(--disabled);
+}
+.theme-btn[disabled]:hover{
+    cursor: not-allowed;
+    background: var(--disabled);
+}
+.theme-btn-secondary{
+    background: var(--theme-gray-dark);
+    color: var(--theme-black);
+    border-radius: 7px;
+    padding: 8px 15px;
+    border: none;
+    outline: none;
+    font-family: cp_r;
+    text-transform: capitalize;
+    transition: 0.3s all;
+}
+.theme-btn-secondary:hover{
+    background: var(--theme-s-btn-hover);
+}
+.theme-btn-secondary[disabled]{
+    background: var(--theme-gray-light);
+}
+.theme-btn-secondary[disabled]:hover{
+    cursor: not-allowed;
+    background: var(--theme-gray-light);
+}
+.theme-del-btn{
+    border: 2px solid var(--red);
+    color: var(--red);
+    background: #fff;
+    border-radius: 7px;
+    padding: 6px 15px;
+    outline: none;
+    font-family: cp_r;
+    text-transform: capitalize;
+    transition: 0.3s all;
+}
+.theme-del-btn:hover{
+    background: var(--red-hover);
+    color: var(--theme-white);
+}
+.theme-del-btn[disabled]{
+    background: var(--disabled);
+}
+.theme-del-btn[disabled]:hover{
+    cursor: not-allowed;
+    background: var(--disabled);
+}
+.action-btn{
+    color: var(--theme-white);
+    border-radius: 5px;
+    padding: 4px 8px;
+    border: none;
+    outline: none;
+    font-family: cp_r;
+    text-transform: capitalize;
+    transition: 0.3s all;
+}
+.action-btn.normal-btn{
+    background: var(--theme-orange);
+}
+.action-btn.normal-btn:hover{
+    background: var(--theme-btn-hover);
+}
+.action-btn.normal-btn[disabled]{
+    background: var(--disabled);
+}
+.action-btn.normal-btn[disabled]:hover{
+    cursor: not-allowed;
+    background: var(--disabled);
+}
+.action-btn.del-btn{
+    background: var(--red);
+}
+.action-btn.del-btn:hover{
+    background: var(--red-hover);
+}
+.action-btn.del-btn[disabled]{
+    background: var(--theme-gray-light);
+}
+.action-btn.del-btn[disabled]:hover{
+    cursor: not-allowed;
+    background: var(--theme-gray-light);
+}
+.other-btn{
+    background: #127cc2;
+    color: var(--white);
+    border-radius: 7px;
+    padding: 8px 15px;
+    border: none;
+    outline: none;
+    font-family: cp_r;
+    text-transform: capitalize;
+    transition: 0.3s all;
+}
+.other-btn:hover{
+    background: #106aa7;
 }
 
 /* ============== Common styles ================ */
@@ -89,27 +208,6 @@ nav ul > li > a{
 .custom-section-margin{
     margin: 50px auto;
 }
-.theme-btn{
-    background: var(--theme-orange);
-    color: var(--white);
-    border-radius: 7px;
-    padding: 8px 15px;
-    border: none;
-    outline: none;
-    font-family: cp_r;
-    text-transform: capitalize;
-    transition: 0.3s all;
-}
-.theme-btn:hover{
-    background: var(--theme-btn-hover);
-}
-.theme-btn[disabled]{
-    background: var(--disabled);
-}
-.theme-btn[disabled]:hover{
-    cursor: not-allowed;
-    background: var(--disabled);
-}
 .horizontal-divider{
     width: 20%;
     margin: 15px auto 25px;
@@ -137,13 +235,43 @@ input, textarea, select{
     color: #fff;
     font-family: cp_m;
 }
-.validator-spinner{
-    position: absolute;
-    top: 5px;
-    right: 25px;
-}
 .alert{
     font-family: cp_r;
+}
+table th{
+    font-family: cp_l;
+    font-size: 15px;
+}
+table td{
+    font-family: cp_l;
+    font-size: 14px;
+}
+.custom-pagination .ngx-pagination li{
+    border: 1px solid #dddddd;
+    font-family: cp_r;
+    margin: 0;
+}
+.custom-pagination .ngx-pagination .current{
+    background: var(--theme-orange);
+    border-color: var(--theme-orange);
+}
+.custom-pagination .ngx-pagination span{
+    font-family: cp_r;
+}
+.custom-pagination .ngx-pagination .pagination-previous a::before, 
+.custom-pagination .ngx-pagination .pagination-previous.disabled::before {
+    content: '\276E';
+}
+.custom-pagination .ngx-pagination .pagination-next a::after, 
+.custom-pagination .ngx-pagination .pagination-next.disabled::after {
+    content: '\276F';
+}
+.spinner-div{
+    padding: 42px 10px;
+    border-radius: 10px;
+}
+.spinner{
+    margin: 10px 0;
 }
 
 /* ================== Control Panel Styles ==================== */
@@ -186,6 +314,9 @@ input, textarea, select{
     color: var(--theme-orange);
     border-radius: 10px 10px 0 0;
 }
+.tab-title > p{
+    font-family: cp_r;
+}
 .tab-content{
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
@@ -200,20 +331,34 @@ input, textarea, select{
 .tab-content form input, .tab-content form textarea{
     font-size: 15px;
 }
-.study-file a .download-file-div{
+.study-file > div{
     border: 1px solid transparent;
 }
-.study-file a:hover{
-    color: var(--theme-orange);
-    text-decoration: none;
-}
-.study-file a:hover .download-file-div{
+.study-file > div:hover{
     border: 1px solid #ccc;
     border-radius: 10px;
+}
+.study-file > div:hover a{
+    color: var(--theme-orange);
+    text-decoration: none;
 }
 .study-file .download-file-div > span{
     color: var(--gray);
     font-size: 13px;
+}
+.file-del-btn{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: none;
+    transition: 0.1s;
+}
+.file-del-btn:hover{
+    cursor: default;
+    transform: scale(1.15);
+}
+.study-file > div:hover .file-del-btn{
+    display: block;
 }
 
 /* Drag and Drop Styles */

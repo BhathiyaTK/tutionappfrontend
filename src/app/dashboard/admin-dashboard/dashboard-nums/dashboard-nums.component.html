@@ -1,0 +1,38 @@
+<div class="row align-items-center">
+    <div class="col-sm-12 col-md-4 col-lg-4">
+        <div class="spinner-div text-center bg-white" *ngIf="spinner">
+            <img class="spinner mr-2" src="../../../../assets/images/loaders/spin_lg_white_edge.gif">
+            <span class="text-monospace">Loading data...</span>
+        </div>
+        <div class="dashboard-num-div num-div1 custom-shadow-div p-4" *ngIf="dashboardComponents">
+            <div class="count">
+                <h1 class="display-4 font-weight-normal">{{totalClasses}}</h1>
+            </div>
+            <h4>Classes</h4>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-4 col-lg-4">
+        <div class="spinner-div text-center bg-white" *ngIf="spinner">
+            <img class="spinner mr-2" src="../../../../assets/images/loaders/spin_lg_white_edge.gif">
+            <span class="text-monospace">Loading data...</span>
+        </div>
+        <div class="dashboard-num-div num-div2 custom-shadow-div p-4" *ngIf="dashboardComponents">
+            <div class="count">
+                <h1 class="display-4 font-weight-normal">{{teachersCount}}</h1>
+            </div>
+            <h4>Teachers</h4>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-4 col-lg-4">
+        <div class="spinner-div text-center bg-white" *ngIf="spinner">
+            <img class="spinner mr-2" src="../../../../assets/images/loaders/spin_lg_white_edge.gif">
+            <span class="text-monospace">Loading data...</span>
+        </div>
+        <div class="dashboard-num-div num-div3 custom-shadow-div p-4" *ngIf="dashboardComponents">
+            <div class="count">
+                <h1 class="display-4 font-weight-normal">{{studentsCount}}</h1>
+            </div>
+            <h4>Students</h4>
+        </div>
+    </div>
+</div>

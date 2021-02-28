@@ -1,0 +1,15 @@
+<div class="bg-white custom-shadow-div p-4">
+    <h5 style="font-family: cp_m;">Classes by category (Top 10)</h5>
+    <hr>
+    <div class="chart-wrapper">
+        <canvas baseChart 
+            [datasets]="lineChartData" 
+            [labels]="lineChartLabels" 
+            [options]="lineChartOptions"
+            [colors]="lineChartColors" 
+            [legend]="lineChartLegend" 
+            [chartType]="lineChartType" 
+            [plugins]="lineChartPlugins">
+        </canvas>
+    </div>
+</div>

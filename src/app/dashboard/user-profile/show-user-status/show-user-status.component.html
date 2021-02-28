@@ -1,27 +1,31 @@
-<div class="custom-shadow-div bg-white p-4">
+<div class="custom-shadow-div bg-white p-4" *ngIf="isTeacher">
     <div class="personalized-data">
         <h5>Personalized Data</h5>
         <div class="personal-data-div d-flex">
             <div class="data-left w-50">
                 <i class="material-icons md-30 float-left mr-3">local_library</i>
+                <span *ngIf="isTeacher">My Classes</span>
                 <span>Joined Classes</span>
             </div>
             <div class="data-right w-50 text-center">
+                <span *ngIf="isTeacher">{{joined_classes}}</span>
                 <span>04</span>
             </div>
         </div>
         <div class="personal-data-div d-flex">
             <div class="data-left w-50">
                 <i class="material-icons md-30 float-left mr-3">people</i>
+                <span *ngIf="isTeacher">Students</span>
                 <span>Teachers</span>
             </div>
             <div class="data-right w-50 text-center">
+                <span *ngIf="isTeacher">{{total_students}}</span>
                 <span>03</span>
             </div>
         </div>
     </div>
     <br>
-    <div class="personalized-data">
+    <!-- <div class="personalized-data" *ngIf="isStudent">
         <h5>Fees Status</h5>
         <div class="fees-status">
             <div class="row align-items-center justify-content-between m-0">
@@ -68,5 +72,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>

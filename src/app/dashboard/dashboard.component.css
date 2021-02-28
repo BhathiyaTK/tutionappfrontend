@@ -1,12 +1,54 @@
+.dashboard-sec > a{
+    display: none;
+}
 .sidebar-content, .panel-content{
     height: calc(100vh - 72px);
 }
 .sidebar-content{
     width: 15%;
+    background: #fff;
 }
 .panel-content{
     width: 85%;
     overflow-y: auto;
     background: var(--theme-gray);
     padding: 30px 40px;
+}
+.sidebarHide{
+    display: none;
+}
+.sidebarShow{
+    display: block;
+}
+
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+    .dashboard-sec > a{
+        display: block;
+    }
+    .sidebar-content{
+        width: 100%;
+    }
+    .panel-content{
+        width: 100%;
+        padding: 30px 15px;
+    }
+}
+
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .dashboard-sec > a{
+        display: block;
+    }
+    .sidebar-content{
+        width: 100%;
+    }
+    .panel-content{
+        width: 100%;
+        padding: 30px 15px;
+    }
 }

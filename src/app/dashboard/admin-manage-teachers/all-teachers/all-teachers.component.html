@@ -1,1 +1,63 @@
-<p>all-teachers works!</p>
+<div class="row mb-3 align-items-center">
+  <div class="col-sm-12 col-md-10 col-lg-10">
+    <div class="alert alert-success alert-dismissible text-left mb-0" *ngIf="successAlert">
+      <i class="material-icons float-left mr-2">check_circle</i>
+      {{successText}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+          <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="alert alert-danger alert-dismissible text-left mb-0" *ngIf="errorAlert">
+      <i class="material-icons float-left">cancel</i>
+      {{errorText}}<br><small>Please try again shortly.</small>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+          <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-2 col-lg-2 text-right">
+    <button class="other-btn" (click)="dataRefresh()"><i class="material-icons mr-2 float-left">cached</i> Refresh</button>
+  </div>
+</div>
+<div class="text-center my-4" *ngIf="spinner">
+  <img class="spinner" src="../../../../assets/images/loaders/spin_lg_white_edge.gif">
+  <h6 class="text-monospace">Loading data...</h6>
+</div>
+<div class="mt-4" *ngIf="emptyMsg">
+  <div class="alert alert-danger mb-0">
+    <i class="material-icons float-left mr-2">error</i>
+    No teachers found.
+  </div>
+</div>
+<div *ngIf="classesTable">
+  <table class="table table-bordered bg-light table-sm">
+    <thead class="thead-dark">
+        <tr class="text-center">
+          <th class="align-middle" scope="col">#</th>
+          <th class="align-middle" scope="col">Teacher ID</th>
+          <th class="align-middle" scope="col">Full Name</th>
+          <th class="align-middle" scope="col">Contact No.</th>
+          <th class="align-middle" scope="col">Address</th>
+          <th class="align-middle" scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let teacher of Teachers; let i = index">
+          <td class="align-middle text-center">{{i+1}}</td>
+          <td class="align-middle text-center">{{teacher.teacherId}}</td>
+          <td class="align-middle">{{teacher.fName}} {{teacher.lName}}</td>
+          <td class="align-middle">{{teacher.telephone}}</td>
+          <td class="align-middle">{{teacher.address}}</td>
+          <td class="align-middle">
+            <div class="d-flex justify-content-center align-items-center">
+              <button class="action-btn del-btn ml-2" (click)="deleteSelectedTeacher(teacher.teacherId)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+</div>

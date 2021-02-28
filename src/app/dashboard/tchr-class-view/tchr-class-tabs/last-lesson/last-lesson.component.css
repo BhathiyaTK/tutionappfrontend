@@ -1,0 +1,13 @@
+.lesson-preview-sec{
+    background: var(--theme-gray-dark);
+    border-radius: 10px;
+    font-family: cp_r;
+}
+.class-preview-content h6{
+    font-size: 14px;
+    color: var(--gray);
+}
+.class-preview-content p{
+    font-size: 13px;
+    font-family: "Arial";
+}

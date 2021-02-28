@@ -1,0 +1,50 @@
+.dashboard-num-div{
+    background: var(--theme-black);
+    border-radius: 10px;
+    color: var(--theme-white);
+}
+.dashboard-num-div.num-div1::before,
+.dashboard-num-div.num-div2::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    width: 100%;
+    height: 80%;
+    z-index: 1;
+    opacity: 0.4;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 100% 0;
+}
+.dashboard-num-div.num-div3::before{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    width: 100%;
+    height: 80%;
+    z-index: 1;
+    opacity: 0.4;
+    background-image: url(../../../../assets/images/student.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 100% 0;
+}
+.dashboard-num-div.num-div1::before{
+    background-image: url(../../../../assets/images/class.png);
+}
+.dashboard-num-div.num-div2::before{
+    background-image: url(../../../../assets/images/teacher.png);
+}
+.dashboard-num-div > hr{
+    background: #7c7c7c;
+}
+.dashboard-num-div > h4{
+    font-family: cp_r;
+}
+.dashboard-num-div .count{
+    color: var(--theme-orange);
+}

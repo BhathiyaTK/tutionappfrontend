@@ -1,7 +1,12 @@
 <app-dashboard-topbar></app-dashboard-topbar>
-<div class="d-md-flex d-lg-flex">
-    <div class="sidebar-content">
-        <app-sidebar></app-sidebar>
+<div class="d-lg-flex dashboard-sec">
+    <a class="text-decoration-none" (click)="mobileNavToggler()">
+        <div class="mobile-toggler px-3 py-2 text-center border-bottom">
+            <span class="text-monospace">&#9776; Menu</span>
+        </div>
+    </a>
+    <div class="sidebar-content" [ngClass]="sidebarStatus">
+        <app-sidebar (exEvent)="mobileNavHide()"></app-sidebar>
     </div>
     <div class="panel-content">
         <router-outlet></router-outlet>

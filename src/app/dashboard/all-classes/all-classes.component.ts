@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ClassesService } from 'src/app/services/classes/classes.service';
 
 @Component({
   selector: 'app-all-classes',
@@ -7,20 +8,59 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllClassesComponent implements OnInit {
 
-  constructor() { }
+  allclasses: any = []
+
+  pagesCount:number;
+  totalElements:number;
+  currentPageNumber:number;
+  initialPageNumber:any = 0;
+  spinner:boolean = false;
+  successAlert: boolean = false;
+  successText:string = '';
+  errorAlert: boolean = false;
+  errorText:string = '';
+  emptyMsg:boolean = false;
+
+  constructor(public cs: ClassesService) { }
 
   ngOnInit(): void {
+    this.getAllClasses(this.initialPageNumber);
   }
 
-  allclasses: any[] = [
-    { "id": "1", "name": "Combined Mathematics", "teacher": "Mr. Nihal Perera", "date": "Monday", "time": "02.00 P.M. to 6.00 P.M.", "fee": "2500.00" },
-    { "id": "2", "name": "Chemistry", "teacher": "Mrs. Ramya Liyanage", "date": "Tuesday", "time": "08.00 A.M. to 10.00 A.M.", "fee": "2500.00" },
-    { "id": "3", "name": "Physics", "teacher": "Mr. Kapila Fernando", "date": "Wednesday", "time": "09.00 A.M. to 12.00 noon.", "fee": "2500.00" },
-    { "id": "4", "name": "GIT", "teacher": "Miss. Heshani Gunathilake", "date": "Thursday", "time": "08.00 A.M. to 11.00 A.M.", "fee": "1500.00" },
-    { "id": "5", "name": "English (Advanced Level)", "teacher": "Mrs. Kamala Athukorala", "date": "Friday", "time": "10.00 A.M. to 12.00 noon.", "fee": "1300.00" },
-    { "id": "6", "name": "Biology", "teacher": "Mr. Athula Siriwardhana", "date": "Monday", "time": "8.00 A.M. to 11.00 A.M.", "fee": "2500.00" },
-    { "id": "7", "name": "Engineering Technology", "teacher": "Mr. Saman Silva", "date": "Tuesday", "time": "9.00 A.M. to 12.00 noon.", "fee": "1800.00" },
-    { "id": "8", "name": "Computer Science", "teacher": "Mr. Dinuth Udugama", "date": "Wednesday", "time": "8.00 A.M. to 10.00 A.M.", "fee": "2000.00" }
-  ]
+  getAllClasses(pageNo){
+    this.spinner = true;
+    this.cs.getClasses(pageNo).subscribe(data => {
+      console.log("Data = ",data);
+      if (data.content.length !== 0) {
+        this.spinner = false;
+      }else{
+        this.spinner = true;
+        this.emptyMsg = true;
+      }
+      this.allclasses = data.content;
+      this.pagesCount = data.totalPages;
+      this.totalElements = data.totalElements;
+      this.currentPageNumber = data.pageable.pageNumber;
+    })
+  }
+
+  pageNumberClick(event){
+    this.getAllClasses(event-1);
+  }
+
+  removeUrlSpaces(str: string){
+    return str.replace(/\s/g, '-');
+  }
+
+  timeConverter(time){
+    if (time) {
+      time = time.split(":");
+      let AMorPM = parseInt(time[0]) >= 12 ? 'PM':'AM';
+      let outputTime = ((parseInt(time[0]) + 11) % 12 + 1) + ':' + time[1] + ' ' + AMorPM;
+      return outputTime;
+    }else{
+      return "N/A";
+    }
+  }
 
 }

@@ -10,3 +10,20 @@
 .alert.alert-danger > button{
     padding-top: 23px;
 }
+.reg-email-input{
+    position: relative;
+}
+.validator-spinner{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+    .spec-col{
+        margin-bottom: 15px;
+    }
+}

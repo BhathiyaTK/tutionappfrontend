@@ -1,0 +1,15 @@
+<div class="bg-white custom-shadow-div p-4 h-100">
+    <h5 style="font-family: cp_m;">Fees paid status</h5>
+    <hr>
+    <div class="chart-wrapper h-100 py-3">
+        <canvas baseChart width="100%" height="100%"
+        [data]="pieChartData" 
+        [labels]="pieChartLabels" 
+        [chartType]="pieChartType"
+        [colors]="pieChartColors" 
+        [options]="pieChartOptions"
+        [plugins]="pieChartPlugins"
+        [legend]="pieChartLegend">
+      </canvas>
+    </div>
+</div>

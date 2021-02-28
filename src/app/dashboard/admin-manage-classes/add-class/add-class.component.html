@@ -1,39 +1,121 @@
 <div class="alert alert-success alert-dismissible fade show" *ngIf="successMsg">
-    Class added successfully.
+    <i class="material-icons float-left mr-2">check</i> Class added successfully.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 <div class="alert alert-danger alert-dismissible fade show" *ngIf="errorMsg">
-    Process failed! something went wrong.
+    <i class="material-icons float-left mr-2">cancel</i> Process failed! something went wrong.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<form (ngSubmit)="addNewClass()" [formGroup]="addClassForm" #classAddForm="ngForm">
-    <div class="form-group">
-        <label for="name">Class name</label>
-        <input type="text" 
-        formControlName="name" 
-        class="form-control"
-        required>
+<form (ngSubmit)="addNewClass()" [formGroup]="addClassForm">
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-7">
+            <div class="form-group">
+                <label for="name">Class Name</label>
+                <input type="text" 
+                formControlName="name" 
+                class="form-control"
+                [ngClass]="{'is-invalid':class_add.name.errors && class_add.name.touched}"
+                required>
+                <div *ngIf="class_add.name.invalid && (class_add.name.dirty || class_add.name.touched)" class="text-danger text-left error-msg-div">
+                    <div *ngIf="class_add.name.errors.required"><small>Class name is required</small></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="teacher">Select the Teacher</label>
+                <select formControlName="teacher"
+                class="form-control" 
+                [ngClass]="{'is-invalid':class_add.teacher.errors && class_add.teacher.touched}"
+                required>
+                    <option value="">Choose...</option>
+                    <option *ngFor="let tchr of Teachers" value="{{tchr.teacherId}}">
+                        {{tchr.fName}} {{tchr.lName}}
+                    </option>
+                </select>
+                <div *ngIf="class_add.teacher.invalid && (class_add.teacher.dirty || class_add.teacher.touched)" class="text-danger text-left error-msg-div">
+                    <div *ngIf="class_add.teacher.errors.required"><small>Please select a teacher</small></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-4">
+                    <div class="form-group">
+                        <label for="fee">Class Fee</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><small>Rs.</small></div>
+                            </div>
+                            <input type="text" 
+                            formControlName="fee" 
+                            class="form-control"
+                            style="border-radius: 0 7px 7px 0 !important;"
+                            placeholder="XXXX.XX"
+                            [ngClass]="{'is-invalid':class_add.fee.errors && class_add.fee.touched}"
+                            required>
+                        </div>
+                        <div *ngIf="class_add.fee.invalid && (class_add.fee.dirty || class_add.fee.touched)" class="text-danger text-left error-msg-div">
+                            <div *ngIf="class_add.fee.errors.required"><small>Class fee is required</small></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group">
+                        <label for="date">Select the Day</label>
+                        <select formControlName="date"
+                        class="form-control" 
+                        [ngClass]="{'is-invalid':class_add.date.errors && class_add.date.touched}"
+                        required>
+                            <option value="">Choose...</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                            <option value="Sunday">Sunday</option>
+                        </select>
+                        <div *ngIf="class_add.date.invalid && (class_add.date.dirty || class_add.date.touched)" class="text-danger text-left error-msg-div">
+                            <div *ngIf="class_add.date.errors.required"><small>Please select the day</small></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group">
+                        <label for="time">Class Held Time</label>
+                        <input type="time" 
+                        formControlName="time" 
+                        class="form-control"
+                        [ngClass]="{'is-invalid':class_add.time.errors && class_add.time.touched}"
+                        required>
+                        <div *ngIf="class_add.time.invalid && (class_add.time.dirty || class_add.time.touched)" class="text-danger text-left error-msg-div">
+                            <div *ngIf="class_add.time.errors.required"><small>Class time is required</small></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-5">
+            <div class="form-group">
+                <label for="note">Class Note</label>
+                <textarea formControlName="notes" 
+                class="form-control"
+                rows="8"
+                maxlength="255"
+                placeholder="Brief introduction about the class..."
+                [ngClass]="{'is-invalid':class_add.notes.errors && class_add.notes.touched}"
+                required></textarea>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div *ngIf="class_add.notes.invalid && (class_add.notes.dirty || class_add.notes.touched)" class="text-danger text-left error-msg-div">
+                        <div *ngIf="class_add.notes.errors.required"><small>Class note is required</small></div>
+                    </div>
+                    <small class="textarea-limit-indicator text-muted">Maximum 255 characters only</small>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="teacher">Select the teacher</label>
-        <select formControlName="teacherId"
-        class="form-control" required>
-            <option value="">Choose...</option>
-            <option *ngFor="let tchr of Teachers" value="{{tchr.teacherId}}">
-                {{tchr.fName}} {{tchr.lName}}
-            </option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="note">Class note</label>
-        <textarea formControlName="notes" 
-        class="form-control"
-        rows="10"
-        required></textarea>
-    </div>
-    <button class="theme-btn" type="submit">Add Class</button>
+    <hr class="mt-0">
+    <button class="theme-btn" [disabled]="addClassForm.invalid">Add Class</button>
+    <button type="reset" class="theme-btn-secondary ml-2">Reset</button>
 </form>

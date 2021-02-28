@@ -27,8 +27,20 @@ export class UserServicesService {
     return this.http.get<any[]>(this.APIUrl + '/admin/getAllTeachers');
   }
 
-  public getStudents(){
-    return this.http.get(this.APIUrl + '/admin/getAllStudents');
+  public getStudents(pageNo): Observable<any>{
+    return this.http.get<any>(this.APIUrl + '/getallstudents?pageNo='+ pageNo +'&pageSize=10');
+  }
+
+  public getSingleTeacher(userId, currentMonth): Observable<any>{
+    return this.http.get<any>(this.APIUrl + '/getOneTeacher/'+ userId +'/2021' + currentMonth);
+  }
+
+  public getSingleStudent(userId, currentMonth): Observable<any>{
+    return this.http.get<any>(this.APIUrl + '/getOneStudent/'+ userId +'/2021' + currentMonth);
+  }
+
+  studentJoinedToClass(scId, sId){
+    return this.http.post(this.APIUrl + '/student/addSubClass/' + scId + '/' + sId, {responseType: 'text' as 'json'});
   }
 
   updateTeachers(val:any){
@@ -39,8 +51,8 @@ export class UserServicesService {
     return this.http.put(this.APIUrl + '/student/update/' + val.studentId, val);
   }
 
-  deleteTeacher(val:any){
-    return this.http.delete(this.APIUrl + '/admin/deleteTeacher/' + val.teacherId, val);
+  deleteTeacher(tId:any){
+    return this.http.delete(this.APIUrl + '/admin/deleteTeacher/' + tId, {responseType: 'text' as 'json'});
   }
 
   deleteStudent(val:any){
