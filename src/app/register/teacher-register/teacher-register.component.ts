@@ -29,6 +29,8 @@ export class TeacherRegisterComponent implements OnInit {
   telephone:string;
   email:string;
   eduQual:string;
+  medium:string;
+  grade:string;
   teacherIntro:string;
   password:string;
   role:string = "teacher";
@@ -51,9 +53,11 @@ export class TeacherRegisterComponent implements OnInit {
     // this.customValidator.validateEmailNotExist.bind(this.customValidator)
     ],
     eduQual: ['', [Validators.required]],
+    medium: ['', [Validators.required]],
+    grade: ['', [Validators.required]],
     teacherIntro: ['', [
       Validators.required,
-      Validators.maxLength(255)
+      Validators.maxLength(500)
     ]],
     password: ['', [
       Validators.required,
@@ -85,6 +89,8 @@ export class TeacherRegisterComponent implements OnInit {
         telephone: this.tchrRegForm.get('telephone').value,
         eduQual: this.tchrRegForm.get('eduQual').value,
         teacherIntro: this.tchrRegForm.get('teacherIntro').value,
+        medium: this.tchrRegForm.get('medium').value,
+        grade: this.tchrRegForm.get('grade').value,
         userModel:{
           username: this.tchrRegForm.get('email').value,
           password: this.tchrRegForm.get('password').value,

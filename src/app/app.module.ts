@@ -69,6 +69,11 @@ import { DashboardNumsComponent } from './dashboard/admin-dashboard/dashboard-nu
 import { BarChartComponent } from './dashboard/admin-dashboard/bar-chart/bar-chart.component';
 import { PieChartComponent } from './dashboard/admin-dashboard/pie-chart/pie-chart.component';
 import { StdAddToClassComponent } from './dashboard/admin-manage-students/std-add-to-class/std-add-to-class.component';
+import { PasswordRestComponent } from './password-rest/password-rest.component';
+import { AboutComponent } from './about/about.component';
+import { ClassApprovalsComponent } from './dashboard/admin-manage-classes/class-approvals/class-approvals.component';
+import { CustomFiletypeValidationService } from './services/validations/custom-filetype-validation.service';
+import { TeacherCreateClassComponent } from './dashboard/teacher-create-class/teacher-create-class.component';
 
 @NgModule({
   declarations: [
@@ -117,7 +122,11 @@ import { StdAddToClassComponent } from './dashboard/admin-manage-students/std-ad
     DashboardNumsComponent,
     BarChartComponent,
     PieChartComponent,
-    StdAddToClassComponent
+    StdAddToClassComponent,
+    PasswordRestComponent,
+    AboutComponent,
+    ClassApprovalsComponent,
+    TeacherCreateClassComponent
   ],
   imports: [
     BrowserModule,
@@ -152,6 +161,7 @@ import { StdAddToClassComponent } from './dashboard/admin-manage-students/std-ad
     AdminGuard,
     UserServicesService,
     ClassesService,
+    CustomFiletypeValidationService,
     DecimalPipe
   ],
   bootstrap: [AppComponent]

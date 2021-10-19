@@ -14,8 +14,10 @@ export class ShowBioInfoComponent implements OnInit {
   user_name: string;
   user_address: string;
   user_tel: string;
+  user_city: string;
   user_eduQl: string;
   user_intro: string;
+  user_tchr_id: number;
   user_std_id: number;
   user_garTel: string;
 
@@ -83,8 +85,10 @@ export class ShowBioInfoComponent implements OnInit {
   getTeacher(uId, currentMonth){
     currentMonth = this.c_month;
     this.us.getSingleTeacher(uId, currentMonth).subscribe(data => {
+      this.user_tchr_id = data.teacherEntity.teacherId;
       this.user_name = data.teacherEntity.fName + ' ' + data.teacherEntity.lName;
       this.user_address = data.teacherEntity.address;
+      this.user_city = data.teacherEntity.city;
       this.user_tel = data.teacherEntity.telephone;
       this.user_eduQl = data.teacherEntity.eduQual;
       this.user_intro = data.teacherEntity.teacherIntro;
@@ -99,6 +103,7 @@ export class ShowBioInfoComponent implements OnInit {
       this.user_std_id = data.studentEntity.studentId;
       this.user_name = data.studentEntity.fName + ' ' + data.studentEntity.lName;
       this.user_address = data.studentEntity.address;
+      this.user_city = data.studentEntity.city;
       this.user_tel = data.studentEntity.telephone;
       this.user_garTel = data.studentEntity.garTelephone;
     }, err => {

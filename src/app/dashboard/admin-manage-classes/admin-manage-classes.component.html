@@ -9,18 +9,28 @@
             <div class="p-4">
                 <ul class="nav nav-tabs" id="teacherClassTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="all-class-tab" data-toggle="tab" href="#all-class" role="tab" aria-controls="all-class" aria-selected="true">All Classes</a>
+                        <a class="nav-link active" id="all-class-tab" data-toggle="tab" href="#all-class" role="tab"
+                            aria-controls="all-class" aria-selected="true">All Classes</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="add-class-tab" data-toggle="tab" href="#add-class" role="tab" aria-controls="add-class" aria-selected="false">Add Class</a>
+                        <a class="nav-link" id="add-class-tab" data-toggle="tab" href="#add-class" role="tab"
+                            aria-controls="add-class" aria-selected="false">Add New</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="approve-class-tab" data-toggle="tab" href="#approve-class" role="tab"
+                            aria-controls="approve-class" aria-selected="false">Approval Requests</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="teacherClassTabContent">
-                    <div class="tab-pane fade show active" id="all-class" role="tabpanel" aria-labelledby="all-class-tab">
+                    <div class="tab-pane fade show active" id="all-class" role="tabpanel"
+                        aria-labelledby="all-class-tab">
                         <app-admin-all-classes></app-admin-all-classes>
                     </div>
                     <div class="tab-pane fade" id="add-class" role="tabpanel" aria-labelledby="add-class-tab">
                         <app-add-class></app-add-class>
+                    </div>
+                    <div class="tab-pane fade" id="approve-class" role="tabpanel" aria-labelledby="approve-class-tab">
+                        <app-class-approvals></app-class-approvals>
                     </div>
                 </div>
             </div>

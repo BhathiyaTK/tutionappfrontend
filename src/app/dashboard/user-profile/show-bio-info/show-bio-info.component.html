@@ -1,12 +1,11 @@
 <div class="custom-shadow-div bg-white mb-5">
     <div class="profile-banner">
-        <div class="profile-banner-img"></div>
         <div class="profile-img-div">
             <div class="row align-items-center">
-                <div class="col-sm-12 col-md-12 col-lg-3">
+                <div class="col-sm-12 col-md-12 col-lg-2">
                     <img src="../../../assets/images/users/avatar.png" alt="">
                 </div>
-                <div class="col-sm-12 col-md-12 col-lg-9">
+                <div class="col-sm-12 col-md-12 col-lg-10">
                     <p>{{user_name}}</p>
                     <span>{{auth.currentUser.sub}}</span>
                 </div>
@@ -15,14 +14,22 @@
         <div class="profile-banner-bottom"></div>
     </div>
     <div class="p-4">
-        <div>
+        <div class="mb-4">
             <div class="personal-detail" *ngIf="isStudent">
                 <small>Student ID</small>
                 <h6>{{user_std_id}}</h6>
             </div>
+            <div class="personal-detail" *ngIf="isTeacher">
+                <small>Teacher ID</small>
+                <h6>{{user_tchr_id}}</h6>
+            </div>
             <div class="personal-detail">
                 <small>Address</small>
                 <h6>{{user_address}}</h6>
+            </div>
+            <div class="personal-detail">
+                <small>Residence Town</small>
+                <h6>{{user_city}}</h6>
             </div>
             <div class="personal-detail">
                 <small>Mobile No.</small>
@@ -43,7 +50,6 @@
                 </p>
             </div>
         </div>
-        <hr>
         <button type="button" class="theme-btn" data-toggle="modal" data-target="#userBioUpdateModal">
             <i class="material-icons md-21 float-left mr-2">edit</i>
             Edit Info
@@ -52,8 +58,9 @@
 </div>
 
 
-<div class="modal fade" id="userBioUpdateModal" tabindex="-1" aria-labelledby="userBioUpdateModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+<div class="modal fade" id="userBioUpdateModal" tabindex="-1" aria-labelledby="userBioUpdateModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="userBioUpdateModalLabel">Update Personal Info</h5>

@@ -15,7 +15,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12 col-md-4 col-lg-3 class-col" *ngFor="let class of myclasses" style="margin-bottom: 30px;">
+            <div class="col-sm-12 col-md-4 col-lg-3 class-col" *ngFor="let class of myclasses"
+                style="margin-bottom: 30px;">
                 <a [routerLink]="['/mPanel/my-classes', class.tutionClassId, removeUrlSpaces(class.name)]">
                     <div class="card custom-shadow-div">
                         <img src="../../../assets/images/bg2.jpg" class="card-img-top" alt="Class Banner Image">
@@ -26,7 +27,7 @@
                             </p>
                             <hr>
                             <p class="class-price">
-                                Rs.{{class.classFee}}
+                                {{currencyConvertor(class.classFee)}}
                             </p>
                         </div>
                     </div>

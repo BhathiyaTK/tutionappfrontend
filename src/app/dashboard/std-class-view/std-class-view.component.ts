@@ -13,7 +13,6 @@ export class StdClassViewComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       // let id = params.get('id');
-      console.log(params);
     });
   }
 

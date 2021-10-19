@@ -20,7 +20,7 @@
 </div>
 <div class="mb-2" *ngIf="isUploading && percentageVal | async as pct">
     <div class="progress" style="height: 10px;">
-        <div class="progress-bar bg-success progress-bar-striped" role="progressbar" [ngStyle]="{width:pct+'%'}" aria-valuenow="{{pct | number}}" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar bg-success progress-bar-striped" role="progressbar" [ngStyle]="{width:pct+'%'}" attr.aria-valuenow="{{pct | number}}" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
     <i><small class="text-success">Uploading files - {{pct | number:'1.0-0'}}%</small></i>
 </div>

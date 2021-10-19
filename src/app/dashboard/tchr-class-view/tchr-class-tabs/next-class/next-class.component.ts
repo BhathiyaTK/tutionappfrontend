@@ -59,7 +59,7 @@ export class NextClassComponent implements OnInit {
       })
       .catch((error) => {
         this.errorAlert = true;
-        this.errorText = error;
+        this.errorText = "Next class updating failed!";
         this.inputDisabled = false;
         this.nextClassForm.reset();
       })

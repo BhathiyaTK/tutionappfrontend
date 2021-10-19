@@ -1,72 +1,84 @@
-<div class="row mb-3 align-items-center">
-    <div class="col-sm-12 col-md-10 col-lg-10">
-      <div class="alert alert-success alert-dismissible text-left mb-0" *ngIf="successAlert">
-        <i class="material-icons float-left mr-2">check_circle</i>
-        {{successText}}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
-            <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="alert alert-danger alert-dismissible text-left mb-0" *ngIf="errorAlert">
-        <i class="material-icons float-left mr-2">cancel</i>
-        {{errorText}} Please try again shortly.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
-            <span aria-hidden="true">&times;</span>
-        </button>
+<form>
+  <div class="row mb-3 align-items-center justify-content-between">
+    <div class="col-sm-12 col-md-10 col-lg-4">
+      <div class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2 w-100" type="search" placeholder="Search by the first OR last name"
+          aria-label="Search" (keyup)="filterStudents($event, currentPageNumber)">
       </div>
     </div>
     <div class="col-sm-12 col-md-2 col-lg-2 text-right">
-      <button class="other-btn" (click)="dataRefresh(currentPageNumber)"><i class="material-icons mr-2 float-left">cached</i> Refresh</button>
+      <button type="reset" class="other-btn" (click)="dataRefresh(currentPageNumber)"
+        [ngClass]="{'special-del-btn': (typedFilterText !== ''), 'other-btn': (typedFilterText == '')}">
+        {{(typedFilterText !== '') ? "Clear filters" : "Refresh"}}
+      </button>
     </div>
   </div>
-  <div class="text-center my-4" *ngIf="spinner">
-    <img class="spinner" src="../../../../assets/images/loaders/spin_lg_white_edge.gif">
-    <h6 class="text-monospace">Loading data...</h6>
+</form>
+
+<p class="text-muted font-italic" *ngIf="typedFilterText !== ''">{{filteredResultCount}} student(s) found for the name
+  '{{typedFilterText}}' on page {{currentPageNumber+1}}</p>
+
+<div class="alert alert-success alert-dismissible text-left mb-3" *ngIf="successAlert">
+  <i class="material-icons float-left mr-2">check_circle</i>
+  {{successText}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="alert alert-danger alert-dismissible text-left mb-3" *ngIf="errorAlert">
+  <i class="material-icons float-left mr-2">cancel</i>
+  {{errorText}} Please try again shortly.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="text-center my-4" *ngIf="spinner">
+  <img class="spinner" src="../../../../assets/images/loaders/spin_lg_white_edge.gif">
+  <h6 class="text-monospace">Loading data...</h6>
+</div>
+<div class="mt-4" *ngIf="emptyMsg">
+  <div class="alert alert-danger mb-0">
+    <i class="material-icons float-left mr-2">error</i>
+    No students found.
   </div>
-  <div class="mt-4" *ngIf="emptyMsg">
-    <div class="alert alert-danger mb-0">
-      <i class="material-icons float-left mr-2">error</i>
-      No students found.
-    </div>
-  </div>
-  <div *ngIf="studentsTable">
-    <table class="table table-bordered bg-light table-sm">
-      <thead class="thead-dark">
-          <tr class="text-center">
-            <th class="align-middle" scope="col">#</th>
-            <th class="align-middle" scope="col">Student ID</th>
-            <th class="align-middle" scope="col">Name</th>
-            <th class="align-middle" scope="col">Student Tel.</th>
-            <th class="align-middle" scope="col">Gardian Tel.</th>
-            <th class="align-middle" scope="col">Address</th>
-            <th class="align-middle" scope="col">Action</th>
-          </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let i = index; let std of Students | paginate: {itemsPerPage: 6, currentPage: currentPageNumber+1, totalItems: totalElements};">
-          <td class="align-middle text-center">{{i+1}}</td>
-          <td class="align-middle text-center">{{std.studentId}}</td>
-          <td class="align-middle">{{std.fName}} {{std.lName}}</td>
-          <td class="align-middle text-center">{{std.telephone}}</td>
-          <td class="align-middle text-center">{{std.garTelephone}}</td>
-          <td class="align-middle" width="300px">{{std.address}}</td>
-          <td class="align-middle">
-            <div class="d-flex justify-content-center align-items-center">
-              <button class="action-btn del-btn ml-2" (click)="deleteSelectedStudent(std.studentId, currentPageNumber)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                </svg>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <pagination-controls
-      class="custom-pagination"
-      responsive="true" 
-      previousLabel="Prev" 
-      nextLabel="Next" 
-      (pageChange)="pageNumberClick($event)">
-    </pagination-controls>
-  </div>
+</div>
+<div *ngIf="studentsTable" class="table-responsive">
+  <table class="table table-bordered bg-light table-sm">
+    <thead class="thead-dark">
+      <tr class="text-center">
+        <th class="align-middle" scope="col">#</th>
+        <th class="align-middle" scope="col">Student ID</th>
+        <th class="align-middle" scope="col">Name</th>
+        <th class="align-middle" scope="col">Student Tel.</th>
+        <th class="align-middle" scope="col">Gardian Tel.</th>
+        <th class="align-middle" scope="col">Address</th>
+        <th class="align-middle" scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let i = index; let std of Students | paginate: {itemsPerPage: 20, currentPage: currentPageNumber+1, totalItems: totalElements};">
+        <td class="align-middle text-center">{{i+1}}</td>
+        <td class="align-middle text-center">{{std.studentId}}</td>
+        <td class="align-middle">{{std.fName}} {{std.lName}}</td>
+        <td class="align-middle text-center">{{std.telephone}}</td>
+        <td class="align-middle text-center">{{std.garTelephone}}</td>
+        <td class="align-middle" width="300px">{{std.address}}</td>
+        <td class="align-middle">
+          <div class="d-flex justify-content-center align-items-center">
+            <button class="action-btn del-btn ml-2" (click)="deleteSelectedStudent(std.studentId, currentPageNumber)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-trash-fill" viewBox="0 0 16 16">
+                <path
+                  d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+              </svg>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls class="custom-pagination" responsive="true" previousLabel="Prev" nextLabel="Next"
+    (pageChange)="pageNumberClick($event)">
+  </pagination-controls>
+</div>

@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class CustomValidationService {
 
-  readonly UsersAPIUrl = "https://tutionspringbootbackend.herokuapp.com/getAllUsers";
+  readonly UsersAPIUrl = "https://masterybackend.tk/filter/getAllUsersEmails";
 
   constructor(private http: HttpClient) { }
 
@@ -48,7 +48,7 @@ export class CustomValidationService {
   checkEmailNotExist(email: string):Observable<boolean> {
     return this.http.get(this.UsersAPIUrl).pipe(
       map((emailList: Array<any>) =>
-        emailList.filter(user => user.username === email)
+        emailList.filter(user => user.emails === email)
       ),
       map(users => !users.length)
     );

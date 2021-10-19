@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { ClassesService } from 'src/app/services/classes/classes.service';
 import { UserServicesService } from 'src/app/services/users/user-services.service';
+import { CustomFiletypeValidationService } from 'src/app/services/validations/custom-filetype-validation.service';
 
 @Component({
   selector: 'app-add-class',
@@ -13,7 +14,8 @@ export class AddClassComponent implements OnInit {
   constructor(
     private fb: FormBuilder, 
     private cs: ClassesService,
-    private uss: UserServicesService
+    private uss: UserServicesService,
+    private cftv: CustomFiletypeValidationService
     ) { }
 
   Teachers:any = [];
@@ -27,6 +29,9 @@ export class AddClassComponent implements OnInit {
   date:string;
   time:string;
   notes:string;
+  image:string;
+  adminApprovalState:string = 'Approved';
+  imageName:string;
 
   addClassForm = this.fb.group({
     name: ['', [Validators.required]],
@@ -37,6 +42,10 @@ export class AddClassComponent implements OnInit {
     notes: ['', [
       Validators.required,
       Validators.maxLength(255)
+    ]],
+    image: ['', [
+      Validators.required, 
+      this.cftv.requiredFileTypes('jpg')
     ]]
   });
 
@@ -62,6 +71,8 @@ export class AddClassComponent implements OnInit {
         hDate: this.addClassForm.get('date').value,
         htime: this.addClassForm.get('time').value,
         classFee: this.addClassForm.get('fee').value,
+        imagePath: this.addClassForm.get('image').value,
+        approvalState: this.adminApprovalState,
         teacherModel:{
           teacherId: this.addClassForm.get('teacher').value
         }

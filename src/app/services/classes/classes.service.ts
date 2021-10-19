@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class ClassesService {
 
-  readonly APIUrl = "https://tutionspringbootbackend.herokuapp.com";
+  readonly APIUrl = "https://masterybackend.tk";
 
   studyMaterialList: AngularFireList<any>;
   assignmentList: AngularFireList<any>;
@@ -25,7 +25,7 @@ export class ClassesService {
   }
 
   addClass(val:any){
-    return this.http.post<any>(this.APIUrl + '/admin/newclass', val, {responseType: 'text' as 'json'});
+    return this.http.post<any>(this.APIUrl + '/tutionClass/newclass', val, {responseType: 'text' as 'json'});
   }
 
   updateClass(classId, val:any){

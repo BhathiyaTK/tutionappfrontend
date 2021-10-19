@@ -19,86 +19,65 @@
     <form class="mb-4" [formGroup]="stdRegForm" (ngSubmit)="stdRegister()" #stdForm="ngForm">
         <div class="row form-group">
             <div class="col-sm-12 col-md-6 col-lg-6 spec-col">
-                <input type="text" 
-                formControlName="fName" 
-                id="fName" 
-                placeholder="First Name" 
-                class="form-control" 
-                [ngClass]="{'is-invalid':std_reg.fName.errors && std_reg.fName.touched}" 
-                required>
-                <div *ngIf="std_reg.fName.invalid && (std_reg.fName.dirty || std_reg.fName.touched)" class="text-danger text-left error-msg-div">
+                <input type="text" formControlName="fName" id="fName" placeholder="First Name" class="form-control"
+                    [ngClass]="{'is-invalid':std_reg.fName.errors && std_reg.fName.touched}" required>
+                <div *ngIf="std_reg.fName.invalid && (std_reg.fName.dirty || std_reg.fName.touched)"
+                    class="text-danger text-left error-msg-div">
                     <div *ngIf="std_reg.fName.errors.required"><small>First name is required</small></div>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-6">
-                <input type="text" 
-                formControlName="lName" 
-                id="lName" 
-                placeholder="Last Name" 
-                class="form-control"
-                [ngClass]="{'is-invalid':std_reg.lName.errors && std_reg.lName.touched}"
-                required>
-                <div *ngIf="std_reg.lName.invalid && (std_reg.lName.dirty || std_reg.lName.touched)" class="text-danger text-left error-msg-div">
+                <input type="text" formControlName="lName" id="lName" placeholder="Last Name" class="form-control"
+                    [ngClass]="{'is-invalid':std_reg.lName.errors && std_reg.lName.touched}" required>
+                <div *ngIf="std_reg.lName.invalid && (std_reg.lName.dirty || std_reg.lName.touched)"
+                    class="text-danger text-left error-msg-div">
                     <div *ngIf="std_reg.lName.errors.required"><small>Last name is required</small></div>
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <input type="text" 
-            formControlName="address" 
-            id="address" 
-            placeholder="Address" 
-            class="form-control"
-            [ngClass]="{'is-invalid':std_reg.address.errors && std_reg.address.touched}"
-            required>
-            <div *ngIf="std_reg.address.invalid && (std_reg.address.dirty || std_reg.address.touched)" class="text-danger text-left error-msg-div">
+            <input type="text" formControlName="address" id="address" placeholder="Address" class="form-control"
+                [ngClass]="{'is-invalid':std_reg.address.errors && std_reg.address.touched}" required>
+            <div *ngIf="std_reg.address.invalid && (std_reg.address.dirty || std_reg.address.touched)"
+                class="text-danger text-left error-msg-div">
                 <div *ngIf="std_reg.address.errors.required"><small>Address is required</small></div>
             </div>
         </div>
         <div class="row form-group">
             <div class="col-sm-12 col-md-4 col-lg-4 spec-col">
-                <input type="text" 
-                formControlName="city" 
-                id="city" 
-                placeholder="City" 
-                class="form-control"
-                [ngClass]="{'is-invalid':std_reg.city.errors && std_reg.city.touched}"
-                required>
-                <div *ngIf="std_reg.city.invalid && (std_reg.city.dirty || std_reg.city.touched)" class="text-danger text-left error-msg-div">
+                <input type="text" formControlName="city" id="city" placeholder="City" class="form-control"
+                    [ngClass]="{'is-invalid':std_reg.city.errors && std_reg.city.touched}" required>
+                <div *ngIf="std_reg.city.invalid && (std_reg.city.dirty || std_reg.city.touched)"
+                    class="text-danger text-left error-msg-div">
                     <div *ngIf="std_reg.city.errors.required"><small>City is required</small></div>
                 </div>
             </div>
             <div class="col-sm-12 col-md-8 col-lg-8 reg-email-input">
-                <input type="text" 
-                formControlName="email" 
-                id="email" 
-                placeholder="Email" 
-                class="form-control"
-                [ngClass]="{'is-invalid':std_reg.email.errors && std_reg.email.touched}" 
-                required>
-                <!-- <div class="validator-spinner" role="status" *ngIf="std_reg.email.pending">
-                    <img src="../../../assets/images/loaders/spin_sm.gif" alt="loading spinner sm">
-                    <small class="text-muted ml-1"><i>Validating...</i></small>
-                </div> -->
-                <div *ngIf="std_reg.email.invalid && (std_reg.email.dirty || std_reg.email.touched)" class="text-danger text-left error-msg-div">
+                <input type="text" formControlName="email" id="email" placeholder="Email" class="form-control"
+                    [ngClass]="{'is-invalid':std_reg.email.errors && std_reg.email.touched}"
+                    (keyup)="checkEmail($event)" required>
+                <div *ngIf="std_reg.email.invalid && (std_reg.email.dirty || std_reg.email.touched)"
+                    class="text-danger text-left error-msg-div">
                     <div *ngIf="std_reg.email.errors.required"><small>Email is required</small></div>
                     <div *ngIf="std_reg.email.errors.email"><small>Please enter a valid email</small></div>
                 </div>
-                <div class="text-danger text-left error-msg-div" *ngIf="std_reg.email.hasError('emailExist')">
+                <div class="validator-spinner" role="status" *ngIf="validatingSpinner">
+                    <span class="spinner-border spinner-border-sm" style="margin-right: 3px; color: orange;"
+                        role="status"></span>
+                    <small class="text-muted ml-1">Validating...</small>
+                </div>
+                <div class="text-danger text-left error-msg-div" *ngIf="validateMsgError">
                     <small>Email already exists. Please try another.</small>
                 </div>
             </div>
         </div>
         <div class="row form-group">
             <div class="col-sm-12 col-md-6 col-lg-6 spec-col">
-                <input type="text" 
-                formControlName="telephone" 
-                id="telephone" 
-                placeholder="Student Mobile No." 
-                class="form-control"
-                [ngClass]="{'is-invalid':std_reg.telephone.errors && std_reg.telephone.touched}"  
-                required>
-                <div *ngIf="std_reg.telephone.invalid && (std_reg.telephone.dirty || std_reg.telephone.touched)" class="text-danger text-left error-msg-div">
+                <input type="text" formControlName="telephone" id="telephone" placeholder="Student Mobile No."
+                    class="form-control"
+                    [ngClass]="{'is-invalid':std_reg.telephone.errors && std_reg.telephone.touched}" required>
+                <div *ngIf="std_reg.telephone.invalid && (std_reg.telephone.dirty || std_reg.telephone.touched)"
+                    class="text-danger text-left error-msg-div">
                     <div *ngIf="std_reg.telephone.errors.required"><small>Student Mobile No. is required</small></div>
                     <div *ngIf="std_reg.telephone.errors.minlength"><small>Must be 10 characters length</small></div>
                     <div *ngIf="std_reg.telephone.errors.maxlength"><small>Must be 10 characters length</small></div>
@@ -106,84 +85,88 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-6">
-                <input type="text" 
-                formControlName="garTelephone" 
-                id="garTelephone" 
-                placeholder="Parent / Gardian Mobile No." 
-                class="form-control"
-                [ngClass]="{'is-invalid':std_reg.garTelephone.errors && std_reg.garTelephone.touched}"  
-                required>
-                <div *ngIf="std_reg.garTelephone.invalid && (std_reg.garTelephone.dirty || std_reg.garTelephone.touched)" class="text-danger text-left error-msg-div">
-                    <div *ngIf="std_reg.garTelephone.errors.required"><small>Parent / Gardian Mobile No. is required</small></div>
+                <input type="text" formControlName="garTelephone" id="garTelephone"
+                    placeholder="Parent / Gardian Mobile No." class="form-control"
+                    [ngClass]="{'is-invalid':std_reg.garTelephone.errors && std_reg.garTelephone.touched}" required>
+                <div *ngIf="std_reg.garTelephone.invalid && (std_reg.garTelephone.dirty || std_reg.garTelephone.touched)"
+                    class="text-danger text-left error-msg-div">
+                    <div *ngIf="std_reg.garTelephone.errors.required"><small>Parent / Gardian Mobile No. is
+                            required</small></div>
                     <div *ngIf="std_reg.garTelephone.errors.minlength"><small>Must be 10 characters length</small></div>
                     <div *ngIf="std_reg.garTelephone.errors.maxlength"><small>Must be 10 characters length</small></div>
-                    <div *ngIf="std_reg.garTelephone.errors.pattern"><small>Only numeric values are allowed</small></div>
+                    <div *ngIf="std_reg.garTelephone.errors.pattern"><small>Only numeric values are allowed</small>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- <div class="row form-group">
+        <div class="row form-group">
             <div class="col-sm-12 col-md-6 col-lg-6">
-                <input type="text" name="std-register-mobile" id="std-register-mobile" placeholder="Student's Mobile No." class="form-control">
+                <select formControlName="medium" id="medium" class="form-control"
+                    [ngClass]="{'is-invalid':std_reg.medium.errors && std_reg.medium.touched}" required>
+                    <option value="" disabled>- Select the medium -</option>
+                    <option value="Sinhala">සිංහල</option>
+                    <option value="English">English</option>
+                    <option value="Tamil">தமிழ்</option>
+                </select>
+                <div *ngIf="std_reg.medium.invalid && (std_reg.medium.dirty || std_reg.medium.touched)"
+                    class="text-danger text-left error-msg-div">
+                    <div *ngIf="std_reg.medium.errors.required"><small>Medium is required</small></div>
+                </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-6">
-                <input type="text" name="std-register-p-mobile" id="std-register-p-mobile" placeholder="Gardian's Contact No." class="form-control">
+                <select formControlName="grade" id="grade" class="form-control"
+                    [ngClass]="{'is-invalid':std_reg.grade.errors && std_reg.grade.touched}" required>
+                    <option value="" disabled>- Select the grade -</option>
+                    <option *ngFor="let gradeItem of gradeList" value="{{gradeItem.value}}">{{gradeItem.name}}</option>
+                </select>
+                <div *ngIf="std_reg.grade.invalid && (std_reg.grade.dirty || std_reg.grade.touched)"
+                    class="text-danger text-left error-msg-div">
+                    <div *ngIf="std_reg.grade.errors.required"><small>Grade is required</small></div>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <select name="std-stream" id="std-stream" class="form-select form-control">
-                <option value="" selected disabled>--- Select Your Stream ---</option>
-                <option value="maths">Mathematics</option>
-                <option value="bio">Biology</option>
-                <option value="tech">Technology</option>
-                <option value="commerce">Commerce</option>
-                <option value="art">Art</option>
-                <option value="tenAndElevan">O/L (Grade 10 - 11)</option>
-                <option value="sixToNine">O/L (Grade 6 - 9)</option>
-                <option value="oneToFive">Primary (Grade 1 - 5)</option>
-            </select>
-        </div> -->
         <div class="row form-group align-items-center spec-col">
             <div class="col-sm-12 col-md-12 col-lg-7">
-                <input type="password" 
-                formControlName="password" 
-                id="password" 
-                placeholder="Password" 
-                class="form-control"
-                [ngClass]="{'is-invalid':std_reg.password.errors && std_reg.password.touched}" 
-                aria-describedby="password1HelpBlock" 
-                required>
+                <input type="password" formControlName="password" id="password" placeholder="Password"
+                    class="form-control" [ngClass]="{'is-invalid':std_reg.password.errors && std_reg.password.touched}"
+                    aria-describedby="password1HelpBlock" required>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-auto">
-                <small id="password1HelpBlock" class="form-text text-muted mt-0">Must have at least 6 characters.</small>
+                <small id="password1HelpBlock" class="form-text text-muted mt-0">Must have at least 6
+                    characters.</small>
             </div>
-            <div *ngIf="std_reg.password.invalid && (std_reg.password.dirty || std_reg.password.touched)" class="text-danger text-left error-msg-div ml-3">
+            <div *ngIf="std_reg.password.invalid && (std_reg.password.dirty || std_reg.password.touched)"
+                class="text-danger text-left error-msg-div ml-3">
                 <div *ngIf="std_reg.password.errors.required"><small>Password is required</small></div>
                 <div *ngIf="std_reg.password.errors.minlength"><small>Must have minimum 6 characters</small></div>
             </div>
         </div>
         <div class="row form-group align-items-center">
             <div class="col-sm-12 col-md-12 col-lg-7">
-                <input type="password" 
-                formControlName="conf_password" 
-                id="conf_password" 
-                placeholder="Re-enter Password" 
-                class="form-control"
-                [ngClass]="{'is-invalid':std_reg.conf_password.errors && std_reg.conf_password.touched}" 
-                aria-describedby="password2HelpBlock" 
-                required>
+                <input type="password" formControlName="conf_password" id="conf_password"
+                    placeholder="Re-enter Password" class="form-control"
+                    [ngClass]="{'is-invalid':std_reg.conf_password.errors && std_reg.conf_password.touched}"
+                    aria-describedby="password2HelpBlock" required>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-auto">
                 <small id="password2HelpBlock" class="form-text text-muted mt-0">Must be same as above.</small>
             </div>
-            <div class="text-danger text-left error-msg-div ml-3" *ngIf="std_reg.conf_password.hasError('passwordMismatch')">
+            <div class="text-danger text-left error-msg-div ml-3"
+                *ngIf="std_reg.conf_password.hasError('passwordMismatch')">
                 <small>Passwords ain't matched. Please check again.</small>
             </div>
-            <div *ngIf="std_reg.conf_password.invalid && (std_reg.conf_password.dirty || std_reg.conf_password.touched)" class="text-danger text-left error-msg-div ml-3">
+            <div *ngIf="std_reg.conf_password.invalid && (std_reg.conf_password.dirty || std_reg.conf_password.touched)"
+                class="text-danger text-left error-msg-div ml-3">
                 <div *ngIf="std_reg.conf_password.errors.required"><small>Please confirm your password</small></div>
                 <div *ngIf="std_reg.conf_password.errors.minlength"><small>Must have minimum 6 characters</small></div>
             </div>
         </div>
-        <button class="theme-btn w-100 mt-3" [disabled]="stdRegForm.invalid">Register</button>
+        <div class="alert alert-info text-left my-4" role="alert">
+            <h6 class="alert-heading"><strong>NOTE</strong></h6>
+            <small><strong>Email</strong> and the <Strong>Student Mobile Number</Strong> you provided, will be used when
+                log into MASTERY.LK platform. Therefore, be sure to enter the correct information.</small>
+        </div>
+        <button class="theme-btn w-100" [disabled]="stdRegForm.invalid">Register</button>
     </form>
 
 </div>

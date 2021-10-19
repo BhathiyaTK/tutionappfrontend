@@ -74,7 +74,6 @@ export class JoinedClassesComponent implements OnInit {
     this.cs.getJoinedClasses(uId, currentMonth).subscribe(data => {
       if (data.length !== 0) {
         this.spinner = false;
-        console.log("not empty");
       } else {
         this.spinner = false;
         this.emptyMsg = true;
@@ -96,6 +95,10 @@ export class JoinedClassesComponent implements OnInit {
     }else{
       return "N/A";
     }
+  }
+
+  removeUrlSpaces(str: string){
+    return str.replace(/\s/g, '-');
   }
 
 }

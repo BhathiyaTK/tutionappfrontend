@@ -1,0 +1,12 @@
+.page-content-wrapper{
+    position: relative;
+    min-height: 100vh;
+}
+h3{
+    font-family: nexa;
+    color: var(--theme-black);
+}
+p{
+    font-family: cp_l;
+    color: var(--gray);
+}

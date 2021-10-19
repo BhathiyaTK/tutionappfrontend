@@ -9,7 +9,7 @@ export class TokenInterceptor implements HttpInterceptor{
     multiHeaderReqUrls: Array<string>;
 
     constructor(private injector: Injector){
-        this.avoidReqUrls = ['login','newstudent/register','newteacher/register','getAllUsers'];
+        this.avoidReqUrls = ['login','newstudent/register','newteacher/register','getAllUsers','passwordforget'];
         this.multiHeaderReqUrls = ['admin/newclass'];
     }
 
@@ -37,8 +37,8 @@ export class TokenInterceptor implements HttpInterceptor{
         return next.handle(req);
     }
 
-    
-    posIndicator:string = 'tutionspringbootbackend.herokuapp.com/';
+
+    posIndicator:string = 'masterybackend.tk/';
 
     private isValidReqUrl(reqUrl: string): boolean{
         let position = reqUrl.indexOf(this.posIndicator);

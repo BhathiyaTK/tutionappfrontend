@@ -30,7 +30,6 @@ export class AllClassesComponent implements OnInit {
   getAllClasses(pageNo){
     this.spinner = true;
     this.cs.getClasses(pageNo).subscribe(data => {
-      console.log("Data = ",data);
       if (data.content.length !== 0) {
         this.spinner = false;
       }else{

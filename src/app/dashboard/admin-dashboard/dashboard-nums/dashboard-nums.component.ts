@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { ClassesService } from 'src/app/services/classes/classes.service';
 import { UserServicesService } from 'src/app/services/users/user-services.service';
 
@@ -9,6 +10,7 @@ import { UserServicesService } from 'src/app/services/users/user-services.servic
 })
 export class DashboardNumsComponent implements OnInit {
 
+  uId:number;
   teachersCount:number;
   studentsCount:number;
   initialPageNumber:any = 0;
@@ -16,9 +18,10 @@ export class DashboardNumsComponent implements OnInit {
   spinner:boolean = false;
   dashboardComponents:boolean = false;
 
-  constructor(private cs: ClassesService, private uss: UserServicesService) { }
+  constructor(public auth: AuthService, private cs: ClassesService, private uss: UserServicesService) { }
 
   ngOnInit(): void {
+    this.uId = this.auth.currentUser.userId;
     this.allClasses(this.initialPageNumber);
     this.allTeachers();
     this.allStudents(this.initialPageNumber);
@@ -44,7 +47,7 @@ export class DashboardNumsComponent implements OnInit {
         this.spinner = false;
         this.dashboardComponents = true;
       }
-      this.teachersCount = data.length;
+      this.teachersCount = data.filter(o => o.fName !== 'admin').length;
       this.teachersCount = this.formatNumber(this.teachersCount);
     });
   }

@@ -20,7 +20,6 @@ export class MyClassesComponent implements OnInit {
   constructor(public auth: AuthService, public us: UserServicesService, public cs: ClassesService) { }
 
   ngOnInit(): void {
-    console.log(this.auth.currentUser);
     this.getTeacherClasses(this.userId, this.getCurrentMonth());
     this.getCurrentMonth();
   }
@@ -103,6 +102,13 @@ export class MyClassesComponent implements OnInit {
     }else{
       return "N/A";
     }
+  }
+
+  currencyConvertor(currency) {
+    var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency', currency: 'LKR'
+    });
+    return formatter.format(currency);
   }
 
 }

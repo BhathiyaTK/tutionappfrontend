@@ -20,6 +20,9 @@ export class StudentRegisterComponent implements OnInit {
   errorAlert:boolean = false;
   errorText:string = '';
   pendingAlert:boolean = false;
+  validateMsgSucess: boolean = false;
+  validateMsgError: boolean = false;
+  validatingSpinner: boolean = false;
 
   fName:string;
   lName:string;
@@ -29,7 +32,25 @@ export class StudentRegisterComponent implements OnInit {
   garTelephone:string;
   email:string;
   password:string;
+  medium:string;
+  grade:string;
   role:string = "student";
+
+  gradeList = [
+    { value: '1', name: '1' },
+    { value: '2', name: '2' },
+    { value: '3', name: '3' },
+    { value: '4', name: '4' },
+    { value: '5', name: '5' },
+    { value: '6', name: '6' },
+    { value: '7', name: '7' },
+    { value: '8', name: '8' },
+    { value: '9', name: '9' },
+    { value: '10', name: '10' },
+    { value: '11', name: '11' },
+    { value: '12', name: '12' },
+    { value: '13', name: '13' }
+  ]
 
   stdRegForm = this.fb.group({
     fName: ['', [Validators.required]],
@@ -39,9 +60,7 @@ export class StudentRegisterComponent implements OnInit {
     email: ['', [
       Validators.required,
       Validators.email
-    ],
-    // this.customValidator.validateEmailNotExist.bind(this.customValidator)
-    ],
+    ]],
     telephone: ['', [
       Validators.required,
       Validators.minLength(10),
@@ -54,6 +73,8 @@ export class StudentRegisterComponent implements OnInit {
       Validators.maxLength(10),
       Validators.pattern('^[0-9]+$')
     ]],
+    medium: ['', [Validators.required]],
+    grade: ['', [Validators.required]],
     password: ['', [
       Validators.required,
       Validators.minLength(6)
@@ -82,6 +103,8 @@ export class StudentRegisterComponent implements OnInit {
         city: this.stdRegForm.get('city').value,
         telephone: this.stdRegForm.get('telephone').value,
         garTelephone: this.stdRegForm.get('garTelephone').value,
+        medium: this.stdRegForm.get('medium').value,
+        grade: this.stdRegForm.get('grade').value,
         userModel:{
           username: this.stdRegForm.get('email').value,
           password: this.stdRegForm.get('password').value,
@@ -101,6 +124,21 @@ export class StudentRegisterComponent implements OnInit {
     } else {
       console.log("Validation Failed!");
     }
+  }
+
+  checkEmail(event) {
+    // this.validatingSpinner = true;
+    // this.userService.getAllUserEmails().subscribe((data) => {
+    //   if (
+    //     data.emails.filter((o) => o === event.target.value).length !== 0
+    //   ) {
+    //     this.validatingSpinner = false;
+    //     this.validateMsgError = true;
+    //   } else {
+    //     this.validatingSpinner = false;
+    //     this.validateMsgError = false;
+    //   }
+    // });
   }
 
   closeAlert(){ this.successAlert = false }

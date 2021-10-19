@@ -29,7 +29,7 @@ nav ul > li > a:hover{
     .navbar-collapse > ul > li{
         text-align: center;
     }
-    .navbar-collapse > ul > li:first-child{
+    .navbar-collapse > ul > li:first-child, .navbar-collapse > ul > li:nth-child(2){
         margin-bottom: 15px;
         margin-right: 0;
     }
@@ -47,7 +47,7 @@ nav ul > li > a:hover{
     .navbar-collapse > ul > li{
         text-align: center;
     }
-    .navbar-collapse > ul > li:first-child{
+    .navbar-collapse > ul > li:first-child, .navbar-collapse > ul > li:nth-child(2){
         margin-bottom: 15px;
         margin-right: 0;
     }

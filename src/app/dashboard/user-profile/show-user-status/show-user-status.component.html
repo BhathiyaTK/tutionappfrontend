@@ -1,76 +1,97 @@
-<div class="custom-shadow-div bg-white p-4" *ngIf="isTeacher">
+<div class="custom-shadow-div bg-white p-4">
     <div class="personalized-data">
-        <h5>Personalized Data</h5>
+        <h5>Personalized Statistics</h5>
         <div class="personal-data-div d-flex">
             <div class="data-left w-50">
                 <i class="material-icons md-30 float-left mr-3">local_library</i>
                 <span *ngIf="isTeacher">My Classes</span>
-                <span>Joined Classes</span>
+                <span *ngIf="isStudent">Joined Classes</span>
             </div>
             <div class="data-right w-50 text-center">
-                <span *ngIf="isTeacher">{{joined_classes}}</span>
-                <span>04</span>
+                <span *ngIf="isTeacher">{{my_classes}}</span>
+                <span *ngIf="isStudent">{{joined_classes}}</span>
             </div>
         </div>
         <div class="personal-data-div d-flex">
             <div class="data-left w-50">
                 <i class="material-icons md-30 float-left mr-3">people</i>
                 <span *ngIf="isTeacher">Students</span>
-                <span>Teachers</span>
+                <span *ngIf="isStudent">Teachers</span>
             </div>
             <div class="data-right w-50 text-center">
                 <span *ngIf="isTeacher">{{total_students}}</span>
-                <span>03</span>
+                <span *ngIf="isStudent">{{total_teachers}}</span>
             </div>
         </div>
     </div>
-    <br>
-    <!-- <div class="personalized-data" *ngIf="isStudent">
-        <h5>Fees Status</h5>
-        <div class="fees-status">
-            <div class="row align-items-center justify-content-between m-0">
-                <div class="col-md-8 title-month-status">
-                    <h6>Combined Mathematics</h6>
-                    <small>by Rohana Senanayaka</small>
-                    <p class="mb-0">
-                        2021 January |
-                        <span>Status: <span class="badge badge-success">PAID</span></span>
-                    </p>
-                </div>
-                <div class="col-md-4 class-fees text-center bg-white rounded-lg">
-                    <span>Rs.2500.00</span>
-                </div>
+</div>
+<div class="custom-shadow-div p-4 bg-white" style="margin-top: 30px; border: 2px solid red;">
+    <div class="personalized-data" *ngIf="isTeacher">
+        <h5>Update Account Credentials</h5>
+        <hr>
+        <p class="text-muted">You can change the email and the password of your mastery account in this
+            section. Check the below <strong>"Confirm credentials update"</strong> checkbox to proceed with the
+            credential updating
+            process.</p>
+        <div class="mt-4">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="show-ep-update" (click)="onChange($event)">
+                <label class="form-check-label" for="show-ep-update"><strong>Confirm credentials
+                        update</strong></label>
             </div>
+
+            <form class="mt-4" [formGroup]="credUpdateForm" #credForm="ngForm">
+                <div class="form-group">
+                    <input type="text" class="form-control credUpdateElems" formControlName="updateEmail"
+                        placeholder="New Email Address"
+                        [ngClass]="{'is-invalid':cred_update.updateEmail.errors && cred_update.updateEmail.touched}"
+                        [attr.disabled]="isDisabled? false : null" required>
+                    <div *ngIf="cred_update.updateEmail.invalid && (cred_update.updateEmail.dirty || cred_update.updateEmail.touched)"
+                        class="text-danger text-left error-msg-div">
+                        <div *ngIf="cred_update.updateEmail.errors.required"><small>Email is required</small></div>
+                        <div *ngIf="cred_update.updateEmail.errors.email"><small>Please enter a valid email</small>
+                        </div>
+                    </div>
+                    <div class="text-danger text-left error-msg-div"
+                        *ngIf="cred_update.updateEmail.hasError('emailExist')">
+                        <small>Email already exists. Please try another.</small>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-sm-12 col-md-6">
+                        <input type="password" class="form-control credUpdateElems" formControlName="updatePassword1"
+                            placeholder="New Password"
+                            [ngClass]="{'is-invalid':cred_update.updatePassword1.errors && cred_update.updatePassword1.touched}"
+                            [attr.disabled]="isDisabled? false : null" required>
+                        <div *ngIf="cred_update.updatePassword1.invalid && (cred_update.updatePassword1.dirty || cred_update.updatePassword1.touched)"
+                            class="text-danger text-left error-msg-div">
+                            <div *ngIf="cred_update.updatePassword1.errors.required"><small>Password is required</small>
+                            </div>
+                            <div *ngIf="cred_update.updatePassword1.errors.minlength"><small>Must have at least 6
+                                    characters</small></div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12 col-md-6">
+                        <input type="password" class="form-control credUpdateElems" formControlName="updatePassword2"
+                            placeholder="Confirm New Password"
+                            [ngClass]="{'is-invalid':cred_update.updatePassword2.errors && cred_update.updatePassword2.touched}"
+                            [attr.disabled]="isDisabled? false : null" required>
+                        <div class="text-danger text-left error-msg-div ml-3"
+                            *ngIf="cred_update.updatePassword2.hasError('passwordMismatch')">
+                            <small>Passwords ain't matched. Please check again.</small>
+                        </div>
+                        <div *ngIf="cred_update.updatePassword2.invalid && (cred_update.updatePassword2.dirty || cred_update.updatePassword2.touched)"
+                            class="text-danger text-left error-msg-div">
+                            <div *ngIf="cred_update.updatePassword2.errors.required"><small>Please confirm your
+                                    password</small></div>
+                            <div *ngIf="cred_update.updatePassword2.errors.minlength"><small>Must have minimum 6
+                                    characters</small></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-success credUpdateElems"
+                    [disabled]="isDisabled || credUpdateForm.invalid"><strong>Update</strong></button>
+            </form>
         </div>
-        <div class="fees-status">
-            <div class="row align-items-center justify-content-between m-0">
-                <div class="col-md-8 title-month-status">
-                    <h6>Physics</h6>
-                    <small>by Nihal Dikwella</small>
-                    <p class="mb-0">
-                        2021 January |
-                        <span>Status: <span class="badge badge-danger">NOT PAID</span></span>
-                    </p>
-                </div>
-                <div class="col-md-4 class-fees text-center bg-white rounded-lg">
-                    <span>Rs.2500.00</span>
-                </div>
-            </div>
-        </div>
-        <div class="fees-status">
-            <div class="row align-items-center justify-content-between m-0">
-                <div class="col-md-8 title-month-status">
-                    <h6>Chemistry</h6>
-                    <small>by Rasangi Karunathilaka</small>
-                    <p class="mb-0">
-                        2021 January |
-                        <span>Status: <span class="badge badge-success">PAID</span></span>
-                    </p>
-                </div>
-                <div class="col-md-4 class-fees text-center bg-white rounded-lg">
-                    <span>Rs.2500.00</span>
-                </div>
-            </div>
-        </div>
-    </div> -->
+    </div>
 </div>

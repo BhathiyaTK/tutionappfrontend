@@ -1,0 +1,69 @@
+<div class="row mb-3 align-items-center justify-content-between">
+    <div class="col-sm-12 col-md-10 col-lg-10">
+        <span class="tab-description text-muted">All the pending class creating requests from the teachers are shown in
+            here.</span>
+    </div>
+    <div class="col-sm-12 col-md-2 col-lg-2 text-right">
+        <button class="other-btn" (click)="dataRefresh()">Refresh</button>
+    </div>
+</div>
+<div class="alert alert-success alert-dismissible text-left mb-3" *ngIf="successAlert">
+    <i class="material-icons md-21 float-left mr-2">check_circle</i>
+    {{successText}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="alert alert-danger alert-dismissible text-left mb-3" *ngIf="errorAlert">
+    <i class="material-icons md-21 float-left mr-2">cancel</i>
+    {{errorText}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="text-center my-4" *ngIf="spinner">
+    <img class="spinner" src="../../../../assets/images/loaders/spin_lg_white_edge.gif">
+    <h6 class="text-monospace">Loading data...</h6>
+</div>
+<div class="mt-4" *ngIf="emptyMsg">
+    <div class="alert alert-danger mb-0">
+        <i class="material-icons md-21 float-left mr-2">error</i>
+        No requests found.
+    </div>
+</div>
+
+<div *ngIf="requestList">
+    <table class="table table-bordered bg-light table-sm">
+        <thead class="thead-dark">
+            <tr class="text-center">
+                <th class="align-middle" scope="col">#</th>
+                <th class="align-middle" scope="col">Class</th>
+                <th class="align-middle" scope="col">Teacher</th>
+                <th class="align-middle" scope="col">Date</th>
+                <th class="align-middle" scope="col">Time</th>
+                <th class="align-middle" scope="col">Fee</th>
+                <th class="align-middle" scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let i = index; let class of Classes">
+                <td class="align-middle text-center">{{i+1}}</td>
+                <td class="align-middle text-center">{{class.name}}</td>
+                <td class="align-middle text-center">{{class.teacher}}</td>
+                <td class="align-middle text-center">{{class.hDate}}</td>
+                <td class="align-middle text-center">{{timeConverter(class.hTime)}}</td>
+                <td class="align-middle">{{currencyConvertor(class.fee)}}</td>
+                <td class="align-middle">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button type="button" class="action-btn normal-btn mx-2"
+                            (click)="approvalSubmit('Approved', class.id, class)">Approve
+                        </button>
+                        <button type="button" class="action-btn del-btn mx-2"
+                            (click)="approvalSubmit('NotApproved', class.id, class)">Reject
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

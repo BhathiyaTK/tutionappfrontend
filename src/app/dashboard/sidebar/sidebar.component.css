@@ -1,97 +1,97 @@
-.sidebar{
-    width: 100%;
-    height: calc(100vh - 72px);
+.sidebar {
+  width: 100%;
+  height: calc(100vh - 72px);
+  position: relative;
 }
-.sidebar-logo{
-    width: 100%;
-    height: 30vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 1px solid var(--theme-gray-dark);
+.sidebar-logo {
+  width: 100%;
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid var(--theme-gray-dark);
 }
-.sidebar-logo img{
-    width: 80%;
+.sidebar-logo img {
+  width: 80%;
 }
-.sidebar-navs > a{
+.sidebar-navs > a {
+  display: block;
+  padding: 10px 20px 10px 25px;
+  border-bottom: 1px solid var(--theme-gray-dark);
+  font-size: 14px;
+}
+.sidebar-navs > a {
+  color: var(--theme-black);
+  font-family: cp_r;
+  width: 100%;
+}
+.sidebar-navs > a:hover {
+  text-decoration: none;
+  color: var(--theme-black);
+  background: var(--theme-gray-dark);
+}
+.sidebar-navs > a.active {
+  color: var(--white);
+  background: var(--theme-orange);
+}
+.developer-sec {
+  display: inline-block;
+  width: 100%;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  bottom: 30px;
+}
+.developer-sec > small > a {
+  color: var(--theme-orange);
+}
+.developer-sec > small > a:hover {
+  text-decoration: none;
+  border-top: 1px solid var(--theme-orange);
+  border-bottom: 1px solid var(--theme-orange);
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+  .sidebar {
+    height: 100%;
+  }
+  .sidebar-logo img {
+    width: 60%;
+  }
+  .sidebar-navs > a {
     display: block;
-    padding: 10px 20px 10px 25px;
+    padding: 10px 20px 10px 20px;
     border-bottom: 1px solid var(--theme-gray-dark);
-    font-size: 14px;
-}
-.sidebar-navs > a{
-    color: var(--theme-black);
-    font-family: cp_r;
+    font-size: 15px;
+  }
+  .developer-sec {
+    display: inline-block;
     width: 100%;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    bottom: 70px;
+  }
 }
-.sidebar-navs > a:hover{
-    text-decoration: none;
-    color: var(--theme-black);
-    background: var(--theme-gray-dark);
-}
-.sidebar-navs > a.active{
-    color: var(--white);
-    background: var(--theme-orange);
-}
-.developer-sec{
+@media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
+  .sidebar {
+    height: 100%;
+  }
+  .sidebar-logo img {
+    width: 100%;
+  }
+  .sidebar-navs > a {
+    display: block;
+    padding: 10px 15px 10px 15px;
+    border-bottom: 1px solid var(--theme-gray-dark);
+    font-size: 13px;
+  }
+  .developer-sec {
+    display: inline-block;
+    width: 100%;
+    margin: auto;
     position: absolute;
     left: 0;
     bottom: 30px;
-    transform: translate(90%, -50%);
-}
-.developer-sec > small > a{
-    color: var(--theme-orange);
-}
-.developer-sec > small > a:hover{
-    text-decoration: none;
-    border-top: 1px solid var(--theme-orange);
-    border-bottom: 1px solid var(--theme-orange);
-}
-
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 667px) 
-  and (-webkit-min-device-pixel-ratio: 2) { 
-    .sidebar{
-        height: auto;
-    }
-    .sidebar-logo img{
-        width: 60%;
-    }
-    .sidebar-navs > a{
-        display: block;
-        padding: 10px 20px 10px 20px;
-        border-bottom: 1px solid var(--theme-gray-dark);
-        font-size: 15px;
-    }
-    .developer-sec{
-        position: absolute;
-        left: 50%;
-        bottom: 30px;
-        transform: translate(-50%, -50%);
-    }
-}
-@media screen 
-  and (min-device-width: 1200px) 
-  and (max-device-width: 1600px) 
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (min-resolution: 192dpi) {
-    .sidebar{
-        height: auto;
-    }
-    .sidebar-logo img{
-        width: 100%;
-    }
-    .sidebar-navs > a{
-        display: block;
-        padding: 10px 15px 10px 15px;
-        border-bottom: 1px solid var(--theme-gray-dark);
-        font-size: 12px;
-    }
-    .developer-sec{
-        position: absolute;
-        left: 0;
-        bottom: 30px;
-        transform: translate(55%, -50%);
-    }
+  }
 }

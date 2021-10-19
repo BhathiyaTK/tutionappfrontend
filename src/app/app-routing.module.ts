@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AboutComponent } from './about/about.component';
 import { AdminDashboardComponent } from './dashboard/admin-dashboard/admin-dashboard.component';
 import { AdminManageClassesComponent } from './dashboard/admin-manage-classes/admin-manage-classes.component';
 import { AdminManageStudentsComponent } from './dashboard/admin-manage-students/admin-manage-students.component';
@@ -11,11 +12,13 @@ import { MyClassesComponent } from './dashboard/my-classes/my-classes.component'
 import { PurchaseClassComponent } from './dashboard/purchase-class/purchase-class.component';
 import { StdClassViewComponent } from './dashboard/std-class-view/std-class-view.component';
 import { TchrClassViewComponent } from './dashboard/tchr-class-view/tchr-class-view.component';
+import { TeacherCreateClassComponent } from './dashboard/teacher-create-class/teacher-create-class.component';
 import { UnavailableClassesComponent } from './dashboard/unavailable-classes/unavailable-classes.component';
 import { UserProfileComponent } from './dashboard/user-profile/user-profile.component';
 import { NoAccessComponent } from './error/no-access/no-access.component';
 import { NotFoundComponent } from './error/not-found/not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
+import { PasswordRestComponent } from './password-rest/password-rest.component';
 import { RegisterComponent } from './register/register.component';
 import { StudentRegisterComponent } from './register/student-register/student-register.component';
 import { TeacherRegisterComponent } from './register/teacher-register/teacher-register.component';
@@ -35,6 +38,8 @@ const routes: Routes = [
       { path: 'teacher', component: TeacherRegisterComponent }
     ]
   },
+  { path: 'about', component: AboutComponent},
+  { path: 'forgotPassword', component: PasswordRestComponent},
   { 
     path: 'mPanel', 
     component: DashboardComponent,
@@ -48,6 +53,7 @@ const routes: Routes = [
       { path: 'classes', component: AllClassesComponent, canActivate: [StudentGuard] },
       { path: 'my-classes/:id/:name', component: TchrClassViewComponent, canActivate: [TeacherGuard] },
       { path: 'my-classes', component: MyClassesComponent, canActivate: [TeacherGuard] },
+      { path: 'create-class', component: TeacherCreateClassComponent, canActivate: [TeacherGuard] },
       { path: 'dashboard', component: AdminDashboardComponent, canActivate: [AdminGuard] },
       { path: 'manage-classes', component: AdminManageClassesComponent, canActivate: [AdminGuard] },
       { path: 'manage-teachers', component: AdminManageTeachersComponent, canActivate: [AdminGuard] },

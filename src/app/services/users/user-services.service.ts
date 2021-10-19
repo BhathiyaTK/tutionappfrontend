@@ -6,8 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserServicesService {
+  getAllEmails() {
+    throw new Error('Method not implemented.');
+  }
 
-  readonly APIUrl = "https://tutionspringbootbackend.herokuapp.com";
+  readonly APIUrl = "https://masterybackend.tk";
 
   constructor(private http: HttpClient) { }
 
@@ -19,16 +22,20 @@ export class UserServicesService {
     return this.http.post(this.APIUrl + '/newteacher/register', val);
   }
 
-  public getAllUsers(): Observable<any[]>{
-    return this.http.get<any[]>(this.APIUrl + '/getAllUsers');
+  passwordReset(val:any){
+    return this.http.get(this.APIUrl + '/passwordforget/' + val, {responseType: 'text' as 'json'});
+  }
+
+  public getAllUserEmails(): Observable<any[]>{
+    return this.http.get<any[]>(this.APIUrl + '/filter/getAllUsersEmails');
   }
 
   public getTeachers(): Observable<any[]>{
-    return this.http.get<any[]>(this.APIUrl + '/admin/getAllTeachers');
+    return this.http.get<any[]>(this.APIUrl + '/filter/filterGetAllTeachers');
   }
 
   public getStudents(pageNo): Observable<any>{
-    return this.http.get<any>(this.APIUrl + '/getallstudents?pageNo='+ pageNo +'&pageSize=10');
+    return this.http.get<any>(this.APIUrl + '/getallstudents?pageNo='+ pageNo +'&pageSize=20');
   }
 
   public getSingleTeacher(userId, currentMonth): Observable<any>{
@@ -40,7 +47,7 @@ export class UserServicesService {
   }
 
   studentJoinedToClass(scId, sId){
-    return this.http.post(this.APIUrl + '/student/addSubClass/' + scId + '/' + sId, {responseType: 'text' as 'json'});
+    return this.http.post(this.APIUrl + '/student/addSubClass/' + scId + '/' + sId, null, {responseType: 'text' as 'json'});
   }
 
   updateTeachers(val:any){
@@ -55,8 +62,8 @@ export class UserServicesService {
     return this.http.delete(this.APIUrl + '/admin/deleteTeacher/' + tId, {responseType: 'text' as 'json'});
   }
 
-  deleteStudent(val:any){
-    return this.http.delete(this.APIUrl + '/admin/deleteTeacher/' + val.studentId, val);
+  deleteStudent(stdId:any){
+    return this.http.delete(this.APIUrl + '/admin/deleteStudent/' + stdId, {responseType: 'text' as 'json'});
   }
   
 }

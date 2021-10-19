@@ -1,24 +1,26 @@
-<app-common-navbar></app-common-navbar>
-<section class="bg-gray section-height" id="register-page">
-    <div class="container custom-section-margin">
-        <div class="register-form-div shadow">
-            <h3>Register</h3>
-            <div class="fullwidth-horizontal-divider"></div>
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-3 navigation-div">
-                    <ul class="form-navigator">
-                        <li routerLinkActive="active"><a routerLink="/register/student">As a Student</a></li>
-                        <li routerLinkActive="active"><a routerLink="/register/teacher">As a Teacher</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-9">
-                    <router-outlet></router-outlet>
-                    <div>
-                        <small class="text-muted">By clicking Register, you're agreed to MASTERY.LK Privacy Policies, Terms & Conditions.</small>
+<div class="page-content-wrapper">
+    <app-common-navbar></app-common-navbar>
+    <section class="bg-gray section-height" id="register-page">
+        <div class="container custom-section-margin">
+            <div class="register-form-div shadow">
+                <h3>Register</h3>
+                <div class="fullwidth-horizontal-divider"></div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-3 navigation-div">
+                        <ul class="form-navigator">
+                            <li routerLinkActive="active"><a routerLink="/register/student">As a Student</a></li>
+                            <li routerLinkActive="active"><a routerLink="/register/teacher">As a Teacher</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-9">
+                        <router-outlet></router-outlet>
+                        <div>
+                            <small class="text-muted">By clicking Register, you're agreed to MASTERY.LK Privacy Policies, Terms & Conditions.</small>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<app-copyright-sec></app-copyright-sec>
+    </section>
+    <app-copyright-sec></app-copyright-sec>
+</div>

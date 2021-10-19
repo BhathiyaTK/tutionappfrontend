@@ -1,27 +1,26 @@
 <div class="class-summery">
-    <h4>Combined Mathematics</h4>
-    <span>Next class on 31/01/2021 at 2.00 P.M. to 6.00 P.M.</span>
+    <h4>{{class_name}}</h4>
+    <span>Next class on {{class_date}} at {{class_time}}.</span>
     <div class="row align-items-center class-teacher-info">
         <div class="col-sm-3 col-md-3 col-lg-3 p-3">
-            <img src="../../../assets/images/users/teachers/teacher.jpg" alt="Teacher Profile Photo" width="100%" class="rounded-circle">
+            <img src="../../../assets/images/users/avatar.png" alt="Teacher Profile Photo" width="100%" class="rounded-circle">
         </div>
         <div class="col-sm-9 col-md-9 col-lg-9 px-0">
             <small>Teacher</small>
-            <h6>Mr. Nihal Perera</h6>
-            <span>BSc. (Hons) in Mathematics</span><br>
+            <h6>{{teacher_name}}</h6>
+            <span>{{teacher_degree}}</span><br>
             <small class="more-details-link" data-toggle="modal" data-target="#teacher-info">More details &#8594;</small>
         </div>
     </div>
     <div class="class-status">
         <span class="px-3 py-1 float-right">Owned</span>
         <small>Monthly fee</small>
-        <p class="class-price text-left">Rs.2500.00</p>
-        <div class="monthly-paid-status px-3 py-2 bg-white rounded-lg">
-            January 2021<span class="float-right">Paid</span>
-        </div>
+        <p class="class-price text-left">Rs.{{class_fee}}</p>
     </div>
     <div class="next-class-join p-4 mt-4 text-right">
-        <span class="float-left">Next Class</span> <a href="#" class="next-class-join-link" target="_blank">Attend Now</a>
+        <span class="float-left">Next Class</span> 
+        <a *ngIf="nextClass_link" href="{{nextClass_link}}" class="next-class-join-link" target="_blank">Attend Now</a>
+        <span *ngIf="nextClass_empty_msg">{{nextClass_empty_msg}}</span>
     </div>
 </div>
 

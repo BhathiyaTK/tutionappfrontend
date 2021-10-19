@@ -1,6 +1,8 @@
 .copyright-div{
     background: var(--theme-black);
     color: var(--theme-white);
+    position: absolute;
+    bottom: 0;
     width: 100%;
 }
 .copyright-div a{

@@ -1,0 +1,132 @@
+<section class="control-panel-content-section">
+    <div class="content-title">
+        <h3 class="mb-0">Create New Class</h3>
+        <span>Create any class that willing to teach</span>
+    </div>
+    <div class="control-panel-content mt-4">
+        <div class="custom-shadow-div bg-white p-4">
+            <div class="alert alert-success alert-dismissible fade show" *ngIf="successMsg">
+                <i class="material-icons float-left mr-2">check</i> Class added successfully.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show" *ngIf="errorMsg">
+                <i class="material-icons float-left mr-2">cancel</i> Process failed! something went wrong.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form (ngSubmit)="addNewClass()" [formGroup]="addClassForm">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-7">
+                        <div class="form-group">
+                            <label for="name">Class Name</label>
+                            <input type="text" formControlName="name" class="form-control"
+                                [ngClass]="{'is-invalid':class_add.name.errors && class_add.name.touched}" required>
+                            <div *ngIf="class_add.name.invalid && (class_add.name.dirty || class_add.name.touched)"
+                                class="text-danger text-left error-msg-div">
+                                <div *ngIf="class_add.name.errors.required"><small>Class name is required</small></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-4">
+                                <div class="form-group">
+                                    <label for="fee">Class Fee</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><small>Rs.</small></div>
+                                        </div>
+                                        <input type="text" formControlName="fee" class="form-control"
+                                            style="border-radius: 0 !important;" placeholder="XXXX"
+                                            [ngClass]="{'is-invalid':class_add.fee.errors && class_add.fee.touched}"
+                                            required>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">.00</span>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="class_add.fee.invalid && (class_add.fee.dirty || class_add.fee.touched)"
+                                        class="text-danger text-left error-msg-div">
+                                        <div *ngIf="class_add.fee.errors.required"><small>Class fee is required</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label for="date">Select the Day</label>
+                                    <select formControlName="date" class="form-control"
+                                        [ngClass]="{'is-invalid':class_add.date.errors && class_add.date.touched}"
+                                        required>
+                                        <option value="">Choose...</option>
+                                        <option value="Monday">Monday</option>
+                                        <option value="Tuesday">Tuesday</option>
+                                        <option value="Wednesday">Wednesday</option>
+                                        <option value="Thursday">Thursday</option>
+                                        <option value="Friday">Friday</option>
+                                        <option value="Saturday">Saturday</option>
+                                        <option value="Sunday">Sunday</option>
+                                    </select>
+                                    <div *ngIf="class_add.date.invalid && (class_add.date.dirty || class_add.date.touched)"
+                                        class="text-danger text-left error-msg-div">
+                                        <div *ngIf="class_add.date.errors.required"><small>Please select the day</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label for="time">Class Held Time</label>
+                                    <input type="time" formControlName="time" class="form-control"
+                                        [ngClass]="{'is-invalid':class_add.time.errors && class_add.time.touched}"
+                                        required>
+                                    <div *ngIf="class_add.time.invalid && (class_add.time.dirty || class_add.time.touched)"
+                                        class="text-danger text-left error-msg-div">
+                                        <div *ngIf="class_add.time.errors.required"><small>Class time is
+                                                required</small></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="image">Upload Class Banner Image</label>
+                            <input type="file" formControlName="image"
+                                [ngClass]="{'is-invalid':class_add.image.errors && class_add.image.touched}" id="image"
+                                class="w-100" style="padding: 6px; border: 1px solid #ddd;" required>
+                            <div *ngIf="class_add.image.invalid && (class_add.image.dirty || class_add.image.touched)"
+                                class="text-danger text-left error-msg-div">
+                                <div *ngIf="class_add.image.errors.required"><small>Banner image is required</small>
+                                </div>
+                                <div class="text-danger text-left error-msg-div"
+                                    *ngIf="class_add.image.hasError('requiredFileTypes')">
+                                    <small>Unsupported format. Only <b>JPG</b> format is
+                                        allowed.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-5">
+                        <div class="form-group">
+                            <label for="note">Class Note</label>
+                            <textarea formControlName="notes" class="form-control" rows="8" maxlength="255"
+                                placeholder="Brief introduction about the class..."
+                                [ngClass]="{'is-invalid':class_add.notes.errors && class_add.notes.touched}"
+                                required></textarea>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div *ngIf="class_add.notes.invalid && (class_add.notes.dirty || class_add.notes.touched)"
+                                    class="text-danger text-left error-msg-div">
+                                    <div *ngIf="class_add.notes.errors.required"><small>Class note is required</small>
+                                    </div>
+                                </div>
+                                <small class="textarea-limit-indicator text-muted">Maximum 255 characters only</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="mt-0">
+                <button class="theme-btn" [disabled]="addClassForm.invalid">Add Class</button>
+                <button type="reset" class="theme-btn-secondary ml-2">Reset</button>
+            </form>
+        </div>
+    </div>
+</section>

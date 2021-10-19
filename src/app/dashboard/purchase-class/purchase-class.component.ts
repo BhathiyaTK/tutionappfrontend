@@ -83,7 +83,6 @@ export class PurchaseClassComponent implements OnInit {
           this.subClassId = data.subTutionClassEntityList[j].subClassId;
         }
       }
-      console.log(this.subClassId)
       this.teacher_name = data.teacherEntity.fName + ' ' + data.teacherEntity.lName;
       this.teacher_tel = data.teacherEntity.telephone;
       this.teacher_edu = data.teacherEntity.eduQual;

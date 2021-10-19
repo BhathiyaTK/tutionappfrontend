@@ -9,7 +9,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
 
-  readonly APIUrl = "https://tutionspringbootbackend.herokuapp.com";
+  readonly APIUrl = "https://masterybackend.tk";
 
   constructor(
     private http: HttpClient,

@@ -9,7 +9,7 @@
     </div>
     <form method="post" class="mb-4" [formGroup]="signinForm" (ngSubmit)="submit()">
         <div class="form-group">
-            <input type="text" formControlName="signin_email" id="signin-email" placeholder="Email" class="form-control" required>
+            <input type="text" formControlName="signin_email" id="signin-email" placeholder="Email / Phone Number" class="form-control" required>
             <div *ngIf="signin_form.signin_email.invalid && (signin_form.signin_email.dirty || signin_form.signin_email.touched)" class="text-danger text-left error-msg-div">
                 <div *ngIf="signin_form.signin_email.errors.required"><small>Email is required</small></div>
                 <div *ngIf="signin_form.signin_email.errors.email"><small>Please enter a valid email</small></div>
@@ -21,10 +21,10 @@
                 <div *ngIf="signin_form.signin_password.errors.required"><small>Password is required</small></div>
             </div>
         </div>
-        <button type="submit" class="theme-btn w-100 mt-3">Sign in</button>
+        <button type="submit" class="theme-btn w-100 mt-3" [disabled]="signinForm.invalid">Sign in</button>
     </form>
     <div class="reset-links-div mt-3">
-        <small>Forgot sign-in credentials? <a routerLink="/reset">Reset</a></small><br>
-        <small>New around here? <a routerLink="/register">Register</a></small>
+        <small>Forgot Password? <a routerLink="/forgotPassword">Click Here</a></small><br>
+        <small>New around here? <a routerLink="/register">Register Now</a></small>
     </div>
 </div>

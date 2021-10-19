@@ -1,75 +1,229 @@
-<div class="text-center my-5 text-monospace">
-    This feature will be updated soon...
-</div>
-<!-- <div class="update-form-div">
-    <div class="row m-0">
-        <div class="col-sm-12 col-md-12 col-lg-8 div-content">
-            <div class="row">
-                <div class="col-sm-12 col-md-6 col-lg-6">
-                    <div class="form-group">
-                        <label class="form-label">First Name:</label>
-                        <input type="text" class="form-control" placeholder="Enter First Name">
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-6">
-                    <div class="form-group">
-                        <label class="form-label">Last Name:</label>
-                        <input type="text" class="form-control" placeholder="Enter Last Name">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Address:</label>
-                <input type="text" class="form-control" placeholder="Enter Address">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Email:</label>
-                <input type="text" class="form-control" placeholder="Enter Valid Email">
-            </div>
-            <div class="row">
-                <div class="col-sm-12 col-md-6 col-lg-6">
-                    <div class="form-group">
-                        <label class="form-label">Your Mobile No:</label>
-                        <input type="text" class="form-control" placeholder="Enter Mobile No.">
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-6">
-                    <div class="form-group">
-                        <label class="form-label">Gardian's Contact No:</label>
-                        <input type="text" class="form-control" placeholder="Enter Gardian's No.">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group mb-0">
-                <label class="form-label">Stream:</label>
-                <select name="std-stream" id="std-stream" class="form-select form-control">
-                    <option value="" selected disabled>--- Select Your Stream ---</option>
-                    <option value="maths">Mathematics</option>
-                    <option value="bio">Biology</option>
-                    <option value="tech">Technology</option>
-                    <option value="commerce">Commerce</option>
-                    <option value="art">Art</option>
-                    <option value="tenAndElevan">O/L (Grade 10 - 11)</option>
-                    <option value="sixToNine">O/L (Grade 6 - 9)</option>
-                    <option value="oneToFive">Primary (Grade 1 - 5)</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-12 col-md-12 col-lg-4">
-            <label class="form-label">Profile Photo:</label>
-            <img src="../../../../assets/images/users/students/student.jpg" alt="" width="100%" class="mb-3">
-            <div class="custom-file mb-3">
-                <input type="file" class="custom-file-input" id="customFile">
-                <label class="custom-file-label" for="customFile">Upload New</label>
-            </div>
-            <div class="alert alert-warning text-center">
-                <i class="material-icons md-36">warning</i><br>
-                Photo need to be maximum 350x350 resolution and must be a square shape one.
-            </div>
-        </div>
+<div class="update-form-div">
+    <div class="alert alert-success alert-dismissible text-left" *ngIf="successAlert">
+        <i class="material-icons float-left mr-2">check_circle</i> Details Updated Successfully.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
+    <div class="alert alert-danger alert-dismissible text-left" *ngIf="errorAlert">
+        <i class="material-icons float-left">cancel</i>
+        {{errorText}}<br><small>Please try again shortly.</small>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="mb-3 py-2" role="status" *ngIf="pendingAlert">
+        <img src="../../../assets/images/loaders/spin_sm.gif" alt="loading spinner sm">
+        <small class="ml-2 text-muted">Processing... Please wait a movement.</small>
+    </div>
+    <form [formGroup]="userDataUpdateForm" #updateForm="ngForm">
+        <div class="row m-0">
+            <div class="col-sm-12 col-md-12 col-lg-8 div-content">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label class="form-label">First Name:</label>
+                            <input type="text" formControlName="fName" id="fName" placeholder="First Name"
+                                class="form-control"
+                                [ngClass]="{'is-invalid':user_data_update.fName.errors && user_data_update.fName.touched}"
+                                required>
+                            <div *ngIf="user_data_update.fName.invalid && (user_data_update.fName.dirty || user_data_update.fName.touched)"
+                                class="text-danger text-left error-msg-div">
+                                <div *ngIf="user_data_update.fName.errors.required"><small>First name is
+                                        required</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label class="form-label">Last Name:</label>
+                            <input type="text" formControlName="lName" id="lName" placeholder="First Name"
+                                class="form-control"
+                                [ngClass]="{'is-invalid':user_data_update.lName.errors && user_data_update.lName.touched}"
+                                required>
+                            <div *ngIf="user_data_update.lName.invalid && (user_data_update.lName.dirty || user_data_update.lName.touched)"
+                                class="text-danger text-left error-msg-div">
+                                <div *ngIf="user_data_update.lName.errors.required"><small>Last name is
+                                        required</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Address:</label>
+                    <input type="text" formControlName="address" id="address" placeholder="First Name"
+                        class="form-control"
+                        [ngClass]="{'is-invalid':user_data_update.address.errors && user_data_update.address.touched}"
+                        required>
+                    <div *ngIf="user_data_update.address.invalid && (user_data_update.address.dirty || user_data_update.address.touched)"
+                        class="text-danger text-left error-msg-div">
+                        <div *ngIf="user_data_update.address.errors.required"><small>Address is
+                                required</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label class="form-label">City:</label>
+                            <input type="text" formControlName="city" id="city" placeholder="First Name"
+                                class="form-control"
+                                [ngClass]="{'is-invalid':user_data_update.city.errors && user_data_update.city.touched}"
+                                required>
+                            <div *ngIf="user_data_update.city.invalid && (user_data_update.city.dirty || user_data_update.city.touched)"
+                                class="text-danger text-left error-msg-div">
+                                <div *ngIf="user_data_update.city.errors.required"><small>First name is
+                                        required</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6" *ngIf="isTeacher">
+                        <div class="form-group">
+                            <label class="form-label">Mobile No:</label>
+                            <input type="text" formControlName="t_mobile" id="t_mobile" placeholder="First Name"
+                                class="form-control"
+                                [ngClass]="{'is-invalid':user_data_update.t_mobile.errors && user_data_update.t_mobile.touched}"
+                                required>
+                            <div *ngIf="user_data_update.t_mobile.invalid && (user_data_update.t_mobile.dirty || user_data_update.t_mobile.touched)"
+                                class="text-danger text-left error-msg-div">
+                                <div *ngIf="user_data_update.t_mobile.errors.required"><small>Mobile number is
+                                        required</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6" *ngIf="isStudent">
+                        <div class="form-group">
+                            <label class="form-label">Your Contact No:</label>
+                            <input type="text" formControlName="s_mobile" id="s_mobile" placeholder="First Name"
+                                class="form-control"
+                                [ngClass]="{'is-invalid':user_data_update.s_mobile.errors && user_data_update.s_mobile.touched}"
+                                required>
+                            <div *ngIf="user_data_update.s_mobile.invalid && (user_data_update.s_mobile.dirty || user_data_update.s_mobile.touched)"
+                                class="text-danger text-left error-msg-div">
+                                <div *ngIf="user_data_update.s_mobile.errors.required"><small>Student's contact number
+                                        is
+                                        required</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6" *ngIf="isStudent">
+                        <div class="form-group">
+                            <label class="form-label">Gardian's Contact No:</label>
+                            <input type="text" formControlName="g_mobile" id="g_mobile" placeholder="First Name"
+                                class="form-control"
+                                [ngClass]="{'is-invalid':user_data_update.g_mobile.errors && user_data_update.g_mobile.touched}"
+                                required>
+                            <div *ngIf="user_data_update.g_mobile.invalid && (user_data_update.g_mobile.dirty || user_data_update.g_mobile.touched)"
+                                class="text-danger text-left error-msg-div">
+                                <div *ngIf="user_data_update.g_mobile.errors.required"><small>Gradian's contact number
+                                        is
+                                        required</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-12 col-md-6 col-lg-6" *ngIf="isStudent">
+                        <label class="form-label">Grade:</label>
+                        <select formControlName="s_grade" id="s_grade" class="form-control"
+                            [ngClass]="{'is-invalid':user_data_update.s_grade.errors && user_data_update.s_grade.touched}"
+                            required>
+                            <option value="" disabled>- Choose -</option>
+                            <option *ngFor="let gradeItem of gradeList" value="{{gradeItem.value}}">{{gradeItem.name}}
+                            </option>
+                        </select>
+                        <div *ngIf="user_data_update.s_grade.invalid && (user_data_update.s_grade.dirty || user_data_update.s_grade.touched)"
+                            class="text-danger text-left error-msg-div">
+                            <div *ngIf="user_data_update.s_grade.errors.required"><small>Grade is required</small></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6" *ngIf="isTeacher">
+                        <label class="form-label">Grade:</label>
+                        <select formControlName="t_grade" id="t_grade" class="form-control"
+                            [ngClass]="{'is-invalid':user_data_update.t_grade.errors && user_data_update.t_grade.touched}"
+                            required>
+                            <option value="" disabled>- Choose -</option>
+                            <option value="1 - 5">1 - 5</option>
+                            <option value="6 - 10">6 - 10</option>
+                            <option value="10 - 11">10 - 11</option>
+                            <option value="12 - 13">12 - 13</option>
+                        </select>
+                        <div *ngIf="user_data_update.t_grade.invalid && (user_data_update.t_grade.dirty || user_data_update.t_grade.touched)"
+                            class="text-danger text-left error-msg-div">
+                            <div *ngIf="user_data_update.t_grade.errors.required"><small>Grade is required</small></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <label class="form-label">Medium:</label>
+                        <select formControlName="medium" id="medium" class="form-control"
+                            [ngClass]="{'is-invalid':user_data_update.medium.errors && user_data_update.medium.touched}"
+                            required>
+                            <option value="" disabled>- Choose -</option>
+                            <option value="Sinhala">සිංහල</option>
+                            <option value="English">English</option>
+                            <option value="Tamil">தமிழ்</option>
+                        </select>
+                        <div *ngIf="user_data_update.medium.invalid && (user_data_update.medium.dirty || user_data_update.medium.touched)"
+                            class="text-danger text-left error-msg-div">
+                            <div *ngIf="user_data_update.medium.errors.required"><small>Medium is required</small></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" *ngIf="isTeacher">
+                    <label class="form-label">Educational Qualifications:</label>
+                    <textarea formControlName="eduQual" id="eduQual"
+                        placeholder="Educational Status - Use comma(,) to seperate each Degree(s) and Diploma(s)"
+                        class="form-control"
+                        [ngClass]="{'is-invalid':user_data_update.eduQual.errors && user_data_update.eduQual.touched}"
+                        required></textarea>
+                    <div *ngIf="user_data_update.eduQual.invalid && (user_data_update.eduQual.dirty || user_data_update.eduQual.touched)"
+                        class="text-danger text-left error-msg-div">
+                        <div *ngIf="user_data_update.eduQual.errors.required"><small>Educational Status is
+                                required</small></div>
+                    </div>
+                </div>
+                <div class="form-group" *ngIf="isTeacher">
+                    <label class="form-label">Self Introduction:</label>
+                    <textarea formControlName="teacherIntro" id="teacherIntro" cols="30" rows="4" maxlength="500"
+                        placeholder="Brief introduction about yourself..." class="form-control"
+                        [ngClass]="{'is-invalid':user_data_update.teacherIntro.errors && user_data_update.teacherIntro.touched}"
+                        [(ngModel)]="intro" required></textarea>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div *ngIf="user_data_update.teacherIntro.invalid && (user_data_update.teacherIntro.dirty || user_data_update.teacherIntro.touched)"
+                            class="text-danger text-left error-msg-div">
+                            <div *ngIf="user_data_update.teacherIntro.errors.required"><small>Introduction is
+                                    required</small></div>
+                            <div *ngIf="user_data_update.teacherIntro.errors.maxlength"><small>Must have minimum 500
+                                    characters</small>
+                            </div>
+                        </div>
+                        <small class="textarea-limit-indicator text-muted">{{intro.length}} / 500</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-4">
+                <label class="form-label">Profile Photo:</label>
+                <img src="../../../../assets/images/users/students/student.jpg" alt="" width="100%" class="mb-3">
+                <div class="custom-file mb-3">
+                    <input type="file" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile">Upload New</label>
+                </div>
+                <div class="alert alert-warning text-center">
+                    <i class="material-icons md-36">warning</i><br>
+                    Photo need to be maximum 350x350 resolution and must be a square shape one.
+                </div>
+            </div>
+        </div>
+    </form>
     <hr>
     <div class="text-center">
-        <button type="submit" class="theme-btn"><i class="material-icons float-left mr-2">arrow_upward</i>Update Info</button>
+        <button type="submit" class="theme-btn"><i class="material-icons float-left mr-2">arrow_upward</i>Update
+            Info</button>
     </div>
-</div> -->
+</div>

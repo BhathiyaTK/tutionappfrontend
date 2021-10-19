@@ -45,7 +45,6 @@ export class StdAddToClassComponent implements OnInit {
         this.inputDisabled = false;
         this.errorText = err;
         this.errorAlert = true;
-        console.log(err);
       })
     }
   }

@@ -27,7 +27,13 @@ export class AdminAllClassesComponent implements OnInit {
   errorText:string = '';
   emptyMsg:boolean = false;
   spinner:boolean = false;
+  modalLoadSpinner:boolean = false;
   classesTable:boolean = false;
+
+  delVal:string = 'show';
+  typedFilterText:string = '';
+  filteredResultCount:number = 0;
+  totalClassesList:any = [];
 
   constructor(private cs: ClassesService, private uss: UserServicesService) { }
 
@@ -54,14 +60,76 @@ export class AdminAllClassesComponent implements OnInit {
         this.classesTable = false;
       }
       this.Classes = data.content;
+      this.totalClassesList = data.content;
       this.pagesCount = data.totalPages;
       this.totalElements = data.totalElements;
       this.currentPageNumber = data.pageable.pageNumber;
       for (let i = 0; i < this.Classes.length; i++) {
         const element = this.Classes[i].teachersEntity;
         this.TeachersEntity.push(element);
-      }      
+      }
     })
+  }
+
+  filterByClass(event, pageNo) {
+    this.typedFilterText = "class name '"+event.target.value+"'";
+    const selectedClass = event.target.value;
+    if (event.target.value !== '') {
+      if (this.totalClassesList !== null) {
+        this.Classes = this.totalClassesList.filter(o => o.name === selectedClass);
+        if (this.Classes.length !== 0) {
+          this.filteredResultCount = this.Classes.length;
+          this.emptyMsg = false;
+          this.classesTable = true;
+        } else {
+          this.filteredResultCount = 0;
+          this.emptyMsg = true;
+          this.classesTable = false;
+        }
+      } else {
+        this.emptyMsg = true;
+        this.classesTable = false;
+      }
+    } else {
+      this.typedFilterText = "";
+      this.emptyMsg = false;
+      this.classesTable = true;
+      this.fetchAllClasses(pageNo);
+    }
+  }
+
+  filterByTeacher(event, pageNo) {
+    this.typedFilterText = "teacher name '"+event.target.value+"'";
+    const selectedTeacher = event.target.value;
+    if (event.target.value !== '') {
+      if (this.totalClassesList !== null) {
+        this.Classes = this.totalClassesList.filter(o => (o.teacherEntity.fName.toLowerCase() === selectedTeacher) || (o.teacherEntity.lName.toLowerCase() === selectedTeacher));
+        if (this.Classes.length !== 0) {
+          this.filteredResultCount = this.Classes.length;
+          this.emptyMsg = false;
+          this.classesTable = true;
+        } else {
+          this.filteredResultCount = 0;
+          this.emptyMsg = true;
+          this.classesTable = false;
+        }
+      } else {
+        this.emptyMsg = true;
+        this.classesTable = false;
+      }
+    } else {
+      this.typedFilterText = "";
+      this.emptyMsg = false;
+      this.classesTable = true;
+      this.fetchAllClasses(pageNo);
+    }
+  }
+
+  clearFilters(pageNo) {
+    this.filteredResultCount = 0;
+    this.typedFilterText = '';
+    this.emptyMsg = false;
+    this.fetchAllClasses(pageNo);
   }
 
   setTeachersEntities(){
@@ -78,15 +146,19 @@ export class AdminAllClassesComponent implements OnInit {
   }
 
   selectedEditClass(selectedClassId, pageNo){
-    this.selectedClass = [];
-    this.cs.getClasses(pageNo).subscribe(data => {
-      for (let j = 0; j < data.content.length; j++) {
-        const element = data.content[j];
-        if (element.tutionClassId == selectedClassId) {
-          this.selectedClass.push(element);
+    this.modalLoadSpinner = true;
+    setTimeout(() => {
+      this.selectedClass = [];
+      this.cs.getClasses(pageNo).subscribe(data => {
+        for (let j = 0; j < data.content.length; j++) {
+          const element = data.content[j];
+          if (element.tutionClassId == selectedClassId) {
+            this.selectedClass.push(element);
+            this.modalLoadSpinner = false;
+          }
         }
-      }
-    })
+      })
+    });
   }
 
   allTeachers(){
@@ -141,8 +213,17 @@ export class AdminAllClassesComponent implements OnInit {
 
   dataRefresh(pageNo){
     this.emptyMsg = false;
+    this.clearFilters(pageNo);
     this.fetchAllClasses(pageNo);
   }
+
+  currencyConvertor(currency) {
+    var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency', currency: 'LKR'
+    });
+    return formatter.format(currency);
+  }
+
 
   timeConverter(time){
     if (time) {

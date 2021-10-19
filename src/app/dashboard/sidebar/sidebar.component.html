@@ -3,7 +3,8 @@
         <img src="../../../assets/images/logo.png" alt="Logo Image">
     </div>
     <div class="sidebar-navs">
-        <a (click)="sidebarToggleEvent()" routerLink="/mPanel/joined-classes" routerLinkActive="active" *ngIf="auth.currentUser.Role == 'student'">
+        <a (click)="sidebarToggleEvent()" routerLink="/mPanel/joined-classes" routerLinkActive="active"
+            *ngIf="auth.currentUser.Role == 'student'">
             <i class="material-icons mr-3 float-left md-21">local_library</i>
             Joined Classes
         </a>
@@ -11,32 +12,44 @@
             <i class="material-icons mr-3 float-left md-21">error</i>
             Classes to be paid <span class="badge badge-danger ml-2">2</span>
         </a> -->
-        <a (click)="sidebarToggleEvent()" routerLink="/mPanel/classes" routerLinkActive="active" *ngIf="auth.currentUser.Role == 'student'">
+        <a (click)="sidebarToggleEvent()" routerLink="/mPanel/classes" routerLinkActive="active"
+            *ngIf="auth.currentUser.Role == 'student'">
             <i class="material-icons mr-3 float-left md-21">view_list</i>
             Browse All Classes
         </a>
-        <a (click)="sidebarToggleEvent()" routerLink="/mPanel/my-classes" routerLinkActive="active" *ngIf="auth.currentUser.Role == 'teacher'">
+        <a (click)="sidebarToggleEvent()" routerLink="/mPanel/my-classes" routerLinkActive="active"
+            *ngIf="auth.currentUser.Role == 'teacher'">
             <i class="material-icons mr-3 float-left md-21">school</i>
             My Classes
         </a>
-        <a (click)="sidebarToggleEvent()" routerLink="/mPanel/dashboard" routerLinkActive="active" *ngIf="auth.currentUser.Role == 'admin'">
+        <a (click)="sidebarToggleEvent()" routerLink="/mPanel/create-class" routerLinkActive="active"
+            *ngIf="auth.currentUser.Role == 'teacher'">
+            <i class="material-icons mr-3 float-left md-21">add</i>
+            Create Class
+        </a>
+        <a (click)="sidebarToggleEvent()" routerLink="/mPanel/dashboard" routerLinkActive="active"
+            *ngIf="auth.currentUser.Role == 'admin'">
             <i class="material-icons mr-3 float-left md-21">dashboard</i>
             Dashboard
         </a>
-        <a (click)="sidebarToggleEvent()" routerLink="/mPanel/manage-classes" routerLinkActive="active" *ngIf="auth.currentUser.Role == 'admin'">
+        <a (click)="sidebarToggleEvent()" routerLink="/mPanel/manage-classes" routerLinkActive="active"
+            *ngIf="auth.currentUser.Role == 'admin'">
             <i class="material-icons mr-3 float-left md-21">school</i>
             Manage Classes
         </a>
-        <a (click)="sidebarToggleEvent()" routerLink="/mPanel/manage-teachers" routerLinkActive="active" *ngIf="auth.currentUser.Role == 'admin'">
+        <a (click)="sidebarToggleEvent()" routerLink="/mPanel/manage-teachers" routerLinkActive="active"
+            *ngIf="auth.currentUser.Role == 'admin'">
             <i class="material-icons mr-3 float-left md-21">people</i>
             Manage Teachers
         </a>
-        <a (click)="sidebarToggleEvent()" routerLink="/mPanel/manage-students" routerLinkActive="active" *ngIf="auth.currentUser.Role == 'admin'">
+        <a (click)="sidebarToggleEvent()" routerLink="/mPanel/manage-students" routerLinkActive="active"
+            *ngIf="auth.currentUser.Role == 'admin'">
             <i class="material-icons mr-3 float-left md-21">groups</i>
             Manage Students
         </a>
     </div>
     <div class="developer-sec text-center">
-        <small class="text-muted ">Developed by<br><a href="https://mlcreativehut.com" target="_blank">ML-Creative-Hut</a></small>
+        <small class="text-muted ">Developed by<br><a href="https://mlcreativehut.com"
+                target="_blank">ML-Creative-Hut</a></small>
     </div>
 </div>

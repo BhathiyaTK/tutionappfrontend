@@ -16,7 +16,6 @@ export class DashboardTopbarComponent implements OnInit {
   constructor(public auth: AuthService, public us: UserServicesService) { }
 
   ngOnInit(): void {
-    console.log(this.auth.currentUser);
     this.getCurrentMonth();
     if (this.auth.currentUser.Role == 'teacher') {
       this.getTeacher(this.uId, this.getCurrentMonth);

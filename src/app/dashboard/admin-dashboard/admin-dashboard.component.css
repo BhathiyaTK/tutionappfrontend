@@ -1,0 +1,16 @@
+.jumbotron> div > h1 {
+    color: var(--theme-orange);
+}
+.jumbotron> div > p {
+    font-family: cp_l;
+    color: var(--gray)
+}
+
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+    .jumbotron> div > p {
+        text-align: justify;
+    }
+}

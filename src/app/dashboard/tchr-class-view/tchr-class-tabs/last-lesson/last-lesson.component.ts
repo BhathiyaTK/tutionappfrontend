@@ -96,7 +96,7 @@ export class LastLessonComponent implements OnInit {
           }, error => {
             this.isUploading = false;
             this.errorAlert = true;
-            this.errorText = error;
+            this.errorText = "Lesson updating failed!";
             this.inputDisabled = false;
             this.videoUploadForm.reset();
           })

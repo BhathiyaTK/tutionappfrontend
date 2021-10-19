@@ -11,19 +11,27 @@
 </ul>
 <div class="tab-content" id="studentClassTabContent">
     <div class="tab-pane fade show active" id="last-class" role="tabpanel" aria-labelledby="last-class-tab">
-        <div class="tab-title mb-2">
-            <p class="mb-0">Complex Numbers Revision</p>
-            <small>28/01/2021</small>
+        <div *ngIf="hasClass">
+            <div class="tab-title mb-2">
+                <p class="mb-0">{{lastClass.lesson}}</p>
+                <small>{{lastClass.date}}</small>
+            </div>
+            <hr>
+            <div class="last-class-note">
+                <h6>Class Note:</h6>
+                <p>
+                    {{lastClass.note}}
+                </p>
+            </div>
+            <div class="last-class-video">
+                <video src="{{lastClass.videoFile}}" controls width="100%"></video>
+            </div>
         </div>
-        <hr>
-        <div class="last-class-note">
-            <h6>Class Note:</h6>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis sunt quam minus ratione eius, earum adipisci, facere pariatur inventore dolor cumque minima et placeat perspiciatis consectetur voluptatum, soluta itaque impedit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam illo dolore ex sapiente, facilis asperiores velit soluta expedita unde recusandae. Aut, minus hic. Recusandae quas aliquid dolorem? Dolore, in culpa!
-            </p>
-        </div>
-        <div class="last-class-video">
-            <video src="../../../assets/videos/video1.mp4" controls width="100%"></video>
+        <div *ngIf="emptyMsg">
+            <small class="text-danger">
+                <i class="material-icons float-left md-21 mr-2" style="margin-top: 3.2px;">error_outline</i>
+                No class held until now.
+            </small>
         </div>
     </div>
     <div class="tab-pane fade" id="study-material" role="tabpanel" aria-labelledby="study-material-tab">
@@ -31,31 +39,21 @@
             <p class="mb-0">Download following study materials for this class</p>
         </div>
         <hr>
-        <div class="study-file row">
-            <div class="col-sm-6 col-md-3 col-lg-2">
-                <a href="../../../assets/images/logo.png" download class="text-center">
+        <div class="study-file row" *ngIf="smList">
+            <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 px-0" *ngFor="let sm of smList; let key = index">
+                <a href="{{sm.downloadURL}}" title="{{sm.fileName}}" target="_blank" class="text-center">
                     <div class="download-file-div py-3">
                         <i class="material-icons md-42">description</i><br>
-                        <small>L1 - ත්‍රිකෝණමිතිය</small> 
+                        <small>{{smFileNameShorter(sm.fileName, 7)}}</small>
                     </div>
                 </a>
             </div>
-            <div class="col-sm-6 col-md-3 col-lg-2">
-                <a href="../../../assets/images/logo.png" download class="text-center">
-                    <div class="download-file-div py-3">
-                        <i class="material-icons md-42">description</i><br>
-                        <small>L2 - අවකලනය</small> 
-                    </div>
-                </a>
-            </div>
-            <div class="col-sm-6 col-md-3 col-lg-2">
-                <a href="../../../assets/images/logo.png" download class="text-center">
-                    <div class="download-file-div py-3">
-                        <i class="material-icons md-42">description</i><br>
-                        <small>L3 - අනුකලනය</small> 
-                    </div>
-                </a>
-            </div>
+        </div>
+        <div *ngIf="emptyMsg">
+            <small class="text-danger">
+                <i class="material-icons float-left md-21 mr-2" style="margin-top: 3.2px;">error_outline</i>
+                No study materials found.
+            </small>
         </div>
     </div>
     <div class="tab-pane fade" id="assignment" role="tabpanel" aria-labelledby="assignment-tab">
@@ -63,34 +61,22 @@
             <p class="mb-0">Download and complete following assignments before their due dates</p>
         </div>
         <hr>
-        <div class="study-file row">
-            <div class="col-sm-6 col-md-3 col-lg-2">
-                <a href="../../../assets/images/logo.png" download class="text-center">
+        <div class="study-file row m-0">
+            <div class="col-sm-6 col-md-3 col-lg-2" *ngFor="let assigt of assigtList; let key = index">
+                <a href="{{assigt.assigtFile}}" title="{{assigt.title}}" target="_blank" class="text-center">
                     <div class="download-file-div py-3">
                         <i class="material-icons md-42">assignment</i><br>
-                        <small>Assignment 01</small><br>
-                        <span>Deadline: 31-01-2021</span>
+                        <small>{{assgtFileNameShorter(assigt.title, 10)}}</small><br>
+                        <span>Deadline: {{assigt.date}}</span>
                     </div>
                 </a>
             </div>
-            <div class="col-sm-6 col-md-3 col-lg-2">
-                <a href="../../../assets/images/logo.png" download class="text-center">
-                    <div class="download-file-div py-3">
-                        <i class="material-icons md-42">assignment</i><br>
-                        <small>Assignment 02</small><br>
-                        <span>Deadline: 31-01-2021</span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-sm-6 col-md-3 col-lg-2">
-                <a href="../../../assets/images/logo.png" download class="text-center">
-                    <div class="download-file-div py-3">
-                        <i class="material-icons md-42">assignment</i><br>
-                        <small>Assignment 03</small><br>
-                        <span>Deadline: 31-01-2021</span>
-                    </div>
-                </a>
-            </div>
+        </div>
+        <div *ngIf="emptyMsg">
+            <small class="text-danger">
+                <i class="material-icons float-left md-21 mr-2" style="margin-top: 3.2px;">error_outline</i>
+                No assignment found.
+            </small>
         </div>
     </div>
 </div>
