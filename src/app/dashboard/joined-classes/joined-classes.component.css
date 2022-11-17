@@ -1,1 +1,10 @@
-
+.card-img-top {
+  height: 100px !important;
+  width: 100% !important;
+  overflow: hidden !important;
+}
+.card-img-top > img {
+  width: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}

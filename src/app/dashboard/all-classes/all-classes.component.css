@@ -1,24 +1,34 @@
-.class-price{
-    margin-bottom: 0;
-    font-family: cp_m;
-    color: var(--theme-black);
-    font-size: 20px;
-    text-align: left;
+.card-img-top {
+  height: 100px !important;
+  width: 100% !important;
+  overflow: hidden !important;
 }
-.class-price > button{
-    font-size: 15px;
+.card-img-top > img {
+  width: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
 }
-.options-box > span{
-    font-family: cp_r;
-    color: #777;
-    margin-right: 10px;
+.class-price {
+  margin-bottom: 0;
+  font-family: cp_m;
+  color: var(--theme-black);
+  font-size: 20px;
+  text-align: center;
 }
-.options-box > select{
-    width: 120px;
+.class-price > button {
+  font-size: 15px;
 }
-.options-box > select option{
-    font-size: 13px;
+.options-box > span {
+  font-family: cp_r;
+  color: #777;
+  margin-right: 10px;
 }
-.options-box > input[type=search]{
-    font-family: cp_l;
+.options-box > select {
+  width: 120px;
+}
+.options-box > select option {
+  font-size: 13px;
+}
+.options-box > input[type="search"] {
+  font-family: cp_l;
 }

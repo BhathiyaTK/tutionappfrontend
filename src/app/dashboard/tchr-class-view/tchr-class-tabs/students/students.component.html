@@ -1,0 +1,31 @@
+<div class="tab-title mb-3">
+    <p class="mb-0">
+        Enrolled Students
+    </p>
+</div>
+<div class="students-set">
+    <table class="table table-bordered table-sm bg-light">
+        <thead>
+            <tr class="text-center table-warning">
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Contact No.</th>
+                <th scope="col">Reg No.</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let i = index; let student of studentsList">
+                <th scope="row" class="text-center">{{i+1}}</th>
+                <td>{{student.fName + " " + student.lName}}</td>
+                <td>{{student.telephone}}</td>
+                <td>{{student.regNumber}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="no-data-msg" *ngIf="emptyMsg">
+    <small class="text-danger">
+        <i class="material-icons float-left md-21 mr-2" style="margin-top: 3.2px;">error_outline</i>
+        None of the students enrolled with this class yet.
+    </small>
+</div>

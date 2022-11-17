@@ -11,6 +11,8 @@ import { JoinedClassesComponent } from './dashboard/joined-classes/joined-classe
 import { MyClassesComponent } from './dashboard/my-classes/my-classes.component';
 import { PurchaseClassComponent } from './dashboard/purchase-class/purchase-class.component';
 import { StdClassViewComponent } from './dashboard/std-class-view/std-class-view.component';
+import { TchrClassRequestsComponent } from './dashboard/tchr-class-requests/tchr-class-requests.component';
+import { ClassEditComponent } from './dashboard/tchr-class-view/class-edit/class-edit.component';
 import { TchrClassViewComponent } from './dashboard/tchr-class-view/tchr-class-view.component';
 import { TeacherCreateClassComponent } from './dashboard/teacher-create-class/teacher-create-class.component';
 import { UnavailableClassesComponent } from './dashboard/unavailable-classes/unavailable-classes.component';
@@ -52,8 +54,10 @@ const routes: Routes = [
       { path: 'classes/:id/:name/purchase', component: PurchaseClassComponent, canActivate: [StudentGuard] },
       { path: 'classes', component: AllClassesComponent, canActivate: [StudentGuard] },
       { path: 'my-classes/:id/:name', component: TchrClassViewComponent, canActivate: [TeacherGuard] },
+      { path: 'my-classes/:id/:name/edit', component: ClassEditComponent, canActivate: [TeacherGuard] },
       { path: 'my-classes', component: MyClassesComponent, canActivate: [TeacherGuard] },
       { path: 'create-class', component: TeacherCreateClassComponent, canActivate: [TeacherGuard] },
+      { path: 'class-requests', component: TchrClassRequestsComponent, canActivate: [TeacherGuard] },
       { path: 'dashboard', component: AdminDashboardComponent, canActivate: [AdminGuard] },
       { path: 'manage-classes', component: AdminManageClassesComponent, canActivate: [AdminGuard] },
       { path: 'manage-teachers', component: AdminManageTeachersComponent, canActivate: [AdminGuard] },
@@ -61,7 +65,8 @@ const routes: Routes = [
       { path: 'no-access', component: NoAccessComponent },
       { path: 'not-found', component: NotFoundComponent }
     ]
-  }
+  },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({

@@ -1,25 +1,29 @@
 <div class="class-summery">
     <h4>{{class_name}}</h4>
-    <span>Next class on {{class_date}} at {{class_time}}.</span>
-    <div class="row align-items-center class-teacher-info">
-        <div class="col-sm-3 col-md-3 col-lg-3 p-3">
-            <img src="../../../assets/images/users/avatar.png" alt="Teacher Profile Photo" width="100%" class="rounded-circle">
-        </div>
-        <div class="col-sm-9 col-md-9 col-lg-9 px-0">
+    <span>Next class on {{class_date}} @ {{timeConverter(class_time)}}.</span>
+    <hr>
+    <div class="row align-items-center class-teacher-info mb-4">
+        <!-- <div class="col-sm-3 col-md-3 col-lg-3 p-3">
+            <img src="../../../assets/images/users/avatar.png" alt="Teacher Profile Photo" width="100%"
+                class="rounded-circle">
+        </div> -->
+        <div class="col-sm-12 col-md-12 col-lg-12">
             <small>Teacher</small>
             <h6>{{teacher_name}}</h6>
             <span>{{teacher_degree}}</span><br>
-            <small class="more-details-link" data-toggle="modal" data-target="#teacher-info">More details &#8594;</small>
+            <small class="more-details-link" data-toggle="modal" data-target="#teacher-info">More details
+                &#8594;</small>
         </div>
     </div>
     <div class="class-status">
         <span class="px-3 py-1 float-right">Owned</span>
         <small>Monthly fee</small>
-        <p class="class-price text-left">Rs.{{class_fee}}</p>
+        <p class="class-price text-left">{{currencyConvertor(class_fee)}}</p>
     </div>
     <div class="next-class-join p-4 mt-4 text-right">
-        <span class="float-left">Next Class</span> 
-        <a *ngIf="nextClass_link" href="{{nextClass_link}}" class="next-class-join-link" target="_blank">Attend Now</a>
+        <span class="float-left">Next Class</span>
+        <a *ngIf="nextClass_link" (click)="openLink(nextClass_link)" class="next-class-join-link" target="_blank">Attend
+            Now</a>
         <span *ngIf="nextClass_empty_msg">{{nextClass_empty_msg}}</span>
     </div>
 </div>

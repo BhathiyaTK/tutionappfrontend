@@ -34,9 +34,11 @@ export class StdAddToClassComponent implements OnInit {
   stdAddToClass(){
     if (this.stdClassAddForm.valid) {
       this.inputDisabled = true;
-      let subClzId = this.stdClassAddForm.get('subClassId').value;
-      let stdId = this.stdClassAddForm.get('stdId').value;
-      this.us.studentJoinedToClass(subClzId, stdId).subscribe(data => {
+      const val = {
+        subClassId: this.stdClassAddForm.get('subClassId').value,
+        reg_number: this.stdClassAddForm.get('stdId').value
+      }
+      this.us.studentJoinedToClass(val).subscribe(data => {
         this.inputDisabled = false;
         this.successText = 'Student added to the class successfully.'
         this.successAlert = true;

@@ -77,7 +77,12 @@ export class MyClassesComponent implements OnInit {
       this.cs.getOwnedClasses(this.teacher_id).subscribe(data2 => {
         if (data2) {
           this.spinner = false;
-          this.myclasses = data2;
+          this.myclasses = data2.filter(o => o.approvalStatus == 'Approved');
+          if (this.myclasses.length == 0) {
+            this.emptyMsg = true;
+          } else {
+            this.emptyMsg = false;
+          }
         }else{
           this.spinner = false;
           this.emptyMsg = true;

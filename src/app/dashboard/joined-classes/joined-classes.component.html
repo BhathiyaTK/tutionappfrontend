@@ -11,7 +11,8 @@
         <div class="mt-4" *ngIf="emptyMsg">
             <div class="alert alert-danger mb-0">
                 <i class="material-icons float-left mr-2">error</i>
-                <b>You didn't joined for any class yet.</b> Please go to <b>Browse All Classes</b> section on the sidebar and join the classes that you need.
+                <b>You didn't joined for any class yet.</b> Please go to <b>Browse All Classes</b> section on the
+                sidebar and join the classes that you need.
             </div>
         </div>
         <div class="mt-4" *ngIf="errorAlert">
@@ -21,19 +22,22 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12 col-md-4 col-lg-3 class-col" *ngFor="let class of classes" style="margin-bottom: 30px;">
+            <div class="col-sm-12 col-md-4 col-lg-4 class-col" *ngFor="let class of classes"
+                style="margin-bottom: 30px;">
                 <a [routerLink]="['/mPanel/joined-classes', class.classId, removeUrlSpaces(class.className)]">
                     <div class="card custom-shadow-div">
-                        <img src="../../../assets/images/bg2.jpg" class="card-img-top" alt="Class Banner Image">
-                        <div class="card-body">
+                        <div class="card-img-top">
+                            <img src="{{class.image}}" class="card-img-top" alt="{{imageAltText}}">
+                        </div>
+                        <div class="card-body text-center">
                             <h5 class="card-title">{{class.className}}</h5>
                             <small>By {{class.teacherFname}} {{class.teacherLname}}</small>
                             <p class="card-text">
-                                Next class on {{class.h_date}}<br>at {{timeConverter(class._time)}}
+                                Every {{class.h_date}} @ {{timeConverter(class._time)}}
                             </p>
                             <hr>
                             <p class="class-price">
-                                Rs.{{class.class_fee}}
+                                {{currencyConvertor(class.class_fee)}}
                             </p>
                         </div>
                     </div>

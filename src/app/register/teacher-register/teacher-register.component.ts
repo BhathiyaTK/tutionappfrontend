@@ -57,7 +57,7 @@ export class TeacherRegisterComponent implements OnInit {
     grade: ['', [Validators.required]],
     teacherIntro: ['', [
       Validators.required,
-      Validators.maxLength(500)
+      Validators.maxLength(250)
     ]],
     password: ['', [
       Validators.required,
@@ -84,9 +84,9 @@ export class TeacherRegisterComponent implements OnInit {
       var val = {
         fName: this.tchrRegForm.get('fName').value,
         lName: this.tchrRegForm.get('lName').value,
+        telephone: this.tchrRegForm.get('telephone').value,
         address: this.tchrRegForm.get('address').value,
         city: this.tchrRegForm.get('city').value,
-        telephone: this.tchrRegForm.get('telephone').value,
         eduQual: this.tchrRegForm.get('eduQual').value,
         teacherIntro: this.tchrRegForm.get('teacherIntro').value,
         medium: this.tchrRegForm.get('medium').value,
@@ -105,7 +105,7 @@ export class TeacherRegisterComponent implements OnInit {
       }, (error) => {
         this.pendingAlert = false;
         this.errorAlert = true;
-        this.errorText = error;
+        this.errorText = "Registration failed! Something went wrong.";
       });
 
     } else {

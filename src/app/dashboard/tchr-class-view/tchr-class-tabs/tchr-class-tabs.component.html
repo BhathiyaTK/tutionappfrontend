@@ -1,15 +1,23 @@
 <ul class="nav nav-tabs" id="teacherClassTab" role="tablist">
     <li class="nav-item" role="presentation">
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#next-class" role="tab" aria-controls="next-class" aria-selected="true">Next Class</a>
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#next-class" role="tab"
+            aria-controls="next-class" aria-selected="true">Next Class</a>
     </li>
     <li class="nav-item" role="presentation">
-        <a class="nav-link" id="home-tab" data-toggle="tab" href="#last-class" role="tab" aria-controls="last-class" aria-selected="true">Last Class</a>
+        <a class="nav-link" id="home-tab" data-toggle="tab" href="#last-class" role="tab" aria-controls="last-class"
+            aria-selected="true">Last Class</a>
     </li>
     <li class="nav-item" role="presentation">
-        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#study-material" role="tab" aria-controls="study-material" aria-selected="false">Study Materials</a>
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#study-material" role="tab"
+            aria-controls="study-material" aria-selected="false">Study Materials</a>
     </li>
     <li class="nav-item" role="presentation">
-        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#assignment" role="tab" aria-controls="assignment" aria-selected="false">Assignments</a>
+        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#assignment" role="tab" aria-controls="assignment"
+            aria-selected="false">Assignments</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="student-tab" data-toggle="tab" href="#students" role="tab" aria-controls="students"
+            aria-selected="false">Students</a>
     </li>
 </ul>
 <div class="tab-content" id="teacherClassTabContent">
@@ -24,5 +32,8 @@
     </div>
     <div class="tab-pane fade" id="assignment" role="tabpanel" aria-labelledby="assignment-tab">
         <app-assignments></app-assignments>
+    </div>
+    <div class="tab-pane fade" id="students" role="tabpanel" aria-labelledby="students-tab">
+        <app-students></app-students>
     </div>
 </div>

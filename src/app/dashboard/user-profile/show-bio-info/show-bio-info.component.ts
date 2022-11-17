@@ -18,8 +18,10 @@ export class ShowBioInfoComponent implements OnInit {
   user_eduQl: string;
   user_intro: string;
   user_tchr_id: number;
+  user_reg_no: string;
   user_std_id: number;
   user_garTel: string;
+  user_medium: string;
 
   isStudent: boolean = false;
   isTeacher: boolean = false;
@@ -92,6 +94,7 @@ export class ShowBioInfoComponent implements OnInit {
       this.user_tel = data.teacherEntity.telephone;
       this.user_eduQl = data.teacherEntity.eduQual;
       this.user_intro = data.teacherEntity.teacherIntro;
+      this.user_medium = data.teacherEntity.medium.charAt(0).toUpperCase() + data.teacherEntity.medium.substr(1).toLowerCase();
     }, err => {
       console.log(err);
     })
@@ -101,11 +104,13 @@ export class ShowBioInfoComponent implements OnInit {
     currentMonth = this.c_month;
     this.us.getSingleStudent(uId, currentMonth).subscribe(data => {
       this.user_std_id = data.studentEntity.studentId;
+      this.user_reg_no = data.studentEntity.regNumber;
       this.user_name = data.studentEntity.fName + ' ' + data.studentEntity.lName;
       this.user_address = data.studentEntity.address;
       this.user_city = data.studentEntity.city;
       this.user_tel = data.studentEntity.telephone;
       this.user_garTel = data.studentEntity.garTelephone;
+      this.user_medium = data.studentEntity.medium.charAt(0).toUpperCase() + data.studentEntity.medium.substr(1).toLowerCase();
     }, err => {
       console.log(err);
     })

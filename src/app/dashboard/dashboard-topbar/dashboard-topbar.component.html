@@ -6,13 +6,13 @@
         <span id="profileBox" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="View Profile">
             <i class="material-icons md-36">account_circle</i><i class="material-icons pl-1">arrow_drop_down</i>
         </span>
-        
-        <div class="dropdown-menu shadow p-3" aria-labelledby="profileBox">
+
+        <div class="dropdown-menu shadow p-3 text-center" aria-labelledby="profileBox">
             <div class="user-info" *ngIf="auth.currentUser.Role !== 'admin'">
-                <div class="user-info-img">
+                <!-- <div class="user-info-img">
                     <img src="../../../assets/images/users/avatar.png" alt="User Image" class="rounded-circle">
-                </div>
-                <div class="user-info-name ml-3">
+                </div> -->
+                <div class="user-info-name">
                     <h6><b>{{user_full_name}}</b></h6>
                     <small class="text-muted">{{auth.currentUser.sub}}</small>
                 </div>
@@ -20,8 +20,12 @@
             <hr *ngIf="auth.currentUser.Role !== 'admin'">
             <div class="dropdown-box-links">
                 <ul>
-                    <li *ngIf="auth.currentUser.Role !== 'admin'"><a routerLink="/mPanel/profile"><i class="material-icons pr-2 float-left">launch</i>View Personal Info</a></li>
-                    <li *ngIf="auth.currentUser.Role == 'admin'" class="text-center"><small>{{auth.currentUser.sub}}</small></li>
+                    <li *ngIf="auth.currentUser.Role !== 'admin'"><a routerLink="/mPanel/profile">View
+                            Profile&nbsp;&#8599;</a>
+                    </li>
+                    <li *ngIf="auth.currentUser.Role == 'admin'" class="text-center">
+                        <small>{{auth.currentUser.sub}}</small>
+                    </li>
                     <hr>
                     <li class="text-center">
                         <button class="btn btn-danger" (click)="auth.userLogout()">

@@ -15,15 +15,17 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12 col-md-4 col-lg-3 class-col" *ngFor="let class of myclasses"
+            <div class="col-sm-12 col-md-4 col-lg-4 class-col text-center" *ngFor="let class of myclasses"
                 style="margin-bottom: 30px;">
                 <a [routerLink]="['/mPanel/my-classes', class.tutionClassId, removeUrlSpaces(class.name)]">
                     <div class="card custom-shadow-div">
-                        <img src="../../../assets/images/bg2.jpg" class="card-img-top" alt="Class Banner Image">
+                        <div class="card-img-top">
+                            <img src="{{class.imagePath}}" alt="Class Banner Image">
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title">{{class.name}}</h5>
                             <p class="card-text">
-                                Every {{class.hDate}}<br>at {{timeConverter(class.htime)}}
+                                Every {{class.hDate}} @ {{timeConverter(class.htime)}}
                             </p>
                             <hr>
                             <p class="class-price">

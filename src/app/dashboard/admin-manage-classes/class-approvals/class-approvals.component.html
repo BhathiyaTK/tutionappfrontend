@@ -46,24 +46,28 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let i = index; let class of Classes">
+            <tr
+                *ngFor="let i = index; let class of Classes | paginate: {itemsPerPage: 20, currentPage: currentPageNumber+1, totalItems: totalElements};">
                 <td class="align-middle text-center">{{i+1}}</td>
-                <td class="align-middle text-center">{{class.name}}</td>
-                <td class="align-middle text-center">{{class.teacher}}</td>
+                <td class="align-middle">{{class.name}}</td>
+                <td class="align-middle">{{class.teacherEntity.fName+" "+class.teacherEntity.lName}}</td>
+                <td class="align-middle">{{currencyConvertor(class.classFee)}}</td>
                 <td class="align-middle text-center">{{class.hDate}}</td>
-                <td class="align-middle text-center">{{timeConverter(class.hTime)}}</td>
-                <td class="align-middle">{{currencyConvertor(class.fee)}}</td>
+                <td class="align-middle text-center">{{timeConverter(class.htime)}}</td>
                 <td class="align-middle">
                     <div class="d-flex justify-content-center align-items-center">
                         <button type="button" class="action-btn normal-btn mx-2"
-                            (click)="approvalSubmit('Approved', class.id, class)">Approve
+                            (click)="approvalSubmit('Approved', class.tutionClassId, class)">Approve
                         </button>
                         <button type="button" class="action-btn del-btn mx-2"
-                            (click)="approvalSubmit('NotApproved', class.id, class)">Reject
+                            (click)="approvalSubmit('NotApproved', class.tutionClassId, class)">Reject
                         </button>
                     </div>
                 </td>
             </tr>
         </tbody>
     </table>
+    <pagination-controls class="custom-pagination" responsive="true" previousLabel="Prev" nextLabel="Next"
+        (pageChange)="pageNumberClick($event)">
+    </pagination-controls>
 </div>

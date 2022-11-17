@@ -59,8 +59,8 @@ export class AdminAllClassesComponent implements OnInit {
         this.emptyMsg = true;
         this.classesTable = false;
       }
-      this.Classes = data.content;
-      this.totalClassesList = data.content;
+      this.Classes = data.content.filter(o => o.approvalStatus == 'Approved');
+      this.totalClassesList = data.content.filter(o => o.approvalStatus == 'Approved');
       this.pagesCount = data.totalPages;
       this.totalElements = data.totalElements;
       this.currentPageNumber = data.pageable.pageNumber;
@@ -133,7 +133,6 @@ export class AdminAllClassesComponent implements OnInit {
   }
 
   setTeachersEntities(){
-    console.log("classes length = ", this.Classes.length);
     for (let i = 0; i < this.Classes.length; i++) {
       const element = this.Classes[i].teachersEntity.fName;
       this.TeachersEntity.push(element);
@@ -150,8 +149,8 @@ export class AdminAllClassesComponent implements OnInit {
     setTimeout(() => {
       this.selectedClass = [];
       this.cs.getClasses(pageNo).subscribe(data => {
-        for (let j = 0; j < data.content.length; j++) {
-          const element = data.content[j];
+        for (let j = 0; j < data.content.filter(o => o.approvalStatus == 'Approved').length; j++) {
+          const element = data.content.filter(o => o.approvalStatus == 'Approved')[j];
           if (element.tutionClassId == selectedClassId) {
             this.selectedClass.push(element);
             this.modalLoadSpinner = false;
@@ -179,7 +178,6 @@ export class AdminAllClassesComponent implements OnInit {
         teacherId: values.classTeacher
       }
     }
-    console.log(val);
     this.cs.updateClass(classId, val).subscribe((res) => {
       this.successAlert = true;
       this.successText = "Class updated successfully.";

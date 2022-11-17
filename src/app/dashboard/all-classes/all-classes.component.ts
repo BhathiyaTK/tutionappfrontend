@@ -20,6 +20,7 @@ export class AllClassesComponent implements OnInit {
   errorAlert: boolean = false;
   errorText:string = '';
   emptyMsg:boolean = false;
+  imageAltText: string = "Loading image...";
 
   constructor(public cs: ClassesService) { }
 
@@ -32,14 +33,19 @@ export class AllClassesComponent implements OnInit {
     this.cs.getClasses(pageNo).subscribe(data => {
       if (data.content.length !== 0) {
         this.spinner = false;
+          this.allclasses = data.content.filter(o => o.approvalStatus == 'Approved');
+        if (data.content.imagePath == '' || data.content.imagePath == null) {
+          this.imageAltText = "Banner image loading...";
+        } else {
+          this.imageAltText = "Class banner image";
+        }
+        this.pagesCount = data.totalPages;
+        this.totalElements = data.totalElements;
+        this.currentPageNumber = data.pageable.pageNumber;
       }else{
         this.spinner = true;
         this.emptyMsg = true;
       }
-      this.allclasses = data.content;
-      this.pagesCount = data.totalPages;
-      this.totalElements = data.totalElements;
-      this.currentPageNumber = data.pageable.pageNumber;
     })
   }
 
@@ -60,6 +66,13 @@ export class AllClassesComponent implements OnInit {
     }else{
       return "N/A";
     }
+  }
+
+  currencyConvertor(currency) {
+    var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency', currency: 'LKR'
+    });
+    return formatter.format(currency);
   }
 
 }

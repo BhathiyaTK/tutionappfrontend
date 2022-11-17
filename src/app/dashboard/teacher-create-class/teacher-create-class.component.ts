@@ -1,5 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ClassesService } from 'src/app/services/classes/classes.service';
 import { UserServicesService } from 'src/app/services/users/user-services.service';
@@ -17,7 +20,8 @@ export class TeacherCreateClassComponent implements OnInit {
     private fb: FormBuilder, 
     private cs: ClassesService,
     private uss: UserServicesService,
-    private cftv: CustomFiletypeValidationService
+    private cftv: CustomFiletypeValidationService,
+    private fbs: AngularFireStorage,
   ) { }
 
   teacher_id: number;
@@ -25,6 +29,10 @@ export class TeacherCreateClassComponent implements OnInit {
   errorMsg: boolean = false;
   note:any = '';
   c_month: string;
+  pendingClzAdd: boolean = false;
+  imageFile: string;
+  percentageVal: Observable<number>;
+  UploadedImageURL: Observable<any>;
 
   name:string;
   teacher:number;
@@ -33,7 +41,7 @@ export class TeacherCreateClassComponent implements OnInit {
   time:string;
   notes:string;
   image:string;
-  adminApprovalState:string = 'Pending';
+  adminApprovalState:string = "Pending";
   imageName:string;
 
   addClassForm = this.fb.group({
@@ -59,6 +67,10 @@ export class TeacherCreateClassComponent implements OnInit {
   get class_add(){
     return this.addClassForm.controls;
   }
+
+  onChange(event) { 
+    this.imageFile = event.target.files[0];
+  } 
 
   getCurrentMonth(){
     let month = new Date().getMonth();
@@ -112,30 +124,50 @@ export class TeacherCreateClassComponent implements OnInit {
   }
 
   addNewClass(){
-    if (this.addClassForm.valid) {
-      var val = {
-        name: this.addClassForm.get('name').value,
-        notes: this.addClassForm.get('notes').value,
-        hDate: this.addClassForm.get('date').value,
-        htime: this.addClassForm.get('time').value,
-        classFee: this.addClassForm.get('fee').value,
-        imagePath: this.addClassForm.get('image').value,
-        approvalState: this.adminApprovalState,
-        teacherModel:{
-          teacherId: this.teacher_id
-        }
-      }
-      this.cs.addClass(val).subscribe((res) => {
-        this.successMsg = true;
-        this.addClassForm.reset();
-        this.note = '';
-      },(err) => {
-        this.errorMsg = true;
-        console.log(err);
-      });
-    } else {
-      console.log("Validation Failed!");
-    }
+    this.pendingClzAdd = true;
+    const storagePath = "/class_covers/"+this.teacher_id+"/"+Math.random();
+    const storageRef = this.fbs.ref(storagePath);
+    const uploadTask = this.fbs.upload(storagePath, this.imageFile);
+    
+    this.percentageVal = uploadTask.percentageChanges();
+    uploadTask.snapshotChanges().pipe(
+      finalize(() => {
+        this.UploadedImageURL = storageRef.getDownloadURL();
+        this.UploadedImageURL.subscribe(imageUrl => {
+          if (imageUrl) {
+            if (this.addClassForm.valid) {
+              var val = {
+                name: this.addClassForm.get('name').value,
+                notes: this.addClassForm.get('notes').value,
+                hDate: this.addClassForm.get('date').value,
+                htime: this.addClassForm.get('time').value,
+                classFee: this.addClassForm.get('fee').value,
+                imagePath: imageUrl,
+                approvalStatus: this.adminApprovalState,
+                teacherModel:{
+                  teacherId: this.teacher_id
+                }
+              }
+              this.cs.addClass(val).subscribe((res) => {
+                this.pendingClzAdd = false;
+                this.successMsg = true;
+                this.addClassForm.reset();
+                this.note = '';
+              },(err) => {
+                this.pendingClzAdd = false;
+                this.errorMsg = true;
+                console.log(err);
+              });
+            } else {
+              console.log("Validation Failed!");
+            }
+          } else {
+            this.errorMsg = true;
+            console.log("Class banner image upload failed! Try again shortly.");
+          }
+        })
+      })
+    ).subscribe();
   }
 
 }

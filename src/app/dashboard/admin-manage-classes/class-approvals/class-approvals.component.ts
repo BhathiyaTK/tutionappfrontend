@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ClassesService } from 'src/app/services/classes/classes.service';
 
 @Component({
   selector: 'app-class-approvals',
@@ -7,11 +8,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class ClassApprovalsComponent implements OnInit {
 
-  Classes:any = [
-    { id: '1', name: 'Combined Mathematics', teacher: 'Nirmal Dissanayaka', hDate: 'Friday', hTime: '14:00', fee: '3400', desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum minus dolores, minima animi, sit molestiae enim dolor excepturi veritatis tenetur delectus numquam ex cupiditate incidunt ut officia quibusdam, fugiat reiciendis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum minus dolores, minima animi, sit molestiae enim dolor excepturi veritatis tenetur delectus numquam ex cupiditate incidunt ut officia quibusdam, fugiat reiciendis. Lorem ipsum dolor sit amet consectetur adipisici.'},
-    { id: '1', name: 'Chemistry', teacher: 'Jayanath Amarasinghe', hDate: 'Wednesday', hTime: '09:30', fee: '3200', desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum minus dolores, minima animi, sit molestiae enim dolor excepturi veritatis tenetur delectus numquam ex cupiditate incidunt ut officia quibusdam, fugiat reiciendis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum minus dolores, minima animi, sit molestiae enim dolor excepturi veritatis tenetur delectus numquam ex cupiditate incidunt ut officia quibusdam, fugiat reiciendis. Lorem ipsum.'}
-  ];
-
+  Classes: any = [];
   approvalStatus:string = '';
   spinner:boolean = false;
   emptyMsg:boolean = false;
@@ -20,26 +17,34 @@ export class ClassApprovalsComponent implements OnInit {
   successText:string = '';
   errorText:string = '';
   requestList:boolean = false;
+  pagesCount:number;
+  totalElements:number;
+  currentPageNumber:number;
+  initialPageNumber:any = 0;
 
-  constructor() { }
+  constructor(private cs: ClassesService) { }
 
   ngOnInit(): void {
-    this.getAllRequests();
+    this.getAllRequests(this.initialPageNumber);
   }
 
-  getAllRequests() {
+  getAllRequests(pageNo) {
     this.spinner = true;
     this.requestList = false;
-    setTimeout(() => {
-      if (this.Classes.length !== 0) {
+    this.cs.getClasses(pageNo).subscribe(data1 => {
+      if (data1.content.filter(o => o.approvalStatus == 'Pending').length !== 0) {
         this.requestList = true;
         this.spinner = false;
-        return null;
-      }else {
+      }else{
         this.spinner = false;
         this.emptyMsg = true;
+        this.requestList = false;
       }
-    }, 1000);
+      this.Classes = data1.content.filter(o => o.approvalStatus == 'Pending');
+      this.pagesCount = data1.totalPages;
+      this.totalElements = data1.totalElements;
+      this.currentPageNumber = data1.pageable.pageNumber;
+    })
   }
 
   approvalSubmit(approval: string, classId, item) {
@@ -47,18 +52,22 @@ export class ClassApprovalsComponent implements OnInit {
     if (accept_confirmation) {
       if (approval == 'Approved') {
         this.approvalStatus = approval;
-        let index = this.Classes.indexOf(item);
-        this.Classes.splice(index, 1);
-        this.successText = 'Class approved';
-        this.successAlert = true;
-        this.getAllRequests();
+        this.cs.approveOrRejectClass(classId, approval).subscribe(data => {
+          let index = this.Classes.indexOf(item);
+          this.Classes.splice(index, 1);
+          this.successText = 'Class request approved';
+          this.successAlert = true;
+          this.getAllRequests(this.currentPageNumber);
+        })
       }else if (approval == 'NotApproved') {
         this.approvalStatus = approval;
-        let index = this.Classes.indexOf(item);
-        this.Classes.splice(index, 1);
-        this.successText = 'Class rejected';
-        this.successAlert = true;
-        this.getAllRequests();
+        this.cs.approveOrRejectClass(classId, approval).subscribe(data => {
+          let index = this.Classes.indexOf(item);
+          this.Classes.splice(index, 1);
+          this.successText = 'Class requested rejected';
+          this.successAlert = true;
+          this.getAllRequests(this.currentPageNumber);
+        })
       }
     } else {
       return null;
@@ -67,7 +76,7 @@ export class ClassApprovalsComponent implements OnInit {
 
   dataRefresh(){
     this.emptyMsg = false;
-    this.getAllRequests();
+    this.getAllRequests(this.currentPageNumber);
   }
 
   timeConverter(time){

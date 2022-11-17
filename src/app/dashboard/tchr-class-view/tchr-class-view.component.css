@@ -1,8 +1,16 @@
-.class-img-banner{
-    height: 180px;;
-    background-image: url("../../../assets/images/bg2.jpg");;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    border-radius: 10px 10px 0 0;
+.class-img-banner {
+  height: 180px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  border-radius: 10px 10px 0 0;
+  position: relative;
+}
+.class-edit-link {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 28px 25px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px 0 0 0;
 }

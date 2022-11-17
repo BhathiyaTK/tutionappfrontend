@@ -55,4 +55,30 @@ export class StdClassSummeryComponent implements OnInit {
     })
   }
 
+  timeConverter(time){
+    if (time) {
+      time = time.split(":");
+      let AMorPM = parseInt(time[0]) >= 12 ? 'PM':'AM';
+      let outputTime = ((parseInt(time[0]) + 11) % 12 + 1) + ':' + time[1] + ' ' + AMorPM;
+      return outputTime;
+    }else{
+      return "N/A";
+    }
+  }
+
+  currencyConvertor(currency) {
+    var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency', currency: 'LKR'
+    });
+    return formatter.format(currency);
+  }
+
+  openLink(url: string) {
+    if (url.includes("https://")) {
+      window.open(url, "_blank");
+    } else {
+      window.open("https://"+url, "_blank");
+    }
+  }
+
 }

@@ -74,6 +74,10 @@ import { AboutComponent } from './about/about.component';
 import { ClassApprovalsComponent } from './dashboard/admin-manage-classes/class-approvals/class-approvals.component';
 import { CustomFiletypeValidationService } from './services/validations/custom-filetype-validation.service';
 import { TeacherCreateClassComponent } from './dashboard/teacher-create-class/teacher-create-class.component';
+import { FirebaseAuthService } from './services/auth/firebase-auth.service';
+import { StudentsComponent } from './dashboard/tchr-class-view/tchr-class-tabs/students/students.component';
+import { ClassEditComponent } from './dashboard/tchr-class-view/class-edit/class-edit.component';
+import { TchrClassRequestsComponent } from './dashboard/tchr-class-requests/tchr-class-requests.component';
 
 @NgModule({
   declarations: [
@@ -126,7 +130,10 @@ import { TeacherCreateClassComponent } from './dashboard/teacher-create-class/te
     PasswordRestComponent,
     AboutComponent,
     ClassApprovalsComponent,
-    TeacherCreateClassComponent
+    TeacherCreateClassComponent,
+    StudentsComponent,
+    ClassEditComponent,
+    TchrClassRequestsComponent
   ],
   imports: [
     BrowserModule,
@@ -155,6 +162,7 @@ import { TeacherCreateClassComponent } from './dashboard/teacher-create-class/te
       multi:true
     },
     AuthService,
+    FirebaseAuthService,
     AuthGuard,
     StudentGuard,
     TeacherGuard,

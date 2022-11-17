@@ -17,6 +17,11 @@ export class ShowUserStatusComponent implements OnInit {
   joined_classes: string;
   total_students: string;
   total_teachers: string;
+  teacher_id: number;
+  student_id: number;
+  successAlert: boolean = false;
+  errorAlert: boolean = false;
+  pendingAlert: boolean = false;
 
   updateEmail: string;
   updatePassword1: string;
@@ -24,7 +29,6 @@ export class ShowUserStatusComponent implements OnInit {
 
   isStudent: boolean = false;
   isTeacher: boolean = false;
-
   isDisabled: boolean = true;
 
   constructor(
@@ -53,6 +57,7 @@ export class ShowUserStatusComponent implements OnInit {
       this.getTeacher(this.uId, this.getCurrentMonth);
     }else {
       this.isStudent = true;
+      this.getStudent(this.uId, this.getCurrentMonth);
     }
   }
 
@@ -106,6 +111,7 @@ export class ShowUserStatusComponent implements OnInit {
     this.us.getSingleTeacher(uId, currentMonth).subscribe(data => {
       this.my_classes = data.classCount;
       this.total_students = data.studentCount;
+      this.teacher_id = data.teacherEntity.teacherId;
     }, err => {
       console.log(err);
     })
@@ -114,8 +120,8 @@ export class ShowUserStatusComponent implements OnInit {
   getStudent(uId, currentMonth){
     currentMonth = this.c_month;
     this.us.getSingleStudent(uId, currentMonth).subscribe(data => {
-      this.joined_classes = data.classCount;
-      this.total_teachers = data.teacherCount;
+      this.joined_classes = data.statusStudentList.length;
+      this.student_id = data.studentEntity.studentId;
     }, err => {
       console.log(err);
     })
@@ -127,6 +133,48 @@ export class ShowUserStatusComponent implements OnInit {
     } else {
       this.isDisabled = true;
     }
+  }
+
+  updateCredentials() {
+    this.pendingAlert = true;
+    if (this.credUpdateForm.valid) {
+      const val = {
+        username: this.credUpdateForm.get('updateEmail').value,
+        password: this.credUpdateForm.get('updatePassword1').value
+      }
+      if (this.auth.currentUser.Role == 'teacher') {
+        this.us.teacherCredUpdate(this.teacher_id, val).subscribe(data => {
+          this.pendingAlert = false;
+          this.credUpdateForm.reset();
+          this.successAlert = true;
+          setTimeout(() => {
+            this.auth.userLogout();
+          },1000);
+        }, (err) => {
+          this.pendingAlert = false;
+          this.errorAlert = true;
+        })
+      } else if (this.auth.currentUser.Role == 'student') {
+        this.us.studentCredUpdate(this.student_id, val).subscribe(data => {
+          this.pendingAlert = false;
+          this.credUpdateForm.reset();
+          this.successAlert = true;
+          setTimeout(() => {
+            this.auth.userLogout();
+          },1000);
+        }, (err) => {
+          this.pendingAlert = false;
+          this.errorAlert = true;
+        })
+      }
+    } else {
+      return null;
+    }
+  }
+
+  closeAlert() {
+    this.successAlert = false;
+    this.errorAlert = false;
   }
 
 }

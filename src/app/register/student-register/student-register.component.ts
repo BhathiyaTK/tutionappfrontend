@@ -118,7 +118,7 @@ export class StudentRegisterComponent implements OnInit {
       }, (error) => {
         this.pendingAlert = false;
         this.errorAlert = true;
-        this.errorText = error;
+        this.errorText = "Registration failed! Something went wrong.";
       });
 
     } else {

@@ -60,6 +60,7 @@
         <th class="align-middle" scope="col">Time</th>
         <th class="align-middle" scope="col">Teacher</th>
         <th class="align-middle" scope="col">Fee</th>
+        <th class="align-middle" scope="col">Cover Photo</th>
         <th class="align-middle" scope="col">Action</th>
       </tr>
     </thead>
@@ -72,6 +73,8 @@
         <td class="align-middle text-center">{{timeConverter(class.htime)}}</td>
         <td class="align-middle">{{class.teacherEntity.fName}} {{class.teacherEntity.lName}}</td>
         <td class="align-middle text-left">{{currencyConvertor(class.classFee)}}</td>
+        <td class="align-middle text-center"><a href="{{class.imagePath}}" target="_blank"
+            rel="noopener noreferrer">View&nbsp;&#8599;</a></td>
         <td class="align-middle">
           <div class="d-flex justify-content-center align-items-center">
             <button type="button" class="action-btn normal-btn" data-toggle="modal" data-target="#editClassModal"
@@ -145,7 +148,10 @@
                 <div class="input-group-text"><small>Rs.</small></div>
               </div>
               <input type="text" name="classFee" class="form-control" [(ngModel)]="clz.classFee"
-                style="border-radius: 0 7px 7px 0 !important;" required>
+                style="border-radius: 0 !important;" required>
+              <div class="input-group-append">
+                <span class="input-group-text">.00</span>
+              </div>
             </div>
           </div>
           <div class="form-group">

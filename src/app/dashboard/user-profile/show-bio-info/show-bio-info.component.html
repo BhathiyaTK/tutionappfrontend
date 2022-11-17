@@ -1,20 +1,17 @@
 <div class="custom-shadow-div bg-white mb-5">
     <div class="profile-banner">
         <div class="profile-img-div">
-            <div class="row align-items-center">
-                <div class="col-sm-12 col-md-12 col-lg-2">
-                    <img src="../../../assets/images/users/avatar.png" alt="">
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-10">
-                    <p>{{user_name}}</p>
-                    <span>{{auth.currentUser.sub}}</span>
-                </div>
-            </div>
+            <p>{{user_name}}</p>
+            <span>{{auth.currentUser.sub}}</span>
         </div>
         <div class="profile-banner-bottom"></div>
     </div>
     <div class="p-4">
         <div class="mb-4">
+            <div class="personal-detail" *ngIf="isStudent">
+                <small>Registration No.</small>
+                <h6>{{user_reg_no}}</h6>
+            </div>
             <div class="personal-detail" *ngIf="isStudent">
                 <small>Student ID</small>
                 <h6>{{user_std_id}}</h6>
@@ -39,6 +36,10 @@
                 <small>Gardian Contact No.</small>
                 <h6>{{user_garTel}}</h6>
             </div>
+            <div class="personal-detail">
+                <small>Medium</small>
+                <h6>{{user_medium}}</h6>
+            </div>
             <div class="personal-detail" *ngIf="isTeacher">
                 <small>Qualification</small>
                 <h6>{{user_eduQl}}</h6>
@@ -60,7 +61,7 @@
 
 <div class="modal fade" id="userBioUpdateModal" tabindex="-1" aria-labelledby="userBioUpdateModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="userBioUpdateModalLabel">Update Personal Info</h5>

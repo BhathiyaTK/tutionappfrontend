@@ -92,7 +92,7 @@
             </div>
         </div>
         <div class="form-group">
-            <textarea formControlName="teacherIntro" id="teacherIntro" cols="30" rows="3" maxlength="500"
+            <textarea formControlName="teacherIntro" id="teacherIntro" cols="30" rows="3" maxlength="250"
                 placeholder="Brief introduction about yourself..." class="form-control"
                 [ngClass]="{'is-invalid':tchr_reg.teacherIntro.errors && tchr_reg.teacherIntro.touched}"
                 [(ngModel)]="intro" required></textarea>
@@ -103,7 +103,7 @@
                     <div *ngIf="tchr_reg.teacherIntro.errors.maxlength"><small>Must have minimum 500 characters</small>
                     </div>
                 </div>
-                <small class="textarea-limit-indicator text-muted">{{intro.length}} / 500</small>
+                <small class="textarea-limit-indicator text-muted">Maximum 250 character only</small>
             </div>
         </div>
         <div class="row form-group">

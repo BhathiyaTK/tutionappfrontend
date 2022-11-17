@@ -80,7 +80,7 @@ export class PurchaseClassComponent implements OnInit {
       for (let j = 0; j < data.subTutionClassEntityList.length; j++) {
         const element = data.subTutionClassEntityList[j].month;
         if (month == element) {
-          this.subClassId = data.subTutionClassEntityList[j].subClassId;
+          this.subClassId = data.subTutionClassEntityList[j].subClassRegNumber;
         }
       }
       this.teacher_name = data.teacherEntity.fName + ' ' + data.teacherEntity.lName;
@@ -91,6 +91,13 @@ export class PurchaseClassComponent implements OnInit {
       this.class_name = data.name;
       this.class_fee = data.classFee;
     })
+  }
+
+  currencyConvertor(currency) {
+    var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency', currency: 'LKR'
+    });
+    return formatter.format(currency);
   }
 
 }

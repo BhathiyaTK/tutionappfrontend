@@ -1,21 +1,19 @@
 <div class="class-summery">
-    <h4>{{class_name}}</h4>
+    <h4 class="mb-2">{{class_name}}</h4>
     <span>Every {{class_date}} at {{timeConverter(class_time)}}</span>
+    <hr>
+    <p class="text-muted">{{class_desc}}</p>
     <div class="class-fee-status d-md-flex d-lg-flex align-items-center justify-content-between">
         <span>Monthly fee</span>
-        <span class="class-price">Rs.{{class_fee}}</span>
+        <span class="class-price">{{currencyConvertor(class_fee)}}</span>
     </div>
     <br>
     <div class="class-stats-info mb-4">
-        <h5><i class="material-icons float-left md-27 mr-2">trending_up</i> Stats</h5>
+        <h5><i class="material-icons float-left md-27 mr-2">trending_up</i> Statistics</h5>
         <hr>
         <ul>
             <li>&#10070; Total study materials &#8212; <span>{{study_mat_count}}</span></li>
             <li>&#10070; Total assignments &#8212; <span>{{assign_count}}</span></li>
         </ul>
     </div>
-    <!-- <div class="revenue p-3">
-        <span class="text-muted">This month revenue</span>
-        <h4 class="mt-1 mb-0">Rs. 300,000.00</h4>
-    </div> -->
 </div>

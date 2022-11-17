@@ -10,60 +10,68 @@ export class UserServicesService {
     throw new Error('Method not implemented.');
   }
 
-  readonly APIUrl = "https://masterybackend.tk";
+  readonly APIUrl = "http://lms.clickyapp.cloud";
 
   constructor(private http: HttpClient) { }
 
-  registerStudent(val:any){
+  registerStudent(val: any) {
     return this.http.post(this.APIUrl + '/newstudent/register', val);
   }
 
-  registerTeacher(val:any){
+  registerTeacher(val: any) {
     return this.http.post(this.APIUrl + '/newteacher/register', val);
   }
 
-  passwordReset(val:any){
-    return this.http.get(this.APIUrl + '/passwordforget/' + val, {responseType: 'text' as 'json'});
+  passwordReset(val: any) {
+    return this.http.get(this.APIUrl + '/passwordforget/' + val, { responseType: 'text' as 'json' });
   }
 
-  public getAllUserEmails(): Observable<any[]>{
+  public getAllUserEmails(): Observable<any[]> {
     return this.http.get<any[]>(this.APIUrl + '/filter/getAllUsersEmails');
   }
 
-  public getTeachers(): Observable<any[]>{
+  public getTeachers(): Observable<any[]> {
     return this.http.get<any[]>(this.APIUrl + '/filter/filterGetAllTeachers');
   }
 
-  public getStudents(pageNo): Observable<any>{
-    return this.http.get<any>(this.APIUrl + '/getallstudents?pageNo='+ pageNo +'&pageSize=20');
+  public getStudents(pageNo): Observable<any> {
+    return this.http.get<any>(this.APIUrl + '/getallstudents?pageNo=' + pageNo + '&pageSize=20');
   }
 
-  public getSingleTeacher(userId, currentMonth): Observable<any>{
-    return this.http.get<any>(this.APIUrl + '/getOneTeacher/'+ userId +'/2021' + currentMonth);
+  public getSingleTeacher(userId, currentMonth): Observable<any> {
+    return this.http.get<any>(this.APIUrl + '/getOneTeacher/' + userId + '/2021' + currentMonth);
   }
 
-  public getSingleStudent(userId, currentMonth): Observable<any>{
-    return this.http.get<any>(this.APIUrl + '/getOneStudent/'+ userId +'/2021' + currentMonth);
+  public getSingleStudent(userId, currentMonth): Observable<any> {
+    return this.http.get<any>(this.APIUrl + '/getOneStudent/' + userId + '/2021' + currentMonth);
   }
 
-  studentJoinedToClass(scId, sId){
-    return this.http.post(this.APIUrl + '/student/addSubClass/' + scId + '/' + sId, null, {responseType: 'text' as 'json'});
+  studentJoinedToClass(val: any) {
+    return this.http.post<any>(this.APIUrl + '/student/addSubClass', val, { responseType: 'text' as 'json' });
   }
 
-  updateTeachers(val:any){
-    return this.http.put(this.APIUrl + '/teacher/update/' + val.teacherId, val);
+  updateTeachers(teacherId, val: any) {
+    return this.http.put(this.APIUrl + '/currentTeacher/update/' + teacherId, val);
   }
 
-  updateStudents(val:any){
-    return this.http.put(this.APIUrl + '/student/update/' + val.studentId, val);
+  updateStudents(studentId, val: any) {
+    return this.http.put(this.APIUrl + '/currentStudent/update/' + studentId, val);
   }
 
-  deleteTeacher(tId:any){
-    return this.http.delete(this.APIUrl + '/admin/deleteTeacher/' + tId, {responseType: 'text' as 'json'});
+  teacherCredUpdate(userId, val: any) {
+    return this.http.put(this.APIUrl + '/currentTeacher/credentialsUpdate/' + userId, val);
   }
 
-  deleteStudent(stdId:any){
-    return this.http.delete(this.APIUrl + '/admin/deleteStudent/' + stdId, {responseType: 'text' as 'json'});
+  studentCredUpdate(userId, val: any) {
+    return this.http.put(this.APIUrl + '/currentStudent/credentialsUpdate/' + userId, val);
   }
-  
+
+  deleteTeacher(tId: any) {
+    return this.http.delete(this.APIUrl + '/admin/deleteTeacher/' + tId, { responseType: 'text' as 'json' });
+  }
+
+  deleteStudent(stdId: any) {
+    return this.http.delete(this.APIUrl + '/admin/deleteStudent/' + stdId, { responseType: 'text' as 'json' });
+  }
+
 }

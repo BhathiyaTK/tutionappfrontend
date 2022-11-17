@@ -5,6 +5,7 @@
             <div class="data-left w-50">
                 <i class="material-icons md-30 float-left mr-3">local_library</i>
                 <span *ngIf="isTeacher">My Classes</span>
+                <div *ngIf="isTeacher"><small class="text-muted"><i>Both Approved and Pending Classes</i></small></div>
                 <span *ngIf="isStudent">Joined Classes</span>
             </div>
             <div class="data-right w-50 text-center">
@@ -12,27 +13,31 @@
                 <span *ngIf="isStudent">{{joined_classes}}</span>
             </div>
         </div>
-        <div class="personal-data-div d-flex">
+        <!-- <div class="personal-data-div d-flex" *ngIf="isTeacher">
             <div class="data-left w-50">
                 <i class="material-icons md-30 float-left mr-3">people</i>
-                <span *ngIf="isTeacher">Students</span>
-                <span *ngIf="isStudent">Teachers</span>
+                <span>Students</span>
             </div>
             <div class="data-right w-50 text-center">
-                <span *ngIf="isTeacher">{{total_students}}</span>
-                <span *ngIf="isStudent">{{total_teachers}}</span>
+                <span>{{total_students}}</span>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 <div class="custom-shadow-div p-4 bg-white" style="margin-top: 30px; border: 2px solid red;">
-    <div class="personalized-data" *ngIf="isTeacher">
+    <div class="personalized-data">
         <h5>Update Account Credentials</h5>
         <hr>
         <p class="text-muted">You can change the email and the password of your mastery account in this
             section. Check the below <strong>"Confirm credentials update"</strong> checkbox to proceed with the
             credential updating
             process.</p>
+
+        <div class="alert alert-warning">
+            <strong>NOTE:</strong><br>Once you update the credentials, you will automatically logged out. Please
+            re-login with new
+            credentials.
+        </div>
         <div class="mt-4">
             <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="show-ep-update" (click)="onChange($event)">
@@ -40,7 +45,26 @@
                         update</strong></label>
             </div>
 
-            <form class="mt-4" [formGroup]="credUpdateForm" #credForm="ngForm">
+            <div class="alert alert-success alert-dismissible text-left mt-3" *ngIf="successAlert">
+                <i class="material-icons float-left mr-2">check_circle</i> <strong>Credentials Updated
+                    Succesfully.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="alert alert-danger alert-dismissible text-left mt-3" *ngIf="errorAlert">
+                <i class="material-icons float-left mr-2">cancel</i>
+                <strong>Process failed! Something went wrong.</strong> <br> Please try again shortly.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="mb-3 py-2 text-center" role="status" *ngIf="pendingAlert">
+                <img src="../../../assets/images/loaders/spin_sm.gif" alt="loading spinner sm">
+                <small class="ml-2 text-muted">Updating... Please wait.</small>
+            </div>
+
+            <form class="mt-4" (ngSubmit)="updateCredentials()" [formGroup]="credUpdateForm" #credForm="ngForm">
                 <div class="form-group">
                     <input type="text" class="form-control credUpdateElems" formControlName="updateEmail"
                         placeholder="New Email Address"

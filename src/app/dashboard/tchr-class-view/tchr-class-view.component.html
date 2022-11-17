@@ -8,7 +8,13 @@
     </div>
     <div class="control-panel-content mt-4">
         <div class="bg-white custom-shadow-div">
-            <div class="class-img-banner"></div>
+            <div class="class-img-banner" style="background-image: url({{bannerImage}});">
+                <span class="class-edit-link">
+                    <button [routerLink]="['/mPanel/my-classes', classId, className, 'edit']" class="theme-btn">
+                        Edit Class Info
+                    </button>
+                </span>
+            </div>
             <div class="row p-4">
                 <div class="col-sm-12 col-md-4 col-lg-4">
                     <app-tchr-class-summery></app-tchr-class-summery>

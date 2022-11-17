@@ -1,0 +1,102 @@
+<section class="control-panel-content-section">
+    <div class="content-title">
+        <button [routerLink]="['/mPanel/my-classes', classId, className]" class="float-right">
+            <i class="material-icons md-21 float-left">arrow_back_ios</i> Back
+        </button>
+        <h3 class="mb-0">Edit Class</h3>
+        <span>Update class information</span>
+    </div>
+    <div class="control-panel-content mt-4">
+        <div class="bg-white custom-shadow-div p-4">
+            <div class="alert alert-success alert-dismissible fade show" *ngIf="successMsg">
+                <i class="material-icons float-left mr-2">check</i> Class updated successfully.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show" *ngIf="errorMsg">
+                <i class="material-icons float-left mr-2">cancel</i> Process failed! something went wrong.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="text-monospace text-center text-info my-3"
+                *ngIf="pendingClzAdd  && percentageVal | async as pct">
+                <span><img src="../../../assets/images/loaders/spin_sm.gif" alt=""></span> Processing... ({{pct |
+                number:'1.0-0'}}%)
+            </div>
+            <div class="text-monospace text-center text-info my-4" *ngIf="loadingClassData">
+                <span><img src="../../../assets/images/loaders/spin_sm.gif" alt=""></span> Loading class data...
+            </div>
+            <form (ngSubmit)="updateClass()" [formGroup]="updateClassForm">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-7">
+                        <div class="form-group">
+                            <label for="name">Class Name</label>
+                            <input type="text" formControlName="name" class="form-control" [(ngModel)]="name" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-4">
+                                <div class="form-group">
+                                    <label for="fee">Class Fee</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><small>Rs.</small></div>
+                                        </div>
+                                        <input type="text" formControlName="fee" class="form-control"
+                                            style="border-radius: 0 !important;" placeholder="XXXX" [(ngModel)]="fee"
+                                            required>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label for="date">Select the Day</label>
+                                    <select formControlName="date" class="form-control" [(ngModel)]="date" required>
+                                        <option value="">Choose...</option>
+                                        <option value="Monday">Monday</option>
+                                        <option value="Tuesday">Tuesday</option>
+                                        <option value="Wednesday">Wednesday</option>
+                                        <option value="Thursday">Thursday</option>
+                                        <option value="Friday">Friday</option>
+                                        <option value="Saturday">Saturday</option>
+                                        <option value="Sunday">Sunday</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label for="time">Class Held Time</label>
+                                    <input type="time" formControlName="time" class="form-control" [(ngModel)]="time"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="note">Class Note</label>
+                            <textarea formControlName="notes" class="form-control" rows="4" maxlength="255"
+                                placeholder="Brief introduction about the class..." [(ngModel)]="notes"
+                                required></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-5">
+                        <div class="form-group mb-3">
+                            <label for="image">Upload New Class Banner Image</label>
+                            <input type="file" formControlName="image" id="image" class="w-100"
+                                style="padding: 6px; border: 1px solid #ddd;" required (change)="onChange($event)">
+                        </div>
+                        <small class="text-muted">Current Banner Image:</small>
+                        <div class="current-banner mt-2 mb-3">
+                            <img src="{{image}}" alt="Banner Image" width="auto" height="100%">
+                        </div>
+                    </div>
+                </div>
+                <hr class="mt-0">
+                <button class="theme-btn">Update Class</button>
+            </form>
+        </div>
+    </div>
+</section>

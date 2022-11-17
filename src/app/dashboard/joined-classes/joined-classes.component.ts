@@ -16,6 +16,7 @@ export class JoinedClassesComponent implements OnInit {
   classes: any = []
   c_month: string;
   userId:number = this.auth.currentUser.userId;
+  imageAltText: string = "Loading image...";
 
   constructor(public cs: ClassesService, public auth: AuthService) { }
 
@@ -73,16 +74,26 @@ export class JoinedClassesComponent implements OnInit {
     this.spinner = true;
     this.cs.getJoinedClasses(uId, currentMonth).subscribe(data => {
       if (data.length !== 0) {
+        for (let z = 0; z < data.length; z++) {
+          this.cs.getSingleClass(data[z].classId).subscribe(clz => {
+            data[z].image = clz.imagePath;
+            if (clz.imagePath == '' || clz.imagePath == null) {
+              this.imageAltText = "Banner image loading failed!";
+            } else {
+              this.imageAltText = "Class banner image";
+            }
+          })
+        }
         this.spinner = false;
+        this.classes = data;
       } else {
         this.spinner = false;
         this.emptyMsg = true;
       }
-      this.classes = data;
     }, err => {
       this.spinner = false;
       this.errorAlert = true;
-      this.errorText = "Data couldn't be loaded. Something went wrong. Please try refreshing the browser. If the issue still has, contact MASTERY.LK.";
+      this.errorText = "Data couldn't be loaded. Something went wrong. Please try refreshing the webpage. If the issue still has, contact MASTERY.LK support team.";
     })
   }
 
@@ -95,6 +106,13 @@ export class JoinedClassesComponent implements OnInit {
     }else{
       return "N/A";
     }
+  }
+
+  currencyConvertor(currency) {
+    var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency', currency: 'LKR'
+    });
+    return formatter.format(currency);
   }
 
   removeUrlSpaces(str: string){

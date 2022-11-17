@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { FirebaseAuthService } from 'src/app/services/auth/firebase-auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -17,7 +18,8 @@ export class SigninComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private aRoute: ActivatedRoute,
-    private route: Router
+    private route: Router,
+    public fAuth: FirebaseAuthService
     ) { }
 
   ngOnInit(): void {
@@ -38,6 +40,8 @@ export class SigninComponent implements OnInit {
 
   submit(){
     if (this.signinForm.valid) {
+      const femail = "masteryuser@mastery.lk";
+      const fpassword = "mastery";
       var credentials = {
         username: this.signinForm.get('signin_email').value,
         password: this.signinForm.get('signin_password').value
@@ -64,6 +68,7 @@ export class SigninComponent implements OnInit {
         this.invalidLogin = true;
         console.log(error);
       });
+      this.fAuth.signin(femail, fpassword);
     }
   }
 

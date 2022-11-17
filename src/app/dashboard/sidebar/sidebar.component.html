@@ -27,6 +27,11 @@
             <i class="material-icons mr-3 float-left md-21">add</i>
             Create Class
         </a>
+        <a (click)="sidebarToggleEvent()" routerLink="/mPanel/class-requests" routerLinkActive="active"
+            *ngIf="auth.currentUser.Role == 'teacher'">
+            <i class="material-icons mr-3 float-left md-21">schedule</i>
+            Class Requests
+        </a>
         <a (click)="sidebarToggleEvent()" routerLink="/mPanel/dashboard" routerLinkActive="active"
             *ngIf="auth.currentUser.Role == 'admin'">
             <i class="material-icons mr-3 float-left md-21">dashboard</i>
@@ -49,7 +54,7 @@
         </a>
     </div>
     <div class="developer-sec text-center">
-        <small class="text-muted ">Developed by<br><a href="https://mlcreativehut.com"
+        <small class="text-muted ">Powered by<br><a href="https://mlcreativehut.com"
                 target="_blank">ML-Creative-Hut</a></small>
     </div>
 </div>

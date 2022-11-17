@@ -13,7 +13,7 @@ export class ErrorIntercept implements HttpInterceptor {
                     errorMessage = `Error: ${error.statusText}`;
                 } else {
                     // server-side error
-                    errorMessage = `Error occured! | Status: ${error.status}`;
+                    errorMessage = `Error occured!`;
                 }
                 return throwError(errorMessage);
             })

@@ -16,6 +16,7 @@ export class TchrClassSummeryComponent implements OnInit {
   study_mat_count: any;
   assign_count: any;
   class_date: any;
+  class_desc: any;
 
   constructor(private ar: ActivatedRoute, private cs: ClassesService) { }
 
@@ -33,6 +34,7 @@ export class TchrClassSummeryComponent implements OnInit {
       this.class_time = data.htime;
       this.class_date = data.hDate;
       this.class_fee = data.classFee;
+      this.class_desc = data.notes;
     }, err => {
       console.log(err);
     })
@@ -71,6 +73,13 @@ export class TchrClassSummeryComponent implements OnInit {
     }else{
       return "N/A";
     }
+  }
+
+  currencyConvertor(currency) {
+    var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency', currency: 'LKR'
+    });
+    return formatter.format(currency);
   }
 
 }

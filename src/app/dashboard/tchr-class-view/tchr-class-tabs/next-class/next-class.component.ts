@@ -77,6 +77,14 @@ export class NextClassComponent implements OnInit {
     })
   }
 
+  openLink(url: string) {
+    if (url.includes("https://")) {
+      window.open(url, "_blank");
+    } else {
+      window.open("https://"+url, "_blank");
+    }
+  }
+
   closeAlert(){ 
     this.successAlert = false ;
     this.errorAlert = false;

@@ -1,6 +1,8 @@
 <div class="update-form-div">
     <div class="alert alert-success alert-dismissible text-left" *ngIf="successAlert">
-        <i class="material-icons float-left mr-2">check_circle</i> Details Updated Successfully.
+        <i class="material-icons float-left mr-2">check_circle</i> <strong>Details Updated
+            Succesfully.</strong><br>Refresh the webpage
+        to see changes.
         <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -12,218 +14,111 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="mb-3 py-2" role="status" *ngIf="pendingAlert">
+    <div class="mb-3 py-2 text-center" role="status" *ngIf="pendingAlert">
         <img src="../../../assets/images/loaders/spin_sm.gif" alt="loading spinner sm">
-        <small class="ml-2 text-muted">Processing... Please wait a movement.</small>
+        <small class="ml-2 text-muted">Updating... Please wait.</small>
     </div>
-    <form [formGroup]="userDataUpdateForm" #updateForm="ngForm">
-        <div class="row m-0">
-            <div class="col-sm-12 col-md-12 col-lg-8 div-content">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <label class="form-label">First Name:</label>
-                            <input type="text" formControlName="fName" id="fName" placeholder="First Name"
-                                class="form-control"
-                                [ngClass]="{'is-invalid':user_data_update.fName.errors && user_data_update.fName.touched}"
-                                required>
-                            <div *ngIf="user_data_update.fName.invalid && (user_data_update.fName.dirty || user_data_update.fName.touched)"
-                                class="text-danger text-left error-msg-div">
-                                <div *ngIf="user_data_update.fName.errors.required"><small>First name is
-                                        required</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <label class="form-label">Last Name:</label>
-                            <input type="text" formControlName="lName" id="lName" placeholder="First Name"
-                                class="form-control"
-                                [ngClass]="{'is-invalid':user_data_update.lName.errors && user_data_update.lName.touched}"
-                                required>
-                            <div *ngIf="user_data_update.lName.invalid && (user_data_update.lName.dirty || user_data_update.lName.touched)"
-                                class="text-danger text-left error-msg-div">
-                                <div *ngIf="user_data_update.lName.errors.required"><small>Last name is
-                                        required</small>
-                                </div>
-                            </div>
-                        </div>
+    <form (ngSubmit)="updatePersonalInfo(userUpdateForm)" #userUpdateForm="ngForm">
+        <div class="div-content">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <label class="form-label">First Name:</label>
+                        <input type="text" name="fName" id="fName" placeholder="First Name" class="form-control"
+                            [(ngModel)]="fName" required>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Address:</label>
-                    <input type="text" formControlName="address" id="address" placeholder="First Name"
-                        class="form-control"
-                        [ngClass]="{'is-invalid':user_data_update.address.errors && user_data_update.address.touched}"
-                        required>
-                    <div *ngIf="user_data_update.address.invalid && (user_data_update.address.dirty || user_data_update.address.touched)"
-                        class="text-danger text-left error-msg-div">
-                        <div *ngIf="user_data_update.address.errors.required"><small>Address is
-                                required</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <label class="form-label">City:</label>
-                            <input type="text" formControlName="city" id="city" placeholder="First Name"
-                                class="form-control"
-                                [ngClass]="{'is-invalid':user_data_update.city.errors && user_data_update.city.touched}"
-                                required>
-                            <div *ngIf="user_data_update.city.invalid && (user_data_update.city.dirty || user_data_update.city.touched)"
-                                class="text-danger text-left error-msg-div">
-                                <div *ngIf="user_data_update.city.errors.required"><small>First name is
-                                        required</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-6" *ngIf="isTeacher">
-                        <div class="form-group">
-                            <label class="form-label">Mobile No:</label>
-                            <input type="text" formControlName="t_mobile" id="t_mobile" placeholder="First Name"
-                                class="form-control"
-                                [ngClass]="{'is-invalid':user_data_update.t_mobile.errors && user_data_update.t_mobile.touched}"
-                                required>
-                            <div *ngIf="user_data_update.t_mobile.invalid && (user_data_update.t_mobile.dirty || user_data_update.t_mobile.touched)"
-                                class="text-danger text-left error-msg-div">
-                                <div *ngIf="user_data_update.t_mobile.errors.required"><small>Mobile number is
-                                        required</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-6" *ngIf="isStudent">
-                        <div class="form-group">
-                            <label class="form-label">Your Contact No:</label>
-                            <input type="text" formControlName="s_mobile" id="s_mobile" placeholder="First Name"
-                                class="form-control"
-                                [ngClass]="{'is-invalid':user_data_update.s_mobile.errors && user_data_update.s_mobile.touched}"
-                                required>
-                            <div *ngIf="user_data_update.s_mobile.invalid && (user_data_update.s_mobile.dirty || user_data_update.s_mobile.touched)"
-                                class="text-danger text-left error-msg-div">
-                                <div *ngIf="user_data_update.s_mobile.errors.required"><small>Student's contact number
-                                        is
-                                        required</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-6" *ngIf="isStudent">
-                        <div class="form-group">
-                            <label class="form-label">Gardian's Contact No:</label>
-                            <input type="text" formControlName="g_mobile" id="g_mobile" placeholder="First Name"
-                                class="form-control"
-                                [ngClass]="{'is-invalid':user_data_update.g_mobile.errors && user_data_update.g_mobile.touched}"
-                                required>
-                            <div *ngIf="user_data_update.g_mobile.invalid && (user_data_update.g_mobile.dirty || user_data_update.g_mobile.touched)"
-                                class="text-danger text-left error-msg-div">
-                                <div *ngIf="user_data_update.g_mobile.errors.required"><small>Gradian's contact number
-                                        is
-                                        required</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col-sm-12 col-md-6 col-lg-6" *ngIf="isStudent">
-                        <label class="form-label">Grade:</label>
-                        <select formControlName="s_grade" id="s_grade" class="form-control"
-                            [ngClass]="{'is-invalid':user_data_update.s_grade.errors && user_data_update.s_grade.touched}"
-                            required>
-                            <option value="" disabled>- Choose -</option>
-                            <option *ngFor="let gradeItem of gradeList" value="{{gradeItem.value}}">{{gradeItem.name}}
-                            </option>
-                        </select>
-                        <div *ngIf="user_data_update.s_grade.invalid && (user_data_update.s_grade.dirty || user_data_update.s_grade.touched)"
-                            class="text-danger text-left error-msg-div">
-                            <div *ngIf="user_data_update.s_grade.errors.required"><small>Grade is required</small></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-6" *ngIf="isTeacher">
-                        <label class="form-label">Grade:</label>
-                        <select formControlName="t_grade" id="t_grade" class="form-control"
-                            [ngClass]="{'is-invalid':user_data_update.t_grade.errors && user_data_update.t_grade.touched}"
-                            required>
-                            <option value="" disabled>- Choose -</option>
-                            <option value="1 - 5">1 - 5</option>
-                            <option value="6 - 10">6 - 10</option>
-                            <option value="10 - 11">10 - 11</option>
-                            <option value="12 - 13">12 - 13</option>
-                        </select>
-                        <div *ngIf="user_data_update.t_grade.invalid && (user_data_update.t_grade.dirty || user_data_update.t_grade.touched)"
-                            class="text-danger text-left error-msg-div">
-                            <div *ngIf="user_data_update.t_grade.errors.required"><small>Grade is required</small></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-6">
-                        <label class="form-label">Medium:</label>
-                        <select formControlName="medium" id="medium" class="form-control"
-                            [ngClass]="{'is-invalid':user_data_update.medium.errors && user_data_update.medium.touched}"
-                            required>
-                            <option value="" disabled>- Choose -</option>
-                            <option value="Sinhala">සිංහල</option>
-                            <option value="English">English</option>
-                            <option value="Tamil">தமிழ்</option>
-                        </select>
-                        <div *ngIf="user_data_update.medium.invalid && (user_data_update.medium.dirty || user_data_update.medium.touched)"
-                            class="text-danger text-left error-msg-div">
-                            <div *ngIf="user_data_update.medium.errors.required"><small>Medium is required</small></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group" *ngIf="isTeacher">
-                    <label class="form-label">Educational Qualifications:</label>
-                    <textarea formControlName="eduQual" id="eduQual"
-                        placeholder="Educational Status - Use comma(,) to seperate each Degree(s) and Diploma(s)"
-                        class="form-control"
-                        [ngClass]="{'is-invalid':user_data_update.eduQual.errors && user_data_update.eduQual.touched}"
-                        required></textarea>
-                    <div *ngIf="user_data_update.eduQual.invalid && (user_data_update.eduQual.dirty || user_data_update.eduQual.touched)"
-                        class="text-danger text-left error-msg-div">
-                        <div *ngIf="user_data_update.eduQual.errors.required"><small>Educational Status is
-                                required</small></div>
-                    </div>
-                </div>
-                <div class="form-group" *ngIf="isTeacher">
-                    <label class="form-label">Self Introduction:</label>
-                    <textarea formControlName="teacherIntro" id="teacherIntro" cols="30" rows="4" maxlength="500"
-                        placeholder="Brief introduction about yourself..." class="form-control"
-                        [ngClass]="{'is-invalid':user_data_update.teacherIntro.errors && user_data_update.teacherIntro.touched}"
-                        [(ngModel)]="intro" required></textarea>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div *ngIf="user_data_update.teacherIntro.invalid && (user_data_update.teacherIntro.dirty || user_data_update.teacherIntro.touched)"
-                            class="text-danger text-left error-msg-div">
-                            <div *ngIf="user_data_update.teacherIntro.errors.required"><small>Introduction is
-                                    required</small></div>
-                            <div *ngIf="user_data_update.teacherIntro.errors.maxlength"><small>Must have minimum 500
-                                    characters</small>
-                            </div>
-                        </div>
-                        <small class="textarea-limit-indicator text-muted">{{intro.length}} / 500</small>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <label class="form-label">Last Name:</label>
+                        <input type="text" name="lName" id="lName" placeholder="First Name" class="form-control"
+                            [(ngModel)]="lName" required>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-12 col-lg-4">
-                <label class="form-label">Profile Photo:</label>
-                <img src="../../../../assets/images/users/students/student.jpg" alt="" width="100%" class="mb-3">
-                <div class="custom-file mb-3">
-                    <input type="file" class="custom-file-input" id="customFile">
-                    <label class="custom-file-label" for="customFile">Upload New</label>
+            <div class="form-group">
+                <label class="form-label">Address:</label>
+                <input type="text" name="address" id="address" placeholder="First Name" class="form-control"
+                    [(ngModel)]="address" required>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <label class="form-label">City:</label>
+                        <input type="text" name="city" id="city" placeholder="First Name" class="form-control"
+                            [(ngModel)]="city" required>
+                    </div>
                 </div>
-                <div class="alert alert-warning text-center">
-                    <i class="material-icons md-36">warning</i><br>
-                    Photo need to be maximum 350x350 resolution and must be a square shape one.
+                <div class="col-sm-12 col-md-6 col-lg-6" *ngIf="isTeacher">
+                    <div class="form-group">
+                        <label class="form-label">Mobile No:</label>
+                        <input type="text" name="t_mobile" id="t_mobile" placeholder="First Name" class="form-control"
+                            [(ngModel)]="t_mobile" required>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6" *ngIf="isStudent">
+                    <div class="form-group">
+                        <label class="form-label">Your Contact No:</label>
+                        <input type="text" name="s_mobile" id="s_mobile" placeholder="First Name" class="form-control"
+                            [(ngModel)]="s_mobile" required>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6" *ngIf="isStudent">
+                    <div class="form-group">
+                        <label class="form-label">Gardian's Contact No:</label>
+                        <input type="text" name="g_mobile" id="g_mobile" placeholder="First Name" class="form-control"
+                            [(ngModel)]="g_mobile" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-12 col-md-6 col-lg-6" *ngIf="isStudent">
+                    <label class="form-label">Grade:</label>
+                    <select name="s_grade" id="s_grade" class="form-control" [(ngModel)]="s_grade" required>
+                        <option value="">- Choose -</option>
+                        <option *ngFor="let gradeItem of gradeList" value="{{gradeItem.value}}" [selected]="s_grade">
+                            {{gradeItem.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6" *ngIf="isTeacher">
+                    <label class="form-label">Grade:</label>
+                    <select name="t_grade" id="t_grade" class="form-control" [(ngModel)]="t_grade" required>
+                        <option value="">- Choose -</option>
+                        <option value="1 - 5" [selected]="t_grade">1 - 5</option>
+                        <option value="6 - 10" [selected]="t_grade">6 - 10</option>
+                        <option value="10 - 11" [selected]="t_grade">10 - 11</option>
+                        <option value="12 - 13" [selected]="t_grade">12 - 13</option>
+                    </select>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <label class="form-label">Medium:</label>
+                    <select name="medium" id="medium" class="form-control" [(ngModel)]="medium" required>
+                        <option value="">- Choose -</option>
+                        <option value="Sinhala" [selected]="medium">සිංහල</option>
+                        <option value="English" [selected]="medium">English</option>
+                        <option value="Tamil" [selected]="medium">தமிழ்</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" *ngIf="isTeacher">
+                <label class="form-label">Educational Qualifications:</label>
+                <textarea name="eduQual" id="eduQual"
+                    placeholder="Educational Status - Use comma(,) to seperate each Degree(s) and Diploma(s)"
+                    class="form-control" [(ngModel)]="eduQual" required></textarea>
+            </div>
+            <div class="form-group" *ngIf="isTeacher">
+                <label class="form-label">Self Introduction:</label>
+                <textarea name="teacherIntro" id="teacherIntro" cols="30" rows="4" maxlength="500"
+                    placeholder="Brief introduction about yourself..." class="form-control" [(ngModel)]="teacherIntro"
+                    required></textarea>
+                <div class="d-flex justify-content-between align-items-center">
+                    <small class="textarea-limit-indicator text-muted">Maximum 255 characters only</small>
                 </div>
             </div>
         </div>
+        <div class="text-center mt-4 mb-2">
+            <button type="submit" class="theme-btn">Update</button>
+        </div>
     </form>
-    <hr>
-    <div class="text-center">
-        <button type="submit" class="theme-btn"><i class="material-icons float-left mr-2">arrow_upward</i>Update
-            Info</button>
-    </div>
 </div>

@@ -35,7 +35,7 @@ export class DashboardNumsComponent implements OnInit {
         this.spinner = false;
         this.dashboardComponents = true;
       }
-      this.totalClasses = data.totalElements;
+      this.totalClasses = data.content.filter(o => o.approvalStatus == 'Approved').length;
       this.totalClasses = this.formatNumber(this.totalClasses);
     })
   }
